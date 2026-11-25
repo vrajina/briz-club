@@ -111,25 +111,14 @@
       </div>
 
       <div class="container hero__content">
-        <div class="hero__text">
-          <a href="#reviews" class="yandex-hero-chip" aria-label="Рейтинг 5,0 на Яндекс Картах — перейти к отзывам">
-            <span class="yandex-hero-chip__pin" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="#FC3F1D"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
-            </span>
-            <span class="yandex-hero-chip__score">5,0</span>
-            <span class="yandex-hero-chip__stars" aria-hidden="true">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </span>
-            <span class="yandex-hero-chip__sep" aria-hidden="true"></span>
-            <span class="yandex-hero-chip__label">Яндекс Карты · 480+ отзывов</span>
-          </a>
-
-          <h1 class="hero__title">Мгновения, которые останутся с тобой</h1>
-          <p class="hero__subhead">Выбери своё…</p>
+        <div class="hero__top-row">
+          <div class="hero__text">
+            <h1 class="hero__title">Мгновения, которые останутся с тобой</h1>
+            <p class="hero__subhead">Выбери своё…</p>
+          </div>
+          <div class="hero__rating-badge">
+            <iframe src="https://yandex.ru/sprav/widget/rating-badge/227400604591?type=rating" width="150" height="50" frameborder="0" title="Рейтинг базы отдыха Бриз на Яндекс Картах"></iframe>
+          </div>
         </div>
 
         <div class="hero-booking-wrap">
@@ -166,10 +155,6 @@
               </label>
               <button type="submit" class="btn btn--primary booking-submit">Проверить наличие</button>
             </form>
-          </div>
-          <div class="booking-bar__note">
-            <span>Синхронизация свободных дат с Контур.Отель · В тариф включён завтрак</span>
-            <span>Бесплатная отмена за 24 часа до заезда</span>
           </div>
         </div>
       </div>
@@ -262,7 +247,7 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Проживание · данные Контур.Отеля</span>
+            <span class="section-eyebrow">Проживание на базе</span>
             <h2 class="section-title">Два формата барнхаусов</h2>
           </div>
           <p class="section-subtitle">
@@ -767,7 +752,7 @@
             <span class="section-eyebrow">Мнения гостей</span>
             <h2 class="section-title">Отзывы на Яндекс Картах</h2>
           </div>
-          <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
+          <a href="https://yandex.ru/maps/org/briz/227400604591/reviews/" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
             Открыть карточку на Яндекс Картах ↗
           </a>
         </div>
@@ -795,10 +780,7 @@
             </div>
 
             <div>
-              <p class="yandex-widget-hint">
-                В прототипе показана статичная вёрстка. На боевом сайте в Тильду вставляется живой <code>iframe</code> из Яндекс Бизнеса (в <code>js/app.js</code> под него уже выделена константа <code>YANDEX_ORG_ID</code>).
-              </p>
-              <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--primary btn--sm" style="width:100%;">Читать все отзывы на Яндексе</a>
+              <a href="https://yandex.ru/maps/org/briz/227400604591/reviews/" target="_blank" rel="noopener" class="btn btn--primary btn--sm" style="width:100%;">Читать все отзывы на Яндексе</a>
             </div>
           </div>
 
@@ -1026,7 +1008,7 @@
       <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-      <span class="section-eyebrow">Онлайн-бронирование · Контур.Отель (ID 1292)</span>
+      <span class="section-eyebrow">Онлайн-бронирование</span>
       <h2 class="modal__title" id="bookingModalTitle">Доступные коттеджи на выбранные даты</h2>
       <p class="modal__subtitle" id="bookingModalSubtitle">
         Кликабельный календарь дат и подбор домика под число гостей с синхронизацией тарифа «Бархатный сезон 2026».
@@ -1102,7 +1084,7 @@
       <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
-      <span class="section-eyebrow">Описание и удобства · Контур.Отель</span>
+      <span class="section-eyebrow">Описание и удобства</span>
       <h2 class="modal__title" id="specsModalTitle">Барн-хаус</h2>
       <p class="modal__subtitle" id="specsModalSubtitle"></p>
       <div id="specsModalBody" style="font-size:0.9375rem;line-height:1.58;"></div>

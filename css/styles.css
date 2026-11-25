@@ -614,65 +614,29 @@ a {
   gap: 28px;
 }
 
+.hero__top-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
 .hero__text {
   max-width: 720px;
 }
 
-.yandex-hero-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 6px 13px 6px 8px;
-  border-radius: 10px;
-  background: rgba(16, 24, 20, 0.56);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  margin-bottom: 16px;
-  transition: background-color var(--transition), border-color var(--transition);
-}
-
-.yandex-hero-chip:hover {
-  background: rgba(16, 24, 20, 0.74);
-  border-color: rgba(255, 255, 255, 0.34);
-}
-
-.yandex-hero-chip__pin {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.hero__rating-badge {
   flex-shrink: 0;
+  line-height: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(10, 18, 24, 0.28);
 }
 
-.yandex-hero-chip__score {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: #ffffff;
-  line-height: 1;
-}
-
-.yandex-hero-chip__stars {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  color: #f5b742;
-}
-
-.yandex-hero-chip__sep {
-  width: 1px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.24);
-}
-
-.yandex-hero-chip__label {
-  font-size: 0.8125rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.9);
-  white-space: nowrap;
+.hero__rating-badge iframe {
+  display: block;
+  border: 0;
 }
 
 .hero__title {
@@ -1866,7 +1830,8 @@ a {
 
 .yandex-live-iframe {
   width: 100%;
-  height: 100%;
+  max-width: 760px;
+  height: 560px;
   min-height: 360px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
@@ -2586,6 +2551,12 @@ a {
   .hero {
     min-height: clamp(480px, 78svh, 680px);
     padding-bottom: 26px;
+  }
+
+  .hero__top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
   }
 
   .booking-form,
