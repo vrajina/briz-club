@@ -132,11 +132,12 @@
   }
 
   // --------------------------------------------------------------------------
-  // 2. Шапка при скролле + парящий бар бронирования + мобильная нижняя кнопка
+  // 2. Шапка при скролле + фиксация плашки бронирования + мобильная нижняя кнопка
   // --------------------------------------------------------------------------
   var siteHeader = document.getElementById("siteHeader");
   var heroSection = document.getElementById("heroSection");
-  var floatingBooking = document.getElementById("floatingBooking");
+  var heroBookingSlot = document.getElementById("heroBookingSlot");
+  var heroBookingBar = document.getElementById("heroBookingBar");
   var mobileStickyCta = document.getElementById("mobileStickyCta");
 
   function handleScroll() {
@@ -145,28 +146,51 @@
       siteHeader.classList.toggle("is-scrolled", y > 60);
     }
 
-    var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 540;
-    if (floatingBooking) {
-      floatingBooking.classList.toggle("is-visible", y > heroBottom);
+    if (heroBookingSlot && heroBookingBar) {
+      if (window.innerWidth >= 1024) {
+        if (!heroBookingBar.classList.contains("is-pinned")) {
+          heroBookingSlot.style.minHeight = heroBookingBar.offsetHeight + "px";
+        }
+        var slotRect = heroBookingSlot.getBoundingClientRect();
+        var shouldPin = slotRect.bottom <= window.innerHeight - 20;
+        heroBookingBar.classList.toggle("is-pinned", shouldPin);
+      } else {
+        heroBookingBar.classList.remove("is-pinned");
+        heroBookingSlot.style.minHeight = "";
+      }
     }
+
+    var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 540;
     if (mobileStickyCta) {
       mobileStickyCta.classList.toggle("is-visible", y > heroBottom);
     }
   }
 
   window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("resize", handleScroll, { passive: true });
   handleScroll();
 
-  var collapseFloatingBtn = document.getElementById("collapseFloatingBtn");
-  var restoreFloatingBtn = document.getElementById("restoreFloatingBtn");
-  if (collapseFloatingBtn && restoreFloatingBtn && floatingBooking) {
-    collapseFloatingBtn.addEventListener("click", function () {
-      floatingBooking.classList.add("is-collapsed");
-    });
-    restoreFloatingBtn.addEventListener("click", function () {
-      floatingBooking.classList.remove("is-collapsed");
-    });
-  }
+  // Открытие нативного календаря при клике на любую область даты
+  document.querySelectorAll('input[type="date"]').forEach(function (dateInput) {
+    function openPicker() {
+      if (typeof dateInput.showPicker === "function") {
+        try {
+          dateInput.showPicker();
+        } catch (_) {}
+      }
+    }
+    dateInput.addEventListener("click", openPicker);
+    var box = dateInput.closest(".kontur-input-box");
+    if (box) {
+      box.style.cursor = "pointer";
+      box.addEventListener("click", function (e) {
+        if (e.target === box) {
+          dateInput.focus();
+          openPicker();
+        }
+      });
+    }
+  });
 
   // --------------------------------------------------------------------------
   // 3. Мобильное бургер-меню
@@ -740,6 +764,35 @@
   }
 
   document.querySelectorAll(".js-booking-form").forEach(function (form) {
+    var cinInput = form.querySelector(".js-checkin");
+    var coutInput = form.querySelector(".js-checkout");
+    var gSelect = form.querySelector(".js-guests");
+    var hSelect = form.querySelector(".js-house");
+
+    [cinInput, coutInput, gSelect, hSelect].forEach(function (ctrl) {
+      if (!ctrl) return;
+      ctrl.addEventListener("change", function () {
+        if (cinInput && coutInput && cinInput.value && coutInput.value) {
+          var d1 = new Date(cinInput.value + "T14:00:00");
+          var d2 = new Date(coutInput.value + "T12:00:00");
+          if (!isNaN(d1.getTime()) && (isNaN(d2.getTime()) || d2 <= d1)) {
+            coutInput.value = formatIsoDate(new Date(d1.getTime() + 86400000));
+          }
+          bookingState.checkin = cinInput.value;
+          bookingState.checkout = coutInput.value;
+        }
+        if (gSelect) {
+          bookingState.guests = gSelect.value;
+        }
+        syncAllBookingInputs();
+        if (hSelect) {
+          document.querySelectorAll(".js-house").forEach(function (el) {
+            el.value = hSelect.value;
+          });
+        }
+      });
+    });
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var cin = form.querySelector(".js-checkin").value;

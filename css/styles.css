@@ -323,12 +323,10 @@ a {
   color: var(--brand-green);
 }
 
-.seasonal-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--brand-wood);
-  flex-shrink: 0;
+.seasonal-emoji {
+  font-size: 0.95em;
+  line-height: 1;
+  display: inline-block;
 }
 
 .nav-link--seasonal {
@@ -344,11 +342,6 @@ a {
   background-color: var(--brand-wood);
   border-color: var(--brand-wood);
   color: #1c1914;
-}
-
-.nav-link--seasonal:hover .seasonal-dot,
-.nav-link--seasonal.is-current .seasonal-dot {
-  background: #1c1914;
 }
 
 .site-header.is-scrolled .nav-link--seasonal {
@@ -442,10 +435,6 @@ a {
   font-weight: 600;
   background-color: var(--brand-wood);
   color: #1b1711;
-}
-
-.mobile-ny-pill .seasonal-dot {
-  background: #1b1711;
 }
 
 .icon-btn {
@@ -585,7 +574,7 @@ a {
   color: var(--text-light);
   overflow: hidden;
   padding-top: calc(var(--header-h) + 32px);
-  padding-bottom: 36px;
+  padding-bottom: 20px;
 }
 
 .hero--subpage {
@@ -696,6 +685,7 @@ a {
   padding: 4px 12px 4px 0;
   border-right: 1px solid var(--border-subtle);
   min-width: 0;
+  cursor: pointer;
 }
 
 .booking-field:last-of-type {
@@ -721,6 +711,11 @@ a {
   cursor: pointer;
 }
 
+input[type="date"],
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
 .booking-submit {
   padding: 14px 28px;
   font-size: 0.9375rem;
@@ -732,116 +727,27 @@ a {
   background: var(--bg-sand);
 }
 
-/* Парящая форма при скролле: ровно по ширине контента */
-.floating-booking {
-  position: fixed;
-  bottom: 14px;
-  left: 50%;
-  transform: translate(-50%, 130%);
-  z-index: 95;
-  width: min(calc(var(--container-max) - 64px), calc(100vw - 48px));
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  padding: 8px 10px 8px 20px;
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.22s ease;
-  opacity: 0;
-  pointer-events: none;
+/* Закрепление основной плашки бронирования при прокрутке на десктопе */
+@media (min-width: 1024px) {
+  .booking-bar.is-pinned {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: calc(100% - 64px);
+    max-width: calc(var(--container-max) - 64px);
+    z-index: 95;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid var(--border-strong);
+    box-shadow: 0 12px 36px rgba(15, 24, 18, 0.14);
+  }
 }
 
-.floating-booking.is-visible {
-  transform: translate(-50%, 0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.floating-booking.is-collapsed {
-  width: auto;
-  padding: 6px;
-  left: auto;
-  right: 24px;
-  transform: translate(0, 0);
-}
-
-.floating-booking__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-}
-
-.floating-booking__fields {
-  display: grid;
-  grid-template-columns: 1fr 1fr 0.85fr 1.15fr auto;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-}
-
-.floating-mini-field {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.875rem;
-  padding-right: 12px;
-  border-right: 1px solid var(--border-subtle);
-}
-
-.floating-mini-field:last-of-type {
-  border-right: none;
-}
-
-.floating-mini-field span {
-  color: var(--text-muted);
-  font-size: 0.8125rem;
-  white-space: nowrap;
-}
-
-.floating-mini-field input,
-.floating-mini-field select {
-  border: none;
-  background: transparent;
-  font-weight: 500;
-  font-size: 0.875rem;
-  color: var(--text-main);
-  outline: none;
-  cursor: pointer;
-  width: 100%;
-}
-
-.floating-collapse-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.floating-collapse-btn:hover {
-  background: var(--bg-sand);
-  color: var(--text-main);
-}
-
-.floating-booking__pill-restore {
-  display: none;
-}
-
-.floating-booking.is-collapsed .floating-booking__row {
-  display: none;
-}
-
-.floating-booking.is-collapsed .floating-booking__pill-restore {
-  display: inline-flex;
+@media (min-width: 1024px) and (max-width: 1120px) {
+  .booking-bar.is-pinned {
+    width: calc(100% - 40px);
+  }
 }
 
 .mobile-sticky-cta {
@@ -1746,9 +1652,31 @@ a {
    ========================================================================== */
 .yandex-reviews-layout {
   display: grid;
-  grid-template-columns: 380px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) 760px;
   gap: 28px;
   align-items: stretch;
+}
+
+.reviews-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reviews-photo-card {
+  flex: 1;
+  min-height: 240px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-sand);
+}
+
+.reviews-photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .yandex-score-card {
@@ -1836,9 +1764,9 @@ a {
 
 .yandex-live-iframe {
   width: 100%;
-  max-width: none;
-  height: 520px;
-  min-height: 460px;
+  max-width: 760px;
+  height: 840px;
+  min-height: 680px;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   background: #ffffff;
@@ -2010,7 +1938,7 @@ a {
 .site-footer {
   background: var(--bg-dark);
   color: rgba(255, 255, 255, 0.78);
-  padding-block: 42px 74px;
+  padding-block: 42px 112px;
 }
 
 .footer-inner {
@@ -2452,6 +2380,15 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .reviews-photo-card {
+    display: none;
+  }
+
+  .yandex-live-iframe {
+    margin-inline: auto;
+    height: 780px;
+  }
+
   .contacts-split {
     grid-template-columns: 1fr;
   }
@@ -2507,10 +2444,6 @@ a {
     grid-column: 1 / -1;
     width: 100%;
     padding: 13px 20px;
-  }
-
-  .floating-booking {
-    display: none !important;
   }
 
   .mobile-sticky-cta {
@@ -2807,8 +2740,8 @@ a {
 
   /* Отзывы и контакты на мобиле */
   .yandex-live-iframe {
-    height: 460px;
-    min-height: 440px;
+    height: 720px;
+    min-height: 640px;
   }
 
   .contacts-panel {
