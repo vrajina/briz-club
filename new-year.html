@@ -193,6 +193,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <div class="house-slider__dots"></div>
+              <span class="house-slider__counter" data-slider-counter>1&nbsp;/&nbsp;4</span>
             </div>
 
             <div class="house-card__body">
@@ -237,6 +238,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <div class="house-slider__dots"></div>
+              <span class="house-slider__counter" data-slider-counter>1&nbsp;/&nbsp;4</span>
             </div>
 
             <div class="house-card__body">
@@ -293,6 +295,15 @@
           </a>
         </div>
       </div>
+    </div>
+    <div class="container footer-legal">
+      <span>© 2026 База отдыха «Бриз» · ООО&nbsp;«Лагуна» · ОГРН&nbsp;1216300052352 · ИНН&nbsp;6316275130</span>
+      <nav class="footer-legal__docs" aria-label="Юридическая информация">
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="privacy">Политика конфиденциальности</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="oferta">Договор оферты</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="rules">Правила проживания</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="consent">Согласие на&nbsp;обработку ПДн</button>
+      </nav>
     </div>
   </footer>
 
@@ -365,6 +376,7 @@
           <button type="submit" class="btn btn--primary" style="flex:1;">Оформить бронь</button>
           <a href="https://briz.club/booking?room-type=254820" target="_blank" rel="noopener" class="btn btn--outline" id="konturDirectLink">Перейти в виджет на briz.club ↗</a>
         </div>
+        <p class="kontur-consent-note">Нажимая «Оформить бронь», вы&nbsp;подтверждаете согласие с&nbsp;<button type="button" class="inline-legal-btn js-open-legal" data-legal="privacy">политикой ПДн</button> и&nbsp;<button type="button" class="inline-legal-btn js-open-legal" data-legal="rules">правилами проживания</button>.</p>
       </form>
 
       <div class="kontur-success" id="konturSuccess" style="display:none;">
@@ -388,6 +400,19 @@
       <div style="margin-top:22px;display:flex;justify-content:flex-end;">
         <button type="button" class="btn btn--primary" id="specsBookBtn">Проверить наличие этого дома</button>
       </div>
+    </div>
+  </div>
+
+  <!-- ЮРИДИЧЕСКИЕ ДОКУМЕНТЫ И ПРАВИЛА ПРОЖИВАНИЯ -->
+  <div class="modal" id="legalModal" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
+    <div class="modal__dialog">
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="section-eyebrow">Документы базы отдыха</span>
+      <h2 class="modal__title" id="legalModalTitle">Юридическая информация</h2>
+      <p class="modal__subtitle" id="legalModalSubtitle"></p>
+      <div class="legal-doc-body" id="legalModalBody"></div>
     </div>
   </div>
 

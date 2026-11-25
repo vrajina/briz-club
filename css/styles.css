@@ -47,6 +47,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 84px;
   font-size: 16px;
 }
 
@@ -241,7 +242,7 @@ a {
   align-items: center;
   color: var(--text-light);
   background: linear-gradient(180deg, rgba(11, 20, 26, 0.64) 0%, rgba(11, 20, 26, 0.24) 68%, rgba(11, 20, 26, 0) 100%);
-  transition: background var(--transition), color var(--transition), border-color var(--transition), height var(--transition);
+  transition: background var(--transition), color var(--transition), border-color var(--transition), height var(--transition), box-shadow var(--transition);
   border-bottom: 1px solid transparent;
 }
 
@@ -252,14 +253,34 @@ a {
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom-color: var(--border-subtle);
-  box-shadow: none;
+  box-shadow: 0 4px 18px rgba(15, 24, 18, 0.05);
 }
 
 .header-inner {
+  position: relative;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.header-inner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 32px;
+  right: 32px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.86);
+  transition: opacity var(--transition), transform var(--transition);
+  pointer-events: none;
+}
+
+.site-header.is-scrolled .header-inner::after {
+  opacity: 0;
+  transform: scaleX(0.96);
 }
 
 .brand-wrap {
@@ -271,8 +292,8 @@ a {
 .brand-logo {
   position: relative;
   display: inline-block;
-  width: 64px;
-  height: 54px;
+  width: 72px;
+  height: 58px;
 }
 
 .brand-logo img {
@@ -314,11 +335,13 @@ a {
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
 
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.14);
+.nav-link:hover,
+.nav-link.is-active {
+  background-color: rgba(255, 255, 255, 0.16);
 }
 
-.site-header.is-scrolled .nav-link:hover {
+.site-header.is-scrolled .nav-link:hover,
+.site-header.is-scrolled .nav-link.is-active {
   background-color: var(--brand-green-soft);
   color: var(--brand-green);
 }
@@ -667,13 +690,14 @@ a {
 
 .booking-bar {
   width: 100%;
-  background: rgba(255, 255, 255, 0.97);
+  background: rgba(31, 51, 38, 0.96);
   backdrop-filter: blur(14px);
-  color: var(--text-main);
+  -webkit-backdrop-filter: blur(14px);
+  color: #ffffff;
   border-radius: var(--radius-md);
   padding: 11px 11px 11px 22px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: 0 18px 44px rgba(10, 18, 13, 0.34);
+  border: 1px solid rgba(197, 155, 109, 0.38);
 }
 
 .booking-form {
@@ -688,7 +712,7 @@ a {
   flex-direction: column;
   gap: 3px;
   padding: 4px 12px 4px 0;
-  border-right: 1px solid var(--border-subtle);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
   min-width: 0;
   cursor: pointer;
 }
@@ -700,7 +724,7 @@ a {
 .booking-field__label {
   font-size: 0.75rem;
   font-weight: 500;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .booking-field__control {
@@ -708,7 +732,8 @@ a {
   background: transparent;
   font-size: 0.9375rem;
   font-weight: 500;
-  color: var(--text-main);
+  color: #ffffff;
+  color-scheme: dark;
   padding: 2px 0;
   outline: none;
   width: 100%;
@@ -716,14 +741,34 @@ a {
   cursor: pointer;
 }
 
+.booking-field__control option {
+  background: #ffffff;
+  color: #1b211c;
+}
+
 input[type="date"],
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
+input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.85;
+}
+
 .booking-submit {
   padding: 14px 28px;
   font-size: 0.9375rem;
+  background: #cfa06b;
+  border-color: #cfa06b;
+  color: #1c1914;
+  font-weight: 600;
+}
+
+.booking-submit:hover {
+  background: #dbb07f;
+  border-color: #dbb07f;
+  color: #1c1914;
 }
 
 .mobile-booking-section {
@@ -736,16 +781,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 @media (min-width: 1024px) {
   .booking-bar.is-pinned {
     position: fixed;
-    bottom: 20px;
+    bottom: 18px;
     left: 0;
     right: 0;
     margin-inline: auto;
     width: calc(100% - 64px);
     max-width: calc(var(--container-max) - 64px);
     z-index: 95;
-    background: rgba(255, 255, 255, 0.98);
-    border: 1px solid var(--border-strong);
-    box-shadow: 0 12px 36px rgba(15, 24, 18, 0.14);
+    background: rgba(31, 51, 38, 0.97);
+    border: 1px solid rgba(197, 155, 109, 0.55);
+    box-shadow: 0 18px 46px rgba(10, 18, 13, 0.34);
   }
 }
 
@@ -755,27 +800,36 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 }
 
-.mobile-sticky-cta {
+.mobile-jump-btn {
   display: none;
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom));
   z-index: 94;
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(14px);
-  border-top: 1px solid var(--border-subtle);
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  transform: translateY(100%);
-  transition: transform 0.28s ease;
-  box-shadow: 0 -6px 20px rgba(20, 32, 24, 0.08);
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: var(--radius-pill);
+  background: #1f3326;
+  color: #ffffff;
+  border: 1px solid rgba(197, 155, 109, 0.55);
+  box-shadow: 0 10px 28px rgba(15, 24, 18, 0.28);
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(14px);
+  transition: opacity 0.24s ease, transform 0.24s ease, background-color 0.2s ease;
 }
 
-.mobile-sticky-cta.is-visible {
+.mobile-jump-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
+}
+
+.mobile-jump-btn:hover {
+  background: #2c4635;
 }
 
 /* ==========================================================================
@@ -995,6 +1049,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .house-slider__dot.is-active {
   background: #ffffff;
   width: 16px;
+}
+
+.house-slider__counter {
+  display: none;
 }
 
 .house-card__body {
@@ -1993,6 +2051,76 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 1;
 }
 
+.footer-legal {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  font-size: 0.78125rem;
+  color: rgba(255, 255, 255, 0.56);
+}
+
+.footer-legal__docs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+}
+
+.footer-legal__link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.78125rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.footer-legal__link:hover {
+  color: #ffffff;
+}
+
+.kontur-consent-note {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+.inline-legal-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--brand-green);
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.legal-doc-body {
+  font-size: 0.90625rem;
+  line-height: 1.62;
+  color: var(--text-main);
+}
+
+.legal-doc-body h3 {
+  margin: 16px 0 6px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.legal-doc-body p {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+}
+
 /* ==========================================================================
    МОДАЛЬНЫЕ ОКНА И ВЫДАЧА ДОСТУПНЫХ ДОМОВ КОНТУР.ОТЕЛЯ
    ========================================================================== */
@@ -2471,6 +2599,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding-inline: 20px;
   }
 
+  .header-inner::after {
+    display: none;
+  }
+
   .main-nav,
   .header-right {
     display: none;
@@ -2480,14 +2612,37 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     display: flex;
   }
 
+  .territory-fullbleed {
+    background: var(--bg-page);
+  }
+
   .territory-floating-card {
     position: static;
     width: auto;
     max-height: none;
-    margin: 16px 20px 0;
+    margin: 14px 20px 0;
+    padding: 0;
+    gap: 12px;
     box-shadow: none;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .territory-panel__head,
+  .territory-detail__badge {
+    display: none;
+  }
+
+  .territory-legend {
+    order: -1;
+  }
+
+  .territory-detail {
+    background: var(--bg-sand);
     border: 1px solid var(--border-subtle);
-    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 16px;
   }
 
   .yandex-reviews-layout {
@@ -2523,9 +2678,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .mobile-booking-section .booking-bar {
-    box-shadow: none;
-    border: 1px solid var(--border-subtle);
-    background: #ffffff;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(197, 155, 109, 0.42);
+    background: #1f3326;
     padding: 12px;
     border-radius: var(--radius-md);
   }
@@ -2538,7 +2693,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .booking-field {
     border-right: none;
     border-bottom: none;
-    background: var(--bg-sand);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-sm);
     padding: 8px 11px;
     gap: 2px;
@@ -2561,8 +2716,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 13px 20px;
   }
 
-  .mobile-sticky-cta {
-    display: flex;
+  .mobile-jump-btn {
+    display: inline-flex;
   }
 
   .ny-card,
@@ -2583,7 +2738,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 @media (max-width: 767px) {
   :root {
-    --header-h: 64px;
+    --header-h: 70px;
+  }
+
+  html {
+    scroll-padding-top: 76px;
   }
 
   .section {
@@ -2599,8 +2758,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .brand-logo {
-    width: 48px;
-    height: 40px;
+    width: 68px;
+    height: 54px;
   }
 
   .hero {
@@ -2637,20 +2796,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 24px;
   }
 
-  /* Мобильный слайдер домов: 100% нативный свайп всех реальных кадров */
+  /* Мобильный слайдер домов: чёткий 4:3 кадр + стрелки + свайп + счётчик */
   .house-slider {
-    aspect-ratio: auto;
-    background: transparent;
+    aspect-ratio: 4 / 3;
+    background: var(--bg-sand);
   }
 
   .house-slider__track {
     display: flex;
+    height: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    gap: 8px;
-    padding: 12px 12px 0;
+    gap: 0;
+    padding: 0;
     transform: none !important;
     transition: none;
   }
@@ -2664,16 +2824,49 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .house-slider__track img {
-    flex: 0 0 84%;
-    aspect-ratio: 4 / 4.4;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
     object-fit: cover;
-    border-radius: var(--radius-md);
+    border-radius: 0;
     scroll-snap-align: start;
   }
 
-  .house-slider__nav,
+  .house-slider__nav {
+    display: inline-flex;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .house-slider__nav--prev {
+    left: 10px;
+  }
+
+  .house-slider__nav--next {
+    right: 10px;
+  }
+
   .house-slider__dots {
     display: none;
+  }
+
+  .house-slider__counter {
+    display: inline-flex;
+    align-items: center;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    background: rgba(15, 24, 18, 0.72);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 2;
+    pointer-events: none;
   }
 
   .house-card__body {
@@ -2731,8 +2924,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .territory-floating-card {
     margin: 12px 16px 0;
-    padding: 14px;
-    border-radius: var(--radius-md);
+    padding: 0;
+    border-radius: 0;
   }
 
   .territory-toggle-btn {
@@ -2764,16 +2957,28 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .territory-legend button {
     width: auto;
     white-space: nowrap;
-    padding: 6px 10px;
+    padding: 7px 12px;
     background: var(--bg-sand);
-    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-pill);
     font-size: 0.8125rem;
+  }
+
+  .territory-legend button.is-active {
+    background: var(--brand-green);
+    border-color: var(--brand-green);
+    color: #ffffff;
   }
 
   .territory-legend__num {
     width: 18px;
     height: 18px;
     font-size: 0.6875rem;
+  }
+
+  .territory-legend button.is-active .territory-legend__num {
+    background: #ffffff;
+    color: var(--brand-green);
   }
 
   /* Услуги на мобиле: табы в 1 строку + компактные горизонтальные строки */
@@ -2825,11 +3030,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-size: 0.875rem;
   }
 
-  /* Философия на мобиле: панорама сверху + карточка с нахлёстом */
+  /* Философия на мобиле: чистое фото сверху и текст прямо под ним без лишней рамки */
   .philosophy-fullbleed {
     display: block;
     min-height: auto;
-    padding-block: 0 56px;
+    padding-block: 0 48px;
     background: var(--bg-page);
   }
 
@@ -2839,13 +3044,21 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: 100%;
   }
 
+  .philosophy-fullbleed__scrim {
+    display: none;
+  }
+
   .philosophy-card {
     position: relative;
-    margin-top: -32px;
-    background: #ffffff;
-    border: 1px solid var(--border-subtle);
-    box-shadow: var(--shadow-md);
-    padding: 24px 20px;
+    width: 100%;
+    margin-top: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 24px 0 0;
   }
 
   .philosophy-pillars {
@@ -2875,7 +3088,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
 
   .site-footer {
-    padding-block: 36px 88px;
+    padding-block: 38px 44px;
   }
 
   /* Модалки как bottom-sheet на мобиле */

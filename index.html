@@ -170,7 +170,7 @@
     </section>
 
     <!-- На мобайле форма бронирования сразу ПОД главным баннером -->
-    <section class="mobile-booking-section" aria-label="Поиск и бронирование на мобильном">
+    <section class="mobile-booking-section" id="mobile-booking" aria-label="Поиск и бронирование на мобильном">
       <div class="container">
         <div class="booking-bar">
           <form class="booking-form js-booking-form" data-source="mobile">
@@ -293,6 +293,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <div class="house-slider__dots"></div>
+              <span class="house-slider__counter" data-slider-counter>1&nbsp;/&nbsp;6</span>
             </div>
 
             <div class="house-card__body">
@@ -347,6 +348,7 @@
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
               <div class="house-slider__dots"></div>
+              <span class="house-slider__counter" data-slider-counter>1&nbsp;/&nbsp;6</span>
             </div>
 
             <div class="house-card__body">
@@ -387,12 +389,12 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Атмосфера и детали</span>
-            <h2 class="section-title">Галерея с быстрыми тегами</h2>
+            <span class="section-eyebrow">Фотогалерея</span>
+            <h2 class="section-title">Лес, Волга и&nbsp;тёплый свет</h2>
           </div>
           <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-            <p class="section-subtitle">Наведите на светящуюся точку, чтобы перейти к домику или услуге, либо откройте любой кадр крупно.</p>
-            <button type="button" class="btn btn--outline btn--sm js-open-lightbox" data-index="0">Смотреть все 14 фото</button>
+            <p class="section-subtitle">Нажмите на&nbsp;любой кадр, чтобы рассмотреть детали коттеджей и&nbsp;зимнего берега ближе или перейти сразу к&nbsp;нужной зоне.</p>
+            <button type="button" class="btn btn--outline btn--sm js-open-lightbox" data-index="0">Смотреть все 14&nbsp;фото</button>
           </div>
         </div>
       </div>
@@ -936,16 +938,22 @@
         </div>
       </div>
     </div>
+    <div class="container footer-legal">
+      <span>© 2026 База отдыха «Бриз» · ООО&nbsp;«Лагуна» · ОГРН&nbsp;1216300052352 · ИНН&nbsp;6316275130</span>
+      <nav class="footer-legal__docs" aria-label="Юридическая информация">
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="privacy">Политика конфиденциальности</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="oferta">Договор оферты</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="rules">Правила проживания</button>
+        <button type="button" class="footer-legal__link js-open-legal" data-legal="consent">Согласие на&nbsp;обработку ПДн</button>
+      </nav>
+    </div>
   </footer>
 
-  <!-- Нижний sticky-бар на мобильных -->
-  <div class="mobile-sticky-cta" id="mobileStickyCta">
-    <div>
-      <strong style="display:block;font-weight:500;font-size:0.95rem;">от 8 000 ₽ / ночь</strong>
-      <span style="font-size:0.75rem;color:var(--text-muted);">Завтрак включён · Барн 70 и 130</span>
-    </div>
-    <button type="button" class="btn btn--primary btn--sm js-open-booking">Выбрать даты</button>
-  </div>
+  <!-- Плавающая кнопка быстрого перехода к форме дат на мобильных -->
+  <a href="#mobile-booking" class="mobile-jump-btn" id="mobileJumpBooking">
+    <span>Выбрать даты</span>
+    <span aria-hidden="true">↑</span>
+  </a>
 
   <!-- =======================================================================
        МОДАЛЬНОЕ ОКНО: ПОДБОР СВОБОДНЫХ ДОМОВ (КОНТУР.ОТЕЛЬ / FRONTDESK24)
@@ -1019,6 +1027,7 @@
           <button type="submit" class="btn btn--primary" style="flex:1;">Оформить бронь</button>
           <a href="https://briz.club/booking?room-type=254820" target="_blank" rel="noopener" class="btn btn--outline" id="konturDirectLink">Перейти в виджет на briz.club ↗</a>
         </div>
+        <p class="kontur-consent-note">Нажимая «Оформить бронь», вы&nbsp;подтверждаете согласие с&nbsp;<button type="button" class="inline-legal-btn js-open-legal" data-legal="privacy">политикой ПДн</button> и&nbsp;<button type="button" class="inline-legal-btn js-open-legal" data-legal="rules">правилами проживания</button>.</p>
       </form>
 
       <div class="kontur-success" id="konturSuccess" style="display:none;">
@@ -1071,6 +1080,21 @@
         </div>
         <div class="lightbox-links" id="lightboxLinks"></div>
       </div>
+    </div>
+  </div>
+
+  <!-- =======================================================================
+       ЮРИДИЧЕСКИЕ ДОКУМЕНТЫ И ПРАВИЛА ПРОЖИВАНИЯ
+       ======================================================================= -->
+  <div class="modal" id="legalModal" role="dialog" aria-modal="true" aria-labelledby="legalModalTitle">
+    <div class="modal__dialog">
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="section-eyebrow">Документы базы отдыха</span>
+      <h2 class="modal__title" id="legalModalTitle">Юридическая информация</h2>
+      <p class="modal__subtitle" id="legalModalSubtitle"></p>
+      <div class="legal-doc-body" id="legalModalBody"></div>
     </div>
   </div>
 

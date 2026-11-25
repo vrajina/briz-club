@@ -155,13 +155,22 @@
   }
 
   // --------------------------------------------------------------------------
-  // 2. Шапка при скролле + фиксация плашки бронирования + мобильная нижняя кнопка
+  // 2. Шапка при скролле + фиксация плашки бронирования + мобильная кнопка к датам + scrollspy
   // --------------------------------------------------------------------------
   var siteHeader = document.getElementById("siteHeader");
   var heroSection = document.getElementById("heroSection");
   var heroBookingSlot = document.getElementById("heroBookingSlot");
   var heroBookingBar = document.getElementById("heroBookingBar");
-  var mobileStickyCta = document.getElementById("mobileStickyCta");
+  var mobileBookingSection = document.getElementById("mobile-booking");
+  var mobileJumpBooking = document.getElementById("mobileJumpBooking");
+  var desktopNavLinks = Array.prototype.slice.call(document.querySelectorAll('.main-nav a[href^="#"]'));
+  var trackedSections = desktopNavLinks
+    .map(function (link) {
+      var targetId = link.getAttribute("href").slice(1);
+      var targetEl = targetId ? document.getElementById(targetId) : null;
+      return targetEl ? { link: link, el: targetEl } : null;
+    })
+    .filter(Boolean);
 
   function handleScroll() {
     var y = window.scrollY || window.pageYOffset;
@@ -183,9 +192,32 @@
       }
     }
 
-    var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 540;
-    if (mobileStickyCta) {
-      mobileStickyCta.classList.toggle("is-visible", y > heroBottom);
+    if (mobileJumpBooking) {
+      var showMobileJump = false;
+      if (window.innerWidth < 1024) {
+        if (mobileBookingSection) {
+          showMobileJump = mobileBookingSection.getBoundingClientRect().bottom < 72;
+        } else {
+          var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 540;
+          showMobileJump = y > heroBottom;
+        }
+      }
+      mobileJumpBooking.classList.toggle("is-visible", showMobileJump);
+    }
+
+    if (trackedSections.length) {
+      var activeItem = null;
+      var lastTop = -Infinity;
+      trackedSections.forEach(function (item) {
+        var top = item.el.getBoundingClientRect().top;
+        if (top <= 145 && Math.abs(top - lastTop) > 20) {
+          activeItem = item;
+          lastTop = top;
+        }
+      });
+      desktopNavLinks.forEach(function (link) {
+        link.classList.toggle("is-active", Boolean(activeItem && activeItem.link === link && y > 180));
+      });
     }
   }
 
@@ -269,10 +301,13 @@
   document.querySelectorAll("[data-slider]").forEach(function (slider) {
     var track = slider.querySelector(".house-slider__track");
     var slides = slider.querySelectorAll(".house-slider__slide");
+    var images = slider.querySelectorAll(".house-slider__slide img");
     var dotsContainer = slider.querySelector(".house-slider__dots");
+    var counterEl = slider.querySelector("[data-slider-counter]");
     var prevBtn = slider.querySelector(".house-slider__nav--prev");
     var nextBtn = slider.querySelector(".house-slider__nav--next");
     var idx = 0;
+    var mobileIdx = 0;
     if (!track || !slides.length || !dotsContainer) return;
 
     slides.forEach(function (_, i) {
@@ -287,15 +322,33 @@
       dotsContainer.appendChild(dot);
     });
 
+    function updateMobileCounter(activeImgIdx) {
+      if (counterEl && images.length) {
+        counterEl.textContent = (activeImgIdx + 1) + "\u00A0/\u00A0" + images.length;
+      }
+    }
+
     function syncTransform() {
       if (window.innerWidth < 768) {
         track.style.transform = "";
+        updateMobileCounter(mobileIdx);
       } else {
         track.style.transform = "translateX(-" + idx * 100 + "%)";
       }
     }
 
     function goTo(newIndex) {
+      if (window.innerWidth < 768 && images.length) {
+        mobileIdx = (newIndex + images.length) % images.length;
+        var slideWidth = track.clientWidth || slider.clientWidth;
+        if (typeof track.scrollTo === "function") {
+          track.scrollTo({ left: mobileIdx * slideWidth, behavior: "smooth" });
+        } else {
+          track.scrollLeft = mobileIdx * slideWidth;
+        }
+        updateMobileCounter(mobileIdx);
+        return;
+      }
       idx = (newIndex + slides.length) % slides.length;
       syncTransform();
       dotsContainer.querySelectorAll(".house-slider__dot").forEach(function (d, i) {
@@ -303,19 +356,31 @@
       });
     }
 
+    var scrollRaf = 0;
+    track.addEventListener("scroll", function () {
+      if (window.innerWidth >= 768 || !images.length) return;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = requestAnimationFrame(function () {
+        var slideWidth = track.clientWidth || 1;
+        var current = Math.round(track.scrollLeft / slideWidth);
+        mobileIdx = Math.max(0, Math.min(images.length - 1, current));
+        updateMobileCounter(mobileIdx);
+      });
+    }, { passive: true });
+
     window.addEventListener("resize", syncTransform);
     syncTransform();
 
     if (prevBtn) {
       prevBtn.addEventListener("click", function (e) {
         e.stopPropagation();
-        goTo(idx - 1);
+        goTo((window.innerWidth < 768 ? mobileIdx : idx) - 1);
       });
     }
     if (nextBtn) {
       nextBtn.addEventListener("click", function (e) {
         e.stopPropagation();
-        goTo(idx + 1);
+        goTo((window.innerWidth < 768 ? mobileIdx : idx) + 1);
       });
     }
   });
@@ -555,6 +620,14 @@
     document.querySelectorAll("[data-pin]").forEach(function (el) {
       el.classList.toggle("is-active", el.getAttribute("data-pin") === pinId);
     });
+    var legend = document.getElementById("territoryLegend");
+    var activeBtn = legend ? legend.querySelector('button[data-pin="' + pinId + '"]') : null;
+    if (legend && activeBtn && window.innerWidth < 1120 && typeof legend.scrollTo === "function") {
+      var legendRect = legend.getBoundingClientRect();
+      var btnRect = activeBtn.getBoundingClientRect();
+      var targetLeft = legend.scrollLeft + (btnRect.left - legendRect.left) - (legend.clientWidth - btnRect.width) / 2;
+      legend.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
+    }
     var badge = document.getElementById("territoryDetailBadge");
     var title = document.getElementById("territoryDetailTitle");
     var desc = document.getElementById("territoryDetailDesc");
@@ -626,6 +699,14 @@
     document.body.style.overflow = "hidden";
   }
 
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.classList.remove("is-open");
+    if (!document.querySelector(".modal.is-open")) {
+      document.body.style.overflow = "";
+    }
+  }
+
   function closeAllModals() {
     document.querySelectorAll(".modal.is-open").forEach(function (m) {
       m.classList.remove("is-open");
@@ -634,11 +715,13 @@
   }
 
   document.querySelectorAll("[data-close-modal]").forEach(function (btn) {
-    btn.addEventListener("click", closeAllModals);
+    btn.addEventListener("click", function () {
+      closeModal(btn.closest(".modal"));
+    });
   });
   document.querySelectorAll(".modal").forEach(function (m) {
     m.addEventListener("click", function (e) {
-      if (e.target === m) closeAllModals();
+      if (e.target === m) closeModal(m);
     });
   });
   document.addEventListener("keydown", function (e) {
@@ -962,6 +1045,68 @@
       }, 2000);
     });
   }
+
+  // --------------------------------------------------------------------------
+  // 10. Юридические документы и правила проживания (ООО «Лагуна»)
+  // --------------------------------------------------------------------------
+  var LEGAL_DOCS = {
+    privacy: {
+      title: "Политика конфиденциальности и обработки ПДн",
+      subtitle: "ООО «Лагуна» · ИНН 6316275130 · ОГРН 1216300052352",
+      html:
+        "<p>Оператор персональных данных: ООО&nbsp;«Лагуна» (ИНН&nbsp;6316275130, ОГРН&nbsp;1216300052352, юридический адрес: 443031, Самарская область, г.&nbsp;Самара, ул.&nbsp;Солнечная, зд.&nbsp;60, пом.&nbsp;3Н). База отдыха «Бриз»: Волжский район, с.п.&nbsp;Курумоч, 81-й квартал Большецаревщинского участкового лесничества, 5Б.</p>" +
+        "<h3>Какие данные обрабатываются</h3>" +
+        "<p>Фамилия, имя и&nbsp;отчество, номер мобильного телефона, адрес электронной почты, даты заезда и&nbsp;выезда, количество гостей и&nbsp;пожелания к&nbsp;размещению, переданные при&nbsp;бронировании через модуль Контур.Отеля или по&nbsp;телефону +7&nbsp;(937)&nbsp;201-44-44.</p>" +
+        "<h3>Цели и порядок хранения</h3>" +
+        "<p>Данные используются исключительно для&nbsp;оформления договора оказания гостиничных услуг, расчёта стоимости проживания и&nbsp;связи с&nbsp;гостем до&nbsp;заезда. Запрос на&nbsp;уточнение или удаление персональных данных можно направить на&nbsp;почту breezesmr@yandex.ru.</p>"
+    },
+    oferta: {
+      title: "Договор публичной оферты",
+      subtitle: "Условия бронирования и оказания услуг размещения на базе отдыха «Бриз»",
+      html:
+        "<p>Настоящий документ является официальным предложением ООО&nbsp;«Лагуна» (далее&nbsp;— Исполнитель) заключить договор краткосрочного проживания в&nbsp;коттеджах «Барн-Хаус» 70 и&nbsp;130 и&nbsp;дополнительных услуг на&nbsp;базе отдыха «Бриз».</p>" +
+        "<h3>Бронирование и оплата</h3>" +
+        "<p>Актуальная стоимость проживания рассчитывается автоматически в&nbsp;системе онлайн-бронирования Контур.Отель на&nbsp;выбранные даты. В&nbsp;базовый тариф включён завтрак, пользование мангальной зоной, Wi-Fi и&nbsp;парковкой на&nbsp;территории.</p>" +
+        "<h3>Расчётный час и отмена</h3>" +
+        "<p>Заезд гостей осуществляется после 14:00, выезд&nbsp;— до&nbsp;12:00. Условия предоплаты, переноса дат и&nbsp;отмены бронирования по&nbsp;выбранному тарифу фиксируются в&nbsp;ваучере при&nbsp;подтверждении заявки.</p>"
+    },
+    rules: {
+      title: "Правила проживания и внутреннего распорядка",
+      subtitle: "Памятка для комфортного и безопасного отдыха на природе",
+      html:
+        "<h3>Режим заезда и тишины</h3>" +
+        "<p>Заезд с&nbsp;14:00, выезд до&nbsp;12:00 (при&nbsp;наличии свободных домов возможен ранний заезд или поздний выезд по&nbsp;согласованию). Просим соблюдать спокойную атмосферу в&nbsp;лесной зоне с&nbsp;22:00 до&nbsp;09:00 и&nbsp;не&nbsp;использовать громкую уличную акустику и&nbsp;фейерверки.</p>" +
+        "<h3>Пожарная безопасность и курение</h3>" +
+        "<p>Внутри коттеджей, на&nbsp;террасах и&nbsp;рядом с&nbsp;хвойными деревьями строго запрещено курение, открытый огонь и&nbsp;пиротехника (штраф&nbsp;5&nbsp;000&nbsp;₽). Мангал разрешено разжигать только на&nbsp;оборудованной площадке.</p>" +
+        "<h3>Отдых с питомцами</h3>" +
+        "<p>Размещение с&nbsp;домашними животными возможно в&nbsp;отдельных домах по&nbsp;предварительному согласованию с&nbsp;администрацией при&nbsp;бронировании.</p>"
+    },
+    consent: {
+      title: "Согласие на обработку персональных данных",
+      subtitle: "В соответствии с Федеральным законом № 152-ФЗ «О персональных данных»",
+      html:
+        "<p>Отправляя заявку на&nbsp;бронирование или обратный звонок на&nbsp;сайте briz.club, субъект персональных данных свободно, своей волей и&nbsp;в&nbsp;своём интересе даёт согласие ООО&nbsp;«Лагуна» (ИНН&nbsp;6316275130) на&nbsp;обработку указанных контактных данных.</p>" +
+        "<p>Согласие охватывает сбор, запись, систематизацию, хранение, уточнение и&nbsp;использование сведений в&nbsp;целях подтверждения бронирования, согласования дополнительных услуг (баня, банный чан, прокат) и&nbsp;организации заезда.</p>" +
+        "<p>Согласие действует до&nbsp;момента исполнения обязательств по&nbsp;договору или отзыва путём направления уведомления на&nbsp;breezesmr@yandex.ru.</p>"
+    }
+  };
+
+  var legalModal = document.getElementById("legalModal");
+  var legalModalTitle = document.getElementById("legalModalTitle");
+  var legalModalSubtitle = document.getElementById("legalModalSubtitle");
+  var legalModalBody = document.getElementById("legalModalBody");
+
+  document.querySelectorAll(".js-open-legal").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var key = btn.getAttribute("data-legal");
+      var doc = LEGAL_DOCS[key];
+      if (!doc || !legalModal) return;
+      if (legalModalTitle) legalModalTitle.textContent = doc.title;
+      if (legalModalSubtitle) legalModalSubtitle.textContent = doc.subtitle;
+      if (legalModalBody) legalModalBody.innerHTML = doc.html;
+      openModal(legalModal);
+    });
+  });
 
   syncAllBookingInputs();
 })();
