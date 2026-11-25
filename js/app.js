@@ -164,13 +164,95 @@
   var mobileBookingSection = document.getElementById("mobile-booking");
   var mobileJumpBooking = document.getElementById("mobileJumpBooking");
   var desktopNavLinks = Array.prototype.slice.call(document.querySelectorAll('.main-nav a[href^="#"]'));
-  var trackedSections = desktopNavLinks
-    .map(function (link) {
-      var targetId = link.getAttribute("href").slice(1);
-      var targetEl = targetId ? document.getElementById(targetId) : null;
-      return targetEl ? { link: link, el: targetEl } : null;
-    })
-    .filter(Boolean);
+  var mainSections = Array.prototype.slice.call(document.querySelectorAll("main > section[id]"));
+  var SECTION_TO_NAV_HREF = {
+    services: "#services",
+    philosophy: "#philosophy",
+    reviews: "#reviews",
+    contacts: "#contacts"
+  };
+  var preferredHouseHref = "";
+  var navClickLockHref = "";
+  var navClickLockUntil = 0;
+
+  function clearNavClickLock() {
+    navClickLockHref = "";
+    navClickLockUntil = 0;
+  }
+
+  window.addEventListener("wheel", clearNavClickLock, { passive: true });
+  window.addEventListener("touchmove", clearNavClickLock, { passive: true });
+
+  document.querySelectorAll('a[href="#barn-70"], a[href="#barn-130"]').forEach(function (link) {
+    link.addEventListener("click", function () {
+      preferredHouseHref = link.getAttribute("href") || "";
+    });
+  });
+
+  desktopNavLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+      navClickLockHref = link.getAttribute("href") || "";
+      navClickLockUntil = Date.now() + 800;
+      handleScroll();
+    });
+  });
+
+  function resolveActiveNavHref(y) {
+    if (navClickLockHref) {
+      if (Date.now() < navClickLockUntil) {
+        return navClickLockHref;
+      }
+      clearNavClickLock();
+    }
+
+    if (y < 140) {
+      preferredHouseHref = "";
+      return "";
+    }
+
+    var contactsEl = document.getElementById("contacts");
+    if (contactsEl && contactsEl.offsetHeight > 0 && window.innerHeight + y >= document.documentElement.scrollHeight - 36) {
+      preferredHouseHref = "";
+      return "#contacts";
+    }
+
+    var probeY = Math.round(window.innerHeight * 0.42);
+    var activeSec = null;
+    mainSections.forEach(function (sec) {
+      if (!sec.offsetHeight) return;
+      var rect = sec.getBoundingClientRect();
+      if (rect.top <= probeY && rect.bottom > probeY) {
+        activeSec = sec;
+      }
+    });
+
+    if (!activeSec) {
+      var viewTop = 72;
+      var viewBottom = window.innerHeight - 80;
+      var bestVisible = 0;
+      mainSections.forEach(function (sec) {
+        if (!sec.offsetHeight) return;
+        var rect = sec.getBoundingClientRect();
+        var visible = Math.min(rect.bottom, viewBottom) - Math.max(rect.top, viewTop);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          activeSec = sec;
+        }
+      });
+    }
+
+    if (!activeSec) {
+      preferredHouseHref = "";
+      return "";
+    }
+
+    if (activeSec.id === "houses") {
+      return preferredHouseHref;
+    }
+
+    preferredHouseHref = "";
+    return SECTION_TO_NAV_HREF[activeSec.id] || "";
+  }
 
   function handleScroll() {
     var y = window.scrollY || window.pageYOffset;
@@ -205,18 +287,10 @@
       mobileJumpBooking.classList.toggle("is-visible", showMobileJump);
     }
 
-    if (trackedSections.length) {
-      var activeItem = null;
-      var lastTop = -Infinity;
-      trackedSections.forEach(function (item) {
-        var top = item.el.getBoundingClientRect().top;
-        if (top <= 145 && Math.abs(top - lastTop) > 20) {
-          activeItem = item;
-          lastTop = top;
-        }
-      });
+    if (desktopNavLinks.length) {
+      var activeHref = resolveActiveNavHref(y);
       desktopNavLinks.forEach(function (link) {
-        link.classList.toggle("is-active", Boolean(activeItem && activeItem.link === link && y > 180));
+        link.classList.toggle("is-active", Boolean(activeHref && link.getAttribute("href") === activeHref));
       });
     }
   }

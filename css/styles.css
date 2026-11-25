@@ -324,6 +324,7 @@ a {
 }
 
 .nav-link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -335,15 +336,40 @@ a {
   transition: background-color var(--transition), color var(--transition), border-color var(--transition);
 }
 
-.nav-link:hover,
-.nav-link.is-active {
+.nav-link:not(.nav-link--seasonal)::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 3px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
+  pointer-events: none;
+}
+
+.nav-link:hover {
   background-color: rgba(255, 255, 255, 0.16);
 }
 
-.site-header.is-scrolled .nav-link:hover,
-.site-header.is-scrolled .nav-link.is-active {
+.site-header.is-scrolled .nav-link:hover {
   background-color: var(--brand-green-soft);
   color: var(--brand-green);
+}
+
+.nav-link.is-active {
+  color: #ffffff;
+}
+
+.site-header.is-scrolled .nav-link.is-active {
+  color: var(--brand-green);
+}
+
+.nav-link.is-active:not(.nav-link--seasonal)::after {
+  transform: scaleX(1);
 }
 
 .seasonal-emoji {
@@ -2587,6 +2613,11 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   .nav-link {
     padding: 8px 9px;
     font-size: 0.90625rem;
+  }
+
+  .nav-link:not(.nav-link--seasonal)::after {
+    left: 9px;
+    right: 9px;
   }
 
   .header-socials {
