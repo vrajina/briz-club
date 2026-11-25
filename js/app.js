@@ -240,13 +240,24 @@
       dotsContainer.appendChild(dot);
     });
 
+    function syncTransform() {
+      if (window.innerWidth < 768) {
+        track.style.transform = "";
+      } else {
+        track.style.transform = "translateX(-" + idx * 100 + "%)";
+      }
+    }
+
     function goTo(newIndex) {
       idx = (newIndex + slides.length) % slides.length;
-      track.style.transform = "translateX(-" + idx * 100 + "%)";
+      syncTransform();
       dotsContainer.querySelectorAll(".house-slider__dot").forEach(function (d, i) {
         d.classList.toggle("is-active", i === idx);
       });
     }
+
+    window.addEventListener("resize", syncTransform);
+    syncTransform();
 
     if (prevBtn) {
       prevBtn.addEventListener("click", function (e) {
