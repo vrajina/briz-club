@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новый год 2027 и январские каникулы — база отдыха «Бриз»</title>
+  <meta name="description" content="Новогодняя ночь 31 декабря — 3 января и рождественские каникулы 3–8 января в тёплых барнхаусах на берегу Волги под Самарой. Программа, варианты размещения и онлайн-подбор дат.">
+  <link rel="icon" type="image/png" href="assets/images/logo-briz-green.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ШАПКА -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-wrap" aria-label="На главную страницу базы отдыха Бриз">
+        <span class="brand-logo">
+          <img src="assets/images/logo-briz-white.png" alt="Бриз" class="brand-logo__white">
+          <img src="assets/images/logo-briz-green.png" alt="" class="brand-logo__green" aria-hidden="true">
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Главное меню">
+        <a href="new-year.html" class="nav-link nav-link--seasonal is-current">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L6.5 9h3.2L5 15h4.2L4 20h16l-5.2-5H19l-4.7-6h3.2L12 2z"/><path d="M12 20v2"/></svg>
+          <span>Новый год</span>
+        </a>
+        <a href="index.html#barn-70" class="nav-link">Барн 70</a>
+        <a href="index.html#barn-130" class="nav-link">Барн 130</a>
+        <a href="index.html#services" class="nav-link">Услуги</a>
+        <a href="index.html#philosophy" class="nav-link">Философия</a>
+        <a href="index.html#reviews" class="nav-link">Отзывы</a>
+        <a href="index.html#contacts" class="nav-link">Контакты</a>
+      </nav>
+
+      <div class="header-right">
+        <div class="header-socials" aria-label="Социальные сети">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="social-icon-link" aria-label="ВКонтакте">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+          </a>
+          <a href="https://t.me/briz_club" target="_blank" rel="noopener" class="social-icon-link" aria-label="Telegram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5L19 7l-7 10 5 3.5L21 5z"/></svg>
+          </a>
+        </div>
+        <a href="tel:+79372014444" class="header-phone">+7 (937) 201-44-44</a>
+      </div>
+
+      <div class="mobile-controls">
+        <a href="index.html" class="mobile-ny-pill">На главную</a>
+        <a href="tel:+79372014444" class="icon-btn" aria-label="Позвонить на базу Бриз">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </a>
+        <button type="button" class="icon-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Мобильное меню -->
+  <div class="mobile-drawer" id="mobileDrawer" aria-hidden="true">
+    <div class="mobile-drawer__panel">
+      <div>
+        <div class="mobile-drawer__top">
+          <img src="assets/images/logo-briz-green.png" alt="Бриз" style="height:40px;width:auto;">
+          <button type="button" class="icon-btn" id="drawerCloseBtn" aria-label="Закрыть меню" style="background:#fff;color:#1C241E;border-color:rgba(28,36,30,0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+        <nav class="mobile-drawer__nav" aria-label="Мобильное меню">
+          <a href="index.html" class="mobile-drawer__link"><span>Главная страница</span><span>→</span></a>
+          <a href="#program" class="mobile-drawer__link mobile-drawer__link--ny"><span>Программа праздников</span><span>→</span></a>
+          <a href="#packages" class="mobile-drawer__link"><span>Варианты размещения</span><span>→</span></a>
+          <a href="index.html#services" class="mobile-drawer__link"><span>Баня, чан и прокат</span><span>→</span></a>
+          <a href="index.html#contacts" class="mobile-drawer__link"><span>Контакты</span><span>→</span></a>
+        </nav>
+      </div>
+      <div class="mobile-drawer__footer">
+        <div class="drawer-socials">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="drawer-social-btn">ВКонтакте</a>
+          <a href="https://t.me/briz_club" target="_blank" rel="noopener" class="drawer-social-btn">Telegram</a>
+        </div>
+        <a href="tel:+79372014444" class="btn btn--outline" style="width:100%;">+7 (937) 201-44-44</a>
+        <button type="button" class="btn btn--primary js-book-ny" data-checkin="2026-12-31" data-checkout="2027-01-03" style="width:100%;">Подобрать даты на НГ</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- ПРАЗДНИЧНЫЙ ПЕРВЫЙ ЭКРАН -->
+    <section class="hero hero--subpage" id="heroSection">
+      <div class="hero__bg">
+        <img src="assets/images/hero-winter.jpg" alt="Новогодняя подсветка коттеджей Бриз в зимнем лесу">
+        <div class="hero__overlay"></div>
+      </div>
+
+      <div class="container hero__content">
+        <div class="hero__text">
+          <a href="index.html" class="yandex-hero-chip">
+            <span class="yandex-hero-chip__label">← Вернуться на главную «Бриза»</span>
+          </a>
+          <h1 class="hero__title">Новый год 2027 и январские каникулы в «Бризе»</h1>
+          <p class="hero__subhead">Камерная зимняя сказка в 30 минутах от Самары — без шумных банкетов, среди заснеженных сосен на берегу Волги.</p>
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:12px;">
+          <button type="button" class="btn btn--wood js-book-ny" data-checkin="2026-12-31" data-checkout="2027-01-03">Новогодняя ночь (31 дек — 3 янв)</button>
+          <button type="button" class="btn btn--ghost-light js-book-ny" data-checkin="2027-01-03" data-checkout="2027-01-06">Каникулы 3–8 января</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПРОГРАММА ПРАЗДНИЧНЫХ ДНЕЙ -->
+    <section class="section" id="program">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-eyebrow">Сценарий каникул</span>
+            <h2 class="section-title">Как проходят новогодние дни на базе</h2>
+          </div>
+          <p class="section-subtitle">
+            Мы сохраняем главный формат «Бриза» — тишину, уют собственного дома и живое общение в своей компании.
+          </p>
+        </div>
+
+        <div class="program-grid">
+          <article class="program-card">
+            <span class="program-card__date">31 декабря · Заезд с 14:00</span>
+            <h3 class="program-card__title">Заселение и огни у дома</h3>
+            <p class="program-card__text">Живая наряженная ель возле крыльца, праздничная иллюминация всей территории, тёплый дом с камином (в Барн 130) и подготовленная мангальная зона с шампурами и решёткой.</p>
+          </article>
+
+          <article class="program-card">
+            <span class="program-card__date">1 января · Неспешное утро</span>
+            <h3 class="program-card__title">Завтрак и сибирский чан</h3>
+            <p class="program-card__text">Утренний завтрак уже включён в проживание. После прогулки по берегу Волги — парение в горячем чане на дровах с пихтовыми ветками и цитрусами под открытым небом.</p>
+          </article>
+
+          <article class="program-card">
+            <span class="program-card__date">2 января · Активный день</span>
+            <h3 class="program-card__title">Лыжи, баня и ужин на углях</h3>
+            <p class="program-card__text">Прогулка по сосновому лесу на беговых лыжах, русская баня с панорамным окном и дубовыми вениками, вечером — настольные игры в гостиной.</p>
+          </article>
+
+          <article class="program-card">
+            <span class="program-card__date">3–8 января · Рождество</span>
+            <h3 class="program-card__title">Спокойные каникулы</h3>
+            <p class="program-card__text">Заезды от 2 суток для тех, кто хочет встретить Рождество на природе, выспаться в тишине хвойного леса и перезагрузиться перед новым рабочим годом.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВАРИАНТЫ РАЗМЕЩЕНИЯ НА НГ -->
+    <section class="section section--sand" id="packages">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-eyebrow">Праздничный календарь</span>
+            <h2 class="section-title">Варианты размещения на Новый год</h2>
+          </div>
+          <p class="section-subtitle">
+            Актуальная стоимость в модуле Контур.Отеля на праздничный период. Проживание и завтраки уже включены в тариф.
+          </p>
+        </div>
+
+        <div class="houses-grid">
+          <article class="house-card">
+            <div class="house-slider" data-slider>
+              <div class="house-slider__track">
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-exterior-5.jpg" alt="Барн 70 зимой среди сосен">
+                  <img src="assets/images/house-bedroom-1.jpg" alt="Спальня на первом этаже Барн 70">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-mezzanine.jpg" alt="Мансардный второй этаж Барн 70">
+                  <img src="assets/images/house-kitchen.jpg" alt="Кухня и сервировка в Барн 70">
+                </div>
+              </div>
+              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="house-slider__dots"></div>
+            </div>
+
+            <div class="house-card__body">
+              <div class="house-card__header">
+                <h3 class="house-card__title">«Барн-Хаус», 70</h3>
+                <span class="house-card__count">4+1 гостя · 8 домов</span>
+              </div>
+              <p class="house-card__meta">70 м² · 2 спальни, кухня-гостиная, терраса и мангальная зона</p>
+
+              <div class="tariff-box" style="margin-top:0;">
+                <div class="tariff-row">
+                  <div class="tariff-row__info">
+                    <strong>Новогодняя ночь 31 дек (в календаре)</strong>
+                    <span>Заезд 31 дек — 3 янв · проживание + завтрак</span>
+                  </div>
+                  <div class="tariff-row__price">
+                    <strong>38 500 ₽ / ночь</strong>
+                    <span>каникулы 3–8 янв по календарю</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="house-card__actions">
+                <button type="button" class="btn btn--primary js-book-ny" data-checkin="2026-12-31" data-checkout="2027-01-03" data-house="254819">Забронировать Барн 70</button>
+                <button type="button" class="text-link js-open-specs" data-spec="254819">Все удобства →</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="house-card">
+            <div class="house-slider" data-slider>
+              <div class="house-slider__track">
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-living-top.jpg" alt="Двусветная гостиная Барн 130">
+                  <img src="assets/images/real-terrace.jpg" alt="Терраса коттеджа среди сосен">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-bedroom-loft.jpg" alt="Спальня второго этажа">
+                  <img src="assets/images/house-pergola.jpg" alt="Крытая пергола для барбекю">
+                </div>
+              </div>
+              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+              <div class="house-slider__dots"></div>
+            </div>
+
+            <div class="house-card__body">
+              <div class="house-card__header">
+                <h3 class="house-card__title">«Барн-хаус», 130</h3>
+                <span class="house-card__count">6+2 гостей · 5 домов</span>
+              </div>
+              <p class="house-card__meta">130 м² · камин, 3 спальни, гостиная, 2 санузла и вид на Волгу</p>
+
+              <div class="tariff-box" style="margin-top:0;">
+                <div class="tariff-row">
+                  <div class="tariff-row__info">
+                    <strong>Новогодняя ночь 31 дек (в календаре)</strong>
+                    <span>Заезд 31 дек — 3 янв · проживание + завтрак</span>
+                  </div>
+                  <div class="tariff-row__price">
+                    <strong>55 000 ₽ / ночь</strong>
+                    <span>каникулы 3–8 янв по календарю</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="house-card__actions">
+                <button type="button" class="btn btn--primary js-book-ny" data-checkin="2026-12-31" data-checkout="2027-01-03" data-house="254820">Забронировать Барн 130</button>
+                <button type="button" class="text-link js-open-specs" data-spec="254820">Все удобства →</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ПОДВАЛ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/images/logo-briz-white.png" alt="Логотип Бриз">
+        <div>
+          <span style="display:block;color:#ffffff;font-weight:500;font-size:0.95rem;">База отдыха «Бриз» · briz.club</span>
+          <span style="font-size:0.8125rem;">ООО «Лагуна» · ИНН 6316275130 · +7 (937) 201-44-44</span>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="index.html">Главная</a>
+          <a href="index.html#barn-70">Барн 70</a>
+          <a href="index.html#barn-130">Барн 130</a>
+          <a href="index.html#services">Услуги</a>
+          <a href="index.html#contacts">Контакты</a>
+        </div>
+        <div class="footer-socials" aria-label="Социальные сети">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="social-icon-link" aria-label="ВКонтакте">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+          </a>
+          <a href="https://t.me/briz_club" target="_blank" rel="noopener" class="social-icon-link" aria-label="Telegram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5L19 7l-7 10 5 3.5L21 5z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- МОДАЛЬНОЕ ОКНО: ПОДБОР СВОБОДНЫХ ДОМОВ -->
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="modal__dialog">
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="section-eyebrow">Онлайн-бронирование · Контур.Отель (ID 1292)</span>
+      <h2 class="modal__title" id="bookingModalTitle">Доступные коттеджи на выбранные даты</h2>
+      <p class="modal__subtitle" id="bookingModalSubtitle">
+        Подбор домика под число гостей с праздничными тарифами.
+      </p>
+
+      <div id="hotel-widget-container"></div>
+
+      <div class="kontur-form-grid">
+        <div class="kontur-input-box">
+          <label for="modalCheckin">Дата заезда</label>
+          <input type="date" id="modalCheckin" required>
+        </div>
+        <div class="kontur-input-box">
+          <label for="modalCheckout">Дата выезда</label>
+          <input type="date" id="modalCheckout" required>
+        </div>
+        <div class="kontur-input-box">
+          <label for="modalGuests">Количество гостей</label>
+          <select id="modalGuests">
+            <option value="1">1 взрослый</option>
+            <option value="2" selected>2 взрослых</option>
+            <option value="3">3 гостя</option>
+            <option value="4">4 гостя</option>
+            <option value="5">5 гостей</option>
+            <option value="6">6 гостей</option>
+            <option value="7">7 гостей</option>
+            <option value="8">8 гостей</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="kontur-rooms-list" id="konturRoomsList"></div>
+
+      <form id="konturSimForm">
+        <div class="kontur-summary" id="konturSummary"></div>
+
+        <div class="kontur-form-grid kontur-form-grid--2">
+          <div class="kontur-input-box">
+            <label for="guestName">Ваше имя</label>
+            <input type="text" id="guestName" placeholder="Например, Алексей" required>
+          </div>
+          <div class="kontur-input-box">
+            <label for="guestPhone">Телефон для подтверждения</label>
+            <input type="tel" id="guestPhone" placeholder="+7 (9__) ___-__-__" required>
+          </div>
+        </div>
+
+        <div class="kontur-input-box" style="margin-bottom:16px;">
+          <label for="guestComment">Пожелания (банный чан, баня, питомец)</label>
+          <input type="text" id="guestComment" placeholder="Например: интересует банный чан на 1 января">
+        </div>
+
+        <div style="display:flex;flex-wrap:wrap;gap:10px;">
+          <button type="submit" class="btn btn--primary" style="flex:1;">Оформить бронь</button>
+          <a href="https://briz.club/booking?room-type=254820" target="_blank" rel="noopener" class="btn btn--outline" id="konturDirectLink">Перейти в виджет на briz.club ↗</a>
+        </div>
+      </form>
+
+      <div class="kontur-success" id="konturSuccess" style="display:none;">
+        <h3 style="margin:0 0 8px;font-weight:500;">Заявка сформирована</h3>
+        <p id="konturSuccessText" style="margin:0 0 14px;font-size:0.9375rem;"></p>
+        <button type="button" class="btn btn--outline btn--sm" id="konturResetBtn">Изменить параметры</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛЬНОЕ ОКНО: ВСЕ УДОБСТВА -->
+  <div class="modal" id="specsModal" role="dialog" aria-modal="true" aria-labelledby="specsModalTitle">
+    <div class="modal__dialog">
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="section-eyebrow">Описание и удобства · Контур.Отель</span>
+      <h2 class="modal__title" id="specsModalTitle">Барн-хаус</h2>
+      <p class="modal__subtitle" id="specsModalSubtitle"></p>
+      <div id="specsModalBody" style="font-size:0.9375rem;line-height:1.58;"></div>
+      <div style="margin-top:22px;display:flex;justify-content:flex-end;">
+        <button type="button" class="btn btn--primary" id="specsBookBtn">Проверить наличие этого дома</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

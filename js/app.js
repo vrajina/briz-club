@@ -1,17 +1,74 @@
 /* ==========================================================================
    Интерактив прототипа базы отдыха «Бриз» (briz.club)
-   Без внешних зависимостей и ES-модулей — работает и через file://, и на Vercel.
+   Поддерживает index.html и new-year.html, работает через file:// и на Vercel.
    ========================================================================== */
 (function () {
   "use strict";
 
-  // Опционально: укажите цифровой ID организации в Яндекс Бизнесе (11–12 цифр),
+  // Опционально: укажите 11–12-значный цифровой ID организации в Яндекс Бизнесе,
   // чтобы на боевом сайте автоматически загружался живой iframe виджета отзывов.
   var YANDEX_ORG_ID = "";
 
   // --------------------------------------------------------------------------
-  // 1. Хелперы и состояние бронирования (синхронизировано между всеми формами)
+  // 1. Данные коттеджей из модуля Контур.Отель (Frontdesk24 ID 1292)
   // --------------------------------------------------------------------------
+  var KONTUR_ROOMS = {
+    "254819": {
+      id: "254819",
+      title: "«Барн-Хаус», 70",
+      area: "70\u00A0м² (75\u00A0м²)",
+      baseCap: 4,
+      extraCap: 1,
+      maxGuests: 5,
+      roomsText: "3\u00A0комнаты: 2\u00A0спальни, гостиная",
+      tariffName: "Бархатный сезон 2026",
+      included: "Проживание · Завтрак",
+      weekday: 8000,
+      friday: 10000,
+      saturday: 12000,
+      nyEve: 38500,
+      nyHoliday: 16500,
+      description:
+        "<p>Дома «Барн Хаус-70»\u00A0— это 70\u00A0м² уюта, рассчитанных на\u00A0семью до\u00A04\u00A0человек с\u00A0возможностью 1\u00A0дополнительного места. Всего на\u00A0территории 8\u00A0таких домов.</p>" +
+        "<p>У\u00A0каждого дома есть индивидуальная мангальная зона с\u00A0комплектом шампуров и\u00A0решётки для барбекю. Дома оборудованы всей необходимой бытовой техникой и\u00A0отлично подойдут для долгосрочного проживания.</p>" +
+        "<p>На\u00A0первом этаже можно приготовить и\u00A0пообедать, собраться всей семьёй, чтобы поиграть в\u00A0настолки. Здесь\u00A0же расположен просторный санузел с\u00A0душем и\u00A0комната с\u00A0двуспальной кроватью. Второй этаж\u00A0— мансардный без двери: две односпальные кровати, которые при желании сдвигаются, и\u00A0возможность разместить 1\u00A0дополнительное место (кресло-кровать или матрас).</p>" +
+        "<p>Лаконичный дизайн с\u00A0хорошей шумоизоляцией не\u00A0отвлекает от\u00A0красоты природы, а\u00A0панорамные окна открывают живописный волжский пейзаж.</p>",
+      amenities: [
+        { group: "Основное", items: "Кондиционер, Wi-Fi, телевизор, мини-бар, диван или кресло, утюг, гладильная доска, терраса, гриль для барбекю" },
+        { group: "Ванная комната", items: "Душ, фен, стиральная машина, тапочки, ванные принадлежности" },
+        { group: "Кухня в\u00A0номере", items: "Стол и\u00A0стулья, холодильник и\u00A0мини-холодильник, чайник, плита, микроволновая печь, кухонные принадлежности" },
+        { group: "Вид из\u00A0окна", items: "На\u00A0реку и\u00A0хвойную территорию базы" }
+      ]
+    },
+    "254820": {
+      id: "254820",
+      title: "«Барн-хаус», 130",
+      area: "130\u00A0м²",
+      baseCap: 6,
+      extraCap: 2,
+      maxGuests: 8,
+      roomsText: "4\u00A0комнаты: 3\u00A0спальни, гостиная",
+      tariffName: "Бархатный сезон 2026",
+      included: "Проживание · Завтрак",
+      weekday: 11500,
+      friday: 14500,
+      saturday: 16500,
+      nyEve: 55000,
+      nyHoliday: 24500,
+      description:
+        "<p>Дома «Барн Хаус-130»\u00A0— это 130\u00A0м² уюта, рассчитанных на\u00A0семью до\u00A06\u00A0человек (с\u00A0возможностью 2\u00A0дополнительных мест). Всего на\u00A0территории 5\u00A0таких домов.</p>" +
+        "<p>У\u00A0каждого дома есть индивидуальная мангальная зона с\u00A0комплектом шампуров и\u00A0решётки для барбекю. Дома оборудованы всей необходимой бытовой техникой и\u00A0отлично подойдут для долгосрочного проживания.</p>" +
+        "<p>На\u00A0первом этаже можно приготовить и\u00A0пообедать, помедитировать у\u00A0камина или собраться всей семьёй, чтобы поиграть в\u00A0настолки. Здесь\u00A0же расположен просторный санузел с\u00A0душем и\u00A0комната с\u00A0двуспальным раскладным диваном (кабинет, гостевая или ещё одна спальня). Второй этаж\u00A0— зона сна и\u00A0отдыха с\u00A0двумя спальнями и\u00A0туалетом.</p>" +
+        "<p>Панорамные окна открывают живописный волжский пейзаж, а\u00A0хорошая шумоизоляция позволяет взрослым и\u00A0детям отдыхать с\u00A0полным комфортом.</p>",
+      amenities: [
+        { group: "Основное", items: "Камин, кондиционер, Wi-Fi, телевизор, мини-бар, диван или кресло, письменный стол, утюг, гладильная доска, терраса, гриль для барбекю" },
+        { group: "Санузлы и\u00A0бельё", items: "Душ и\u00A0дополнительный гостевой туалет на\u00A02\u00A0этаже, фен, стиральная машина, халат, ванные принадлежности" },
+        { group: "Кухня в\u00A0номере", items: "Стол и\u00A0стулья, холодильник, чайник, плита, микроволновая печь, кухонные принадлежности" },
+        { group: "Вид из\u00A0окна", items: "На\u00A0реку и\u00A0волжскую протоку" }
+      ]
+    }
+  };
+
   function formatIsoDate(date) {
     var y = date.getFullYear();
     var m = String(date.getMonth() + 1).padStart(2, "0");
@@ -27,7 +84,7 @@
     checkin: formatIsoDate(defaultIn),
     checkout: formatIsoDate(defaultOut),
     guests: "2",
-    house: "barn70-2",
+    selectedRoomId: "254820",
     note: ""
   };
 
@@ -41,12 +98,32 @@
     document.querySelectorAll(".js-guests").forEach(function (el) {
       el.value = bookingState.guests;
     });
-    document.querySelectorAll(".js-house").forEach(function (el) {
-      el.value = bookingState.house === "all" ? "all" : bookingState.house;
-    });
   }
 
-  // Монтирование живого iframe Яндекс Карт, если задан YANDEX_ORG_ID
+  // Неблокирующая синхронизация с /api/kontur (при работе на Vercel / HTTP)
+  if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+    fetch("/api/kontur")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (payload) {
+        if (!payload || !payload.ok || !payload.data) return;
+        var roomTypes = payload.data.roomTypes || payload.data.rooms || [];
+        if (Array.isArray(roomTypes)) {
+          roomTypes.forEach(function (rt) {
+            var id = String(rt.id || "");
+            if (KONTUR_ROOMS[id] && rt.name) {
+              KONTUR_ROOMS[id].title = rt.name;
+              var elTitle = document.getElementById("title-" + id);
+              if (elTitle) elTitle.textContent = rt.name;
+            }
+          });
+        }
+      })
+      .catch(function () {
+        // Работаем на встроенных данных Контур.Отеля
+      });
+  }
+
+  // Монтирование живого iframe Яндекс Карт, если указан YANDEX_ORG_ID
   var yandexSlot = document.getElementById("yandexReviewsSlot");
   if (YANDEX_ORG_ID && yandexSlot) {
     yandexSlot.innerHTML =
@@ -65,19 +142,16 @@
 
   function handleScroll() {
     var y = window.scrollY || window.pageYOffset;
-    if (y > 60) {
-      siteHeader.classList.add("is-scrolled");
-    } else {
-      siteHeader.classList.remove("is-scrolled");
+    if (siteHeader) {
+      siteHeader.classList.toggle("is-scrolled", y > 60);
     }
 
     var heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight - 120 : 540;
-    if (y > heroBottom) {
-      floatingBooking.classList.add("is-visible");
-      mobileStickyCta.classList.add("is-visible");
-    } else {
-      floatingBooking.classList.remove("is-visible");
-      mobileStickyCta.classList.remove("is-visible");
+    if (floatingBooking) {
+      floatingBooking.classList.toggle("is-visible", y > heroBottom);
+    }
+    if (mobileStickyCta) {
+      mobileStickyCta.classList.toggle("is-visible", y > heroBottom);
     }
   }
 
@@ -86,7 +160,7 @@
 
   var collapseFloatingBtn = document.getElementById("collapseFloatingBtn");
   var restoreFloatingBtn = document.getElementById("restoreFloatingBtn");
-  if (collapseFloatingBtn && restoreFloatingBtn) {
+  if (collapseFloatingBtn && restoreFloatingBtn && floatingBooking) {
     collapseFloatingBtn.addEventListener("click", function () {
       floatingBooking.classList.add("is-collapsed");
     });
@@ -103,26 +177,29 @@
   var drawerCloseBtn = document.getElementById("drawerCloseBtn");
 
   function setDrawerOpen(open) {
+    if (!mobileDrawer || !burgerBtn) return;
     mobileDrawer.classList.toggle("is-open", open);
     mobileDrawer.setAttribute("aria-hidden", open ? "false" : "true");
     burgerBtn.setAttribute("aria-expanded", open ? "true" : "false");
     document.body.style.overflow = open ? "hidden" : "";
   }
 
-  burgerBtn.addEventListener("click", function () {
-    setDrawerOpen(true);
-  });
-  drawerCloseBtn.addEventListener("click", function () {
-    setDrawerOpen(false);
-  });
-  mobileDrawer.addEventListener("click", function (e) {
-    if (e.target === mobileDrawer) setDrawerOpen(false);
-  });
-  mobileDrawer.querySelectorAll("a, button.js-open-booking").forEach(function (el) {
-    el.addEventListener("click", function () {
+  if (burgerBtn && mobileDrawer && drawerCloseBtn) {
+    burgerBtn.addEventListener("click", function () {
+      setDrawerOpen(true);
+    });
+    drawerCloseBtn.addEventListener("click", function () {
       setDrawerOpen(false);
     });
-  });
+    mobileDrawer.addEventListener("click", function (e) {
+      if (e.target === mobileDrawer) setDrawerOpen(false);
+    });
+    mobileDrawer.querySelectorAll("a, button.js-open-booking, button.js-book-ny").forEach(function (el) {
+      el.addEventListener("click", function () {
+        setDrawerOpen(false);
+      });
+    });
+  }
 
   document.querySelectorAll("[data-house-jump]").forEach(function (link) {
     link.addEventListener("click", function () {
@@ -141,7 +218,7 @@
   });
 
   // --------------------------------------------------------------------------
-  // 4. Слайдеры реальных фото внутри карточек домов и выбор варианта Барн 70
+  // 4. Слайдеры реальных фото внутри карточек домов
   // --------------------------------------------------------------------------
   document.querySelectorAll("[data-slider]").forEach(function (slider) {
     var track = slider.querySelector(".house-slider__track");
@@ -150,6 +227,7 @@
     var prevBtn = slider.querySelector(".house-slider__nav--prev");
     var nextBtn = slider.querySelector(".house-slider__nav--next");
     var idx = 0;
+    if (!track || !slides.length || !dotsContainer) return;
 
     slides.forEach(function (_, i) {
       var dot = document.createElement("button");
@@ -171,34 +249,26 @@
       });
     }
 
-    prevBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      goTo(idx - 1);
-    });
-    nextBtn.addEventListener("click", function (e) {
-      e.stopPropagation();
-      goTo(idx + 1);
-    });
-  });
-
-  var barn70Variants = document.querySelectorAll("[data-variant]");
-  barn70Variants.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      barn70Variants.forEach(function (b) {
-        b.classList.remove("is-selected");
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        goTo(idx - 1);
       });
-      btn.classList.add("is-selected");
-      bookingState.house = btn.getAttribute("data-variant");
-      bookingState.guests = bookingState.house === "barn70-4" ? "4" : "2";
-      syncAllBookingInputs();
-    });
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        goTo(idx + 1);
+      });
+    }
   });
 
   // --------------------------------------------------------------------------
-  // 5. Фотогалерея: шоппинг-теги + полноэкранный лайтбокс (все реальные кадры)
+  // 5. Фотогалерея: шоппинг-теги и полноэкранный лайтбокс (14 фото)
   // --------------------------------------------------------------------------
   document.querySelectorAll(".shop-tag").forEach(function (tag) {
     var dot = tag.querySelector(".shop-tag__dot");
+    if (!dot) return;
     dot.addEventListener("click", function (e) {
       e.stopPropagation();
       var wasOpen = tag.classList.contains("is-open");
@@ -229,14 +299,14 @@
       src: "assets/images/hero-winter.jpg",
       caption: "Вечерние барнхаусы «Бриза» в\u00A0новогодней подсветке",
       links: [
-        { label: "Барн 130 · от\u00A07\u00A0000\u00A0₽ →", href: "#barn-130" },
-        { label: "Барн 70 · от\u00A06\u00A0500\u00A0₽ →", href: "#barn-70" }
+        { label: "«Барн-хаус», 130 · от\u00A011\u00A0500\u00A0₽ →", href: "#barn-130" },
+        { label: "«Барн-Хаус», 70 · от\u00A08\u00A0000\u00A0₽ →", href: "#barn-70" }
       ]
     },
     {
       src: "assets/images/house-living-top.jpg",
       caption: "Двусветная гостиная с\u00A0панорамным остеклением и\u00A0видом на\u00A0лес",
-      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
+      links: [{ label: "Смотреть «Барн-хаус», 130 →", href: "#barn-130" }]
     },
     {
       src: "assets/images/banya-chan.jpg",
@@ -246,7 +316,7 @@
     {
       src: "assets/images/house-exterior-5.jpg",
       caption: "Коттедж в\u00A0стиле барнхаус среди сосен",
-      links: [{ label: "Перейти к\u00A0Барн 70 →", href: "#barn-70" }]
+      links: [{ label: "Перейти к\u00A0«Барн-Хаус», 70 →", href: "#barn-70" }]
     },
     {
       src: "assets/images/house-pergola.jpg",
@@ -254,44 +324,49 @@
       links: [{ label: "Услуги и\u00A0наборы для\u00A0гриля →", href: "#services" }]
     },
     {
+      src: "assets/images/winter-active.jpg",
+      caption: "Русская баня на\u00A0дровах и\u00A0зимний прокат лыж и\u00A0коньков",
+      links: [{ label: "Все услуги и\u00A0прокат →", href: "#services" }]
+    },
+    {
       src: "assets/images/house-living-window.jpg",
       caption: "Гостиная с\u00A0выходом на\u00A0приватную террасу",
-      links: [{ label: "Перейти к\u00A0Барн 70 →", href: "#barn-70" }]
+      links: [{ label: "Перейти к\u00A0«Барн-Хаус», 70 →", href: "#barn-70" }]
     },
     {
       src: "assets/images/house-bedroom-1.jpg",
-      caption: "Уютная спальня с\u00A0двуспальной кроватью на\u00A01\u00A0этаже",
-      links: [{ label: "Варианты размещения →", href: "#barn-70" }]
+      caption: "Спальня с\u00A0двуспальной кроватью на\u00A01\u00A0этаже",
+      links: [{ label: "Смотреть «Барн-Хаус», 70 →", href: "#barn-70" }]
     },
     {
       src: "assets/images/house-mezzanine.jpg",
-      caption: "Спальная антресоль 2\u00A0этажа под мансардным окном",
-      links: [{ label: "Барн 70 (3–4\u00A0гостя) →", href: "#barn-70" }]
+      caption: "Второй мансардный этаж со\u00A0спальными местами",
+      links: [{ label: "Смотреть «Барн-Хаус», 70 →", href: "#barn-70" }]
     },
     {
       src: "assets/images/house-kitchen.jpg",
-      caption: "Кухня с\u00A0полным комплектом посуды, плитой и\u00A0чайником",
+      caption: "Кухня с\u00A0плитой, СВЧ, холодильником и\u00A0полным набором посуды",
       links: [{ label: "Сравнить оба дома →", href: "#houses" }]
     },
     {
       src: "assets/images/house-bathroom.jpg",
-      caption: "Современный санузел с\u00A0LED-зеркалом и\u00A0полотенцами",
+      caption: "Современный санузел с\u00A0душем, LED-зеркалом и\u00A0полотенцами",
       links: [{ label: "Сравнить оба дома →", href: "#houses" }]
     },
     {
       src: "assets/images/real-terrace.jpg",
       caption: "Приватная терраса коттеджа среди хвойного леса",
-      links: [{ label: "Барн 130 · от\u00A07\u00A0000\u00A0₽ →", href: "#barn-130" }]
+      links: [{ label: "Смотреть «Барн-хаус», 130 →", href: "#barn-130" }]
     },
     {
       src: "assets/images/house-bedroom-loft.jpg",
       caption: "Изолированная спальня на\u00A0втором этаже",
-      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
+      links: [{ label: "Смотреть «Барн-хаус», 130 →", href: "#barn-130" }]
     },
     {
       src: "assets/images/house-second-floor.jpg",
       caption: "Галерея второго этажа с\u00A0видом на\u00A0витраж",
-      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
+      links: [{ label: "Смотреть «Барн-хаус», 130 →", href: "#barn-130" }]
     }
   ];
 
@@ -300,66 +375,76 @@
   var lightboxCaption = document.getElementById("lightboxCaption");
   var lightboxCounter = document.getElementById("lightboxCounter");
   var lightboxLinks = document.getElementById("lightboxLinks");
+  var lightboxPrev = document.getElementById("lightboxPrev");
+  var lightboxNext = document.getElementById("lightboxNext");
   var currentPhotoIdx = 0;
 
   function renderLightbox(index) {
+    if (!lightboxModal || !lightboxImg) return;
     currentPhotoIdx = (index + galleryData.length) % galleryData.length;
     var item = galleryData[currentPhotoIdx];
     lightboxImg.src = item.src;
     lightboxImg.alt = item.caption;
-    lightboxCaption.textContent = item.caption;
-    lightboxCounter.textContent = "Фото " + (currentPhotoIdx + 1) + " из\u00A0" + galleryData.length;
-    lightboxLinks.innerHTML = "";
-    item.links.forEach(function (lnk) {
-      var a = document.createElement("a");
-      a.href = lnk.href;
-      a.className = "lightbox-tag-link";
-      a.textContent = lnk.label;
-      a.addEventListener("click", function () {
-        closeAllModals();
+    if (lightboxCaption) lightboxCaption.textContent = item.caption;
+    if (lightboxCounter) lightboxCounter.textContent = "Фото " + (currentPhotoIdx + 1) + " из\u00A0" + galleryData.length;
+    if (lightboxLinks) {
+      lightboxLinks.innerHTML = "";
+      item.links.forEach(function (lnk) {
+        var a = document.createElement("a");
+        a.href = lnk.href;
+        a.className = "lightbox-tag-link";
+        a.textContent = lnk.label;
+        a.addEventListener("click", function () {
+          closeAllModals();
+        });
+        lightboxLinks.appendChild(a);
       });
-      lightboxLinks.appendChild(a);
-    });
+    }
   }
 
-  document.querySelectorAll(".js-open-lightbox").forEach(function (el) {
-    el.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var idx = parseInt(el.getAttribute("data-index") || "0", 10);
-      renderLightbox(idx);
-      openModal(lightboxModal);
+  if (lightboxModal) {
+    document.querySelectorAll(".js-open-lightbox").forEach(function (el) {
+      el.addEventListener("click", function (e) {
+        e.stopPropagation();
+        var idx = parseInt(el.getAttribute("data-index") || "0", 10);
+        renderLightbox(idx);
+        openModal(lightboxModal);
+      });
     });
-  });
-
-  document.getElementById("lightboxPrev").addEventListener("click", function () {
-    renderLightbox(currentPhotoIdx - 1);
-  });
-  document.getElementById("lightboxNext").addEventListener("click", function () {
-    renderLightbox(currentPhotoIdx + 1);
-  });
+    if (lightboxPrev) {
+      lightboxPrev.addEventListener("click", function () {
+        renderLightbox(currentPhotoIdx - 1);
+      });
+    }
+    if (lightboxNext) {
+      lightboxNext.addEventListener("click", function () {
+        renderLightbox(currentPhotoIdx + 1);
+      });
+    }
+  }
 
   // --------------------------------------------------------------------------
-  // 6. Интерактивная карта территории
+  // 6. Полноширинная карта территории и сворачиваемая легенда
   // --------------------------------------------------------------------------
   var territoryObjects = {
     "1": {
       badge: "Объект №\u00A01",
       title: "Въезд, КПП и\u00A0гостевая парковка",
-      desc: "Круглогодичный асфальтовый подъезд со\u00A0стороны Курумоча. Охраняемая парковка внутри территории, регистрация гостей после 14:00.",
+      desc: "Круглогодичный асфальтовый подъезд со\u00A0стороны Курумоча. Охраняемая парковка на\u00A0территории, заезд гостей после 14:00.",
       btnText: "Как добраться",
       btnHref: "#contacts"
     },
     "2": {
       badge: "Объект №\u00A02",
-      title: "Коттеджи «Барн Хаус-130»",
-      desc: "Пять двухэтажных домов на\u00A0первой линии над набережной. Внутри\u00A0— дровяной камин и\u00A03\u00A0спальные зоны, снаружи\u00A0— крытая терраса с\u00A0мангалом.",
+      title: "Коттеджи «Барн-хаус», 130",
+      desc: "Пять двухэтажных домов (130\u00A0м², 6+2\u00A0места) с\u00A0дровяным камином, 3\u00A0спальнями, 2\u00A0санузлами и\u00A0мангальной зоной.",
       btnText: "Перейти к\u00A0Барн 130",
       btnHref: "#barn-130"
     },
     "3": {
       badge: "Объект №\u00A03",
-      title: "Коттеджи «Барн Хаус-70»",
-      desc: "Камерные двухэтажные домики в\u00A0тихой хвойной части. Основное размещение до\u00A02\u00A0гостей и\u00A0формат 3–4\u00A0гостя с\u00A0дополнительными местами на\u00A0антресоли.",
+      title: "Коттеджи «Барн-Хаус», 70",
+      desc: "Восемь двухэтажных домов (70\u00A0м², 4+1\u00A0гостя) со\u00A0спальней на\u00A01\u00A0этаже, мансардой и\u00A0видом на\u00A0реку.",
       btnText: "Перейти к\u00A0Барн 70",
       btnHref: "#barn-70"
     },
@@ -410,17 +495,20 @@
   function selectTerritoryPin(pinId) {
     var info = territoryObjects[pinId];
     if (!info) return;
-
     document.querySelectorAll("[data-pin]").forEach(function (el) {
       el.classList.toggle("is-active", el.getAttribute("data-pin") === pinId);
     });
-
-    document.getElementById("territoryDetailBadge").textContent = info.badge;
-    document.getElementById("territoryDetailTitle").textContent = info.title;
-    document.getElementById("territoryDetailDesc").textContent = info.desc;
+    var badge = document.getElementById("territoryDetailBadge");
+    var title = document.getElementById("territoryDetailTitle");
+    var desc = document.getElementById("territoryDetailDesc");
     var btn = document.getElementById("territoryDetailBtn");
-    btn.textContent = info.btnText;
-    btn.href = info.btnHref;
+    if (badge) badge.textContent = info.badge;
+    if (title) title.textContent = info.title;
+    if (desc) desc.textContent = info.desc;
+    if (btn) {
+      btn.textContent = info.btnText;
+      btn.href = info.btnHref;
+    }
   }
 
   document.querySelectorAll("[data-pin]").forEach(function (el) {
@@ -429,27 +517,38 @@
     });
   });
 
+  var territoryPanel = document.getElementById("territoryPanel");
+  var territoryToggleBtn = document.getElementById("territoryToggleBtn");
+  if (territoryPanel && territoryToggleBtn) {
+    territoryToggleBtn.addEventListener("click", function () {
+      var collapsed = territoryPanel.classList.toggle("is-legend-collapsed");
+      territoryToggleBtn.textContent = collapsed ? "Показать список" : "Свернуть список";
+    });
+  }
+
   // --------------------------------------------------------------------------
   // 7. Фильтрация списка услуг
   // --------------------------------------------------------------------------
   var filterTabs = document.querySelectorAll(".filter-tab");
   var serviceRows = document.querySelectorAll("#servicesList .service-row");
 
-  filterTabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      var filter = tab.getAttribute("data-filter");
-      filterTabs.forEach(function (t) {
-        t.classList.toggle("is-active", t === tab);
-      });
-      serviceRows.forEach(function (row) {
-        var cat = row.getAttribute("data-category");
-        row.classList.toggle("is-hidden", filter !== "all" && cat !== filter);
+  if (filterTabs.length && serviceRows.length) {
+    filterTabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        var filter = tab.getAttribute("data-filter");
+        filterTabs.forEach(function (t) {
+          t.classList.toggle("is-active", t === tab);
+        });
+        serviceRows.forEach(function (row) {
+          var cat = row.getAttribute("data-category");
+          row.classList.toggle("is-hidden", filter !== "all" && cat !== filter);
+        });
       });
     });
-  });
+  }
 
   // --------------------------------------------------------------------------
-  // 8. Модальные окна: Контур.Отель (расчёт) и Планировки домов
+  // 8. Модальное окно подбора домиков Контур.Отель и попап удобств
   // --------------------------------------------------------------------------
   var bookingModal = document.getElementById("bookingModal");
   var specsModal = document.getElementById("specsModal");
@@ -457,12 +556,15 @@
   var konturSuccess = document.getElementById("konturSuccess");
   var modalCheckin = document.getElementById("modalCheckin");
   var modalCheckout = document.getElementById("modalCheckout");
-  var modalHouse = document.getElementById("modalHouse");
   var modalGuests = document.getElementById("modalGuests");
   var guestComment = document.getElementById("guestComment");
+  var konturRoomsList = document.getElementById("konturRoomsList");
   var konturSummary = document.getElementById("konturSummary");
+  var konturDirectLink = document.getElementById("konturDirectLink");
+  var konturResetBtn = document.getElementById("konturResetBtn");
 
   function openModal(modal) {
+    if (!modal) return;
     modal.classList.add("is-open");
     document.body.style.overflow = "hidden";
   }
@@ -484,93 +586,148 @@
   });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeAllModals();
-    if (lightboxModal.classList.contains("is-open")) {
+    if (lightboxModal && lightboxModal.classList.contains("is-open")) {
       if (e.key === "ArrowLeft") renderLightbox(currentPhotoIdx - 1);
       if (e.key === "ArrowRight") renderLightbox(currentPhotoIdx + 1);
     }
   });
 
-  var HOUSE_TARIFFS = {
-    "barn70-2": { name: "Барн 70 (основное размещение, до\u00A02\u00A0гостей)", weekday: 6500, weekend: 10000, ny: 18000 },
-    "barn70-4": { name: "Барн 70 (с\u00A0доп. местами, 3–4\u00A0гостя)", weekday: 8500, weekend: 12000, ny: 21000 },
-    "barn130": { name: "Барн 130 (коттедж с\u00A0камином, до\u00A06\u00A0гостей)", weekday: 7000, weekend: 13000, ny: 26000 }
-  };
+  function computeRoomStay(room, d1, d2, nights) {
+    var total = 0;
+    var nyDays = 0;
+    for (var i = 0; i < nights; i++) {
+      var cur = new Date(d1.getTime() + i * 86400000);
+      var m = cur.getMonth() + 1;
+      var day = cur.getDate();
+      var dow = cur.getDay();
+      if (m === 12 && day === 31) {
+        total += room.nyEve;
+        nyDays++;
+      } else if ((m === 12 && day >= 29) || (m === 1 && day <= 8)) {
+        total += room.nyHoliday;
+        nyDays++;
+      } else if (dow === 5) {
+        total += room.friday;
+      } else if (dow === 6) {
+        total += room.saturday;
+      } else {
+        total += room.weekday;
+      }
+    }
+    return { total: total, firstNight: Math.round(total / nights), nyDays: nyDays };
+  }
 
-  function calculateStaySummary() {
+  function renderKonturRooms() {
+    if (!modalCheckin || !modalCheckout || !modalGuests || !konturRoomsList || !konturSummary) return;
+
     var d1 = new Date(modalCheckin.value + "T14:00:00");
     var d2 = new Date(modalCheckout.value + "T12:00:00");
     if (isNaN(d1.getTime()) || isNaN(d2.getTime()) || d2 <= d1) {
       d2 = new Date(d1.getTime() + 86400000);
       modalCheckout.value = formatIsoDate(d2);
     }
-
     var nights = Math.max(1, Math.round((d2 - d1) / 86400000));
-    var houseKey = modalHouse.value;
-    var tariff = HOUSE_TARIFFS[houseKey] || HOUSE_TARIFFS["barn70-2"];
+    var guestsCount = parseInt(modalGuests.value || "2", 10);
 
-    var total = 0;
-    var nyDays = 0;
-    var weekendDays = 0;
-    for (var i = 0; i < nights; i++) {
-      var cur = new Date(d1.getTime() + i * 86400000);
-      var m = cur.getMonth() + 1;
-      var day = cur.getDate();
-      var dow = cur.getDay();
-      if ((m === 12 && day >= 30) || (m === 1 && day <= 8)) {
-        total += tariff.ny;
-        nyDays++;
-      } else if (dow === 5 || dow === 6) {
-        total += tariff.weekend;
-        weekendDays++;
-      } else {
-        total += tariff.weekday;
-      }
+    // Если гостей больше 5 — по умолчанию выбираем Барн 130
+    if (guestsCount > 5 && bookingState.selectedRoomId === "254819") {
+      bookingState.selectedRoomId = "254820";
     }
 
-    var rateNote = nyDays > 0
-      ? "Новогодний праздничный тариф"
-      : (weekendDays > 0 ? "Учтён тариф выходного дня" : "Тариф будних дней");
+    var primaryIds = guestsCount <= 5 ? ["254819", "254820"] : ["254820"];
+    var overflowIds = guestsCount > 5 ? ["254819"] : [];
+
+    function buildOfferCard(room, isSmall) {
+      var calc = computeRoomStay(room, d1, d2, nights);
+      var isSelected = bookingState.selectedRoomId === room.id;
+      var cls = "kontur-room-offer" + (isSelected ? " is-selected" : "") + (isSmall ? " is-small-capacity" : "");
+      var capNote = isSmall
+        ? "Вместимость дома до\u00A05\u00A0мест (для\u00A0" + guestsCount + "\u00A0гостей потребуется 2\u00A0дома)"
+        : room.area + " · " + room.baseCap + "+" + room.extraCap + "\u00A0гостей · " + room.roomsText;
+
+      return (
+        '<div class="' + cls + '" data-offer-id="' + room.id + '">' +
+          '<div>' +
+            '<div class="kontur-room-offer__title">' + room.title + "</div>" +
+            '<div class="kontur-room-offer__meta">' + capNote + "</div>" +
+            '<div class="kontur-room-offer__tariff">Тариф «' + room.tariffName + "» · " + room.included + "</div>" +
+          "</div>" +
+          '<div class="kontur-room-offer__right">' +
+            '<div class="kontur-room-offer__price">' + calc.total.toLocaleString("ru-RU") + "\u00A0₽</div>" +
+            '<div style="font-size:0.78rem;color:var(--text-muted);">за\u00A0' + nights + "\u00A0ноч. · отмена за\u00A024\u00A0ч</div>" +
+            '<button type="button" class="btn ' + (isSelected ? "btn--primary" : "btn--outline") + ' btn--sm js-pick-room" data-room-id="' + room.id + '">' +
+              (isSelected ? "Выбрано" : "Выбрать") +
+            "</button>" +
+          "</div>" +
+        "</div>"
+      );
+    }
+
+    var html = primaryIds.map(function (id) {
+      return buildOfferCard(KONTUR_ROOMS[id], false);
+    }).join("");
+
+    if (overflowIds.length) {
+      html += '<div class="kontur-section-note">Дома меньшей вместимости</div>';
+      html += overflowIds.map(function (id) {
+        return buildOfferCard(KONTUR_ROOMS[id], true);
+      }).join("");
+    }
+
+    konturRoomsList.innerHTML = html;
+
+    konturRoomsList.querySelectorAll(".js-pick-room").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        bookingState.selectedRoomId = btn.getAttribute("data-room-id");
+        renderKonturRooms();
+      });
+    });
+
+    var chosen = KONTUR_ROOMS[bookingState.selectedRoomId] || KONTUR_ROOMS["254820"];
+    var chosenCalc = computeRoomStay(chosen, d1, d2, nights);
+    var rateType = chosenCalc.nyDays > 0 ? "праздничный / новогодний тариф" : "тариф «Бархатный сезон 2026»";
 
     konturSummary.innerHTML =
-      '<div class="kontur-summary__row"><span>Выбранный дом</span><strong>' + tariff.name + "</strong></div>" +
-      '<div class="kontur-summary__row"><span>Ночей проживания</span><strong>' + nights + " · " + rateNote + "</strong></div>" +
-      '<div class="kontur-summary__row kontur-summary__total"><span>Ориентировочная стоимость</span><span>' + total.toLocaleString("ru-RU") + "\u00A0₽</span></div>";
+      '<div class="kontur-summary__row"><span>Выбранный дом</span><strong>' + chosen.title + " (" + guestsCount + "\u00A0гост.)</strong></div>" +
+      '<div class="kontur-summary__row"><span>Период и\u00A0условия</span><span>' + nights + "\u00A0ноч. · " + rateType + " · завтрак включён</span></div>" +
+      '<div class="kontur-summary__row kontur-summary__total"><span>Итого (предоплата первых суток)</span><span>' + chosenCalc.total.toLocaleString("ru-RU") + "\u00A0₽</span></div>";
+
+    if (konturDirectLink) {
+      konturDirectLink.href = "https://briz.club/booking?room-type=" + chosen.id;
+    }
   }
 
   function openBookingModal(opts) {
     opts = opts || {};
     if (opts.checkin) bookingState.checkin = opts.checkin;
     if (opts.checkout) bookingState.checkout = opts.checkout;
-    if (opts.guests) bookingState.guests = opts.guests;
-    if (opts.house && opts.house !== "all") bookingState.house = opts.house;
+    if (opts.guests) bookingState.guests = String(opts.guests);
+    if (opts.house && KONTUR_ROOMS[opts.house]) bookingState.selectedRoomId = opts.house;
     if (opts.note !== undefined) bookingState.note = opts.note;
 
-    modalCheckin.value = bookingState.checkin;
-    modalCheckout.value = bookingState.checkout;
-    modalHouse.value = bookingState.house === "all" ? "barn70-2" : bookingState.house;
-    modalGuests.value = bookingState.guests;
-    guestComment.value = bookingState.note || "";
+    if (modalCheckin) modalCheckin.value = bookingState.checkin;
+    if (modalCheckout) modalCheckout.value = bookingState.checkout;
+    if (modalGuests) modalGuests.value = bookingState.guests;
+    if (guestComment) guestComment.value = bookingState.note || "";
 
-    konturForm.style.display = "block";
-    konturSuccess.style.display = "none";
-    calculateStaySummary();
+    if (konturForm) konturForm.style.display = "block";
+    if (konturSuccess) konturSuccess.style.display = "none";
+
+    renderKonturRooms();
     openModal(bookingModal);
-
-    if (window.HotelWidget && typeof window.HotelWidget.add === "function") {
-      try {
-        window.HotelWidget.add({
-          type: "horizontalBlock",
-          appearance: { container: "hotel-widget-container" }
-        });
-      } catch (err) {
-        // В тестовом режиме используется встроенный расчёт
-      }
-    }
   }
 
-  [modalCheckin, modalCheckout, modalHouse, modalGuests].forEach(function (el) {
-    el.addEventListener("change", calculateStaySummary);
-  });
+  if (modalCheckin && modalCheckout && modalGuests) {
+    [modalCheckin, modalCheckout, modalGuests].forEach(function (el) {
+      el.addEventListener("change", function () {
+        bookingState.checkin = modalCheckin.value;
+        bookingState.checkout = modalCheckout.value;
+        bookingState.guests = modalGuests.value;
+        syncAllBookingInputs();
+        renderKonturRooms();
+      });
+    });
+  }
 
   document.querySelectorAll(".js-booking-form").forEach(function (form) {
     form.addEventListener("submit", function (e) {
@@ -578,18 +735,15 @@
       var cin = form.querySelector(".js-checkin").value;
       var cout = form.querySelector(".js-checkout").value;
       var g = form.querySelector(".js-guests").value;
-      var h = form.querySelector(".js-house").value;
+      var hEl = form.querySelector(".js-house");
+      var h = hEl ? hEl.value : "all";
 
-      var resolvedHouse = h;
-      if (h === "all") {
-        resolvedHouse = parseInt(g, 10) >= 5 ? "barn130" : (parseInt(g, 10) >= 3 ? "barn70-4" : "barn70-2");
-      }
-
+      var targetId = h && h !== "all" ? h : (parseInt(g, 10) >= 5 ? "254820" : "254819");
       openBookingModal({
         checkin: cin,
         checkout: cout,
         guests: g,
-        house: resolvedHouse
+        house: targetId
       });
     });
   });
@@ -598,14 +752,8 @@
     btn.addEventListener("click", function () {
       var target = btn.getAttribute("data-house-target");
       var svc = btn.getAttribute("data-service-note");
-      var house = bookingState.house;
-      if (target === "barn130") house = "barn130";
-      if (target === "barn70") {
-        var selected = document.querySelector(".variant-row.is-selected[data-variant]");
-        house = selected ? selected.getAttribute("data-variant") : "barn70-2";
-      }
       openBookingModal({
-        house: house,
+        house: target && KONTUR_ROOMS[target] ? target : bookingState.selectedRoomId,
         note: svc ? "Интересует услуга: " + svc : ""
       });
     });
@@ -616,72 +764,67 @@
       openBookingModal({
         checkin: btn.getAttribute("data-checkin"),
         checkout: btn.getAttribute("data-checkout"),
+        house: btn.getAttribute("data-house") || bookingState.selectedRoomId,
         note: "Новогодний заезд 2027"
       });
     });
   });
 
-  konturForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    var name = document.getElementById("guestName").value.trim() || "Гость";
-    var phone = document.getElementById("guestPhone").value.trim();
-    var houseText = modalHouse.options[modalHouse.selectedIndex].text;
-    document.getElementById("konturSuccessText").innerHTML =
-      "<strong>" + name + "</strong>, ваш запрос на\u00A0<strong>" + houseText + "</strong> (" +
-      modalCheckin.value + " — " + modalCheckout.value + ") принят. " +
-      "На\u00A0боевом сайте <code>briz.club</code> эта кнопка передаёт параметры прямо в\u00A0шахматку Контур.Отеля и\u00A0отправляет подтверждение на\u00A0номер <strong>" + phone + "</strong>.";
-    konturForm.style.display = "none";
-    konturSuccess.style.display = "block";
-  });
+  if (konturForm && konturSuccess) {
+    konturForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("guestName").value.trim() || "Гость";
+      var phone = document.getElementById("guestPhone").value.trim();
+      var room = KONTUR_ROOMS[bookingState.selectedRoomId] || KONTUR_ROOMS["254820"];
+      var successText = document.getElementById("konturSuccessText");
+      if (successText) {
+        successText.innerHTML =
+          "<strong>" + name + "</strong>, ваш запрос на\u00A0<strong>" + room.title + "</strong> (" +
+          modalCheckin.value + "\u00A0— " + modalCheckout.value + ", гостей: " + modalGuests.value + ") сформирован. " +
+          "При подключении API Контур.Отеля бронь отправляется напрямую в\u00A0систему управления (ID\u00A01292) с\u00A0подтверждением на\u00A0номер <strong>" + phone + "</strong>.";
+      }
+      konturForm.style.display = "none";
+      konturSuccess.style.display = "block";
+    });
+  }
 
-  document.getElementById("konturResetBtn").addEventListener("click", function () {
-    konturForm.style.display = "block";
-    konturSuccess.style.display = "none";
-  });
+  if (konturResetBtn && konturForm && konturSuccess) {
+    konturResetBtn.addEventListener("click", function () {
+      konturForm.style.display = "block";
+      konturSuccess.style.display = "none";
+    });
+  }
 
-  var HOUSE_SPECS = {
-    barn70: {
-      title: "Барн Хаус-70 — планировка и\u00A0оснащение",
-      subtitle: "70\u00A0м² · 2\u00A0этажа · основное размещение до\u00A02\u00A0гостей или 3–4\u00A0гостя с\u00A0доп. местами",
-      html:
-        "<p><strong>1\u00A0этаж:</strong> кухня-гостиная с\u00A0панорамным остеклением и\u00A0выходом на\u00A0террасу, изолированная спальня с\u00A0двуспальной кроватью, санузел с\u00A0душем, LED-зеркалом и\u00A0феном.</p>" +
-        "<p><strong>2\u00A0этаж (антресоль):</strong> открытая спальная зона под мансардным окном с\u00A0дополнительным спальным местом и\u00A0раскладным креслом.</p>" +
-        "<p><strong>Кухня и\u00A0техника:</strong> индукционная плита, СВЧ, холодильник, чайник, полный набор посуды и\u00A0бокалов, кондиционер, тёплые полы, умная колонка с\u00A0ТВ и\u00A0Wi-Fi.</p>" +
-        "<p><strong>Улица:</strong> приватная терраса с\u00A0креслами и\u00A0крытая мангальная пергола рядом с\u00A0домом.</p>",
-      targetHouse: "barn70-2"
-    },
-    barn130: {
-      title: "Барн Хаус-130 — планировка и\u00A0оснащение",
-      subtitle: "130\u00A0м² · 2\u00A0этажа · до\u00A06\u00A0основных гостей (+ доп. места) · 5\u00A0коттеджей на\u00A0базе",
-      html:
-        "<p><strong>1\u00A0этаж:</strong> просторная двусветная гостиная с\u00A0дровяным камином, обеденная зона, отдельная гостевая комната с\u00A0двуспальным диваном, санузел с\u00A0душем и\u00A0стиральной машиной.</p>" +
-        "<p><strong>2\u00A0этаж:</strong> галерея со\u00A0вторым светом, две изолированные спальни с\u00A0двуспальными кроватями и\u00A0дополнительный туалет.</p>" +
-        "<p><strong>Кухня и\u00A0комфорт:</strong> вся бытовая техника, полный комплект посуды и\u00A0бокалов для компании, кондиционирование, тёплые полы, полотенца.</p>" +
-        "<p><strong>Улица:</strong> вид на\u00A0волжскую протоку и\u00A0крытая беседка-пергола с\u00A0мангалом.</p>",
-      targetHouse: "barn130"
-    }
-  };
-
+  // Попап с полным описанием и всеми удобствами из Контур.Отеля
   var specsBookBtn = document.getElementById("specsBookBtn");
-  var activeSpecTarget = "barn70-2";
+  var activeSpecId = "254819";
 
   document.querySelectorAll(".js-open-specs").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var key = btn.getAttribute("data-spec");
-      var spec = HOUSE_SPECS[key];
-      if (!spec) return;
-      document.getElementById("specsModalTitle").textContent = spec.title;
-      document.getElementById("specsModalSubtitle").textContent = spec.subtitle;
-      document.getElementById("specsModalBody").innerHTML = spec.html;
-      activeSpecTarget = spec.targetHouse;
+      var id = btn.getAttribute("data-spec");
+      var room = KONTUR_ROOMS[id];
+      if (!room || !specsModal) return;
+
+      document.getElementById("specsModalTitle").textContent = room.title;
+      document.getElementById("specsModalSubtitle").textContent =
+        room.area + " · " + room.baseCap + "+" + room.extraCap + "\u00A0гостей · " + room.roomsText + " · Тариф «" + room.tariffName + "» (" + room.included + ")";
+
+      var amenitiesHtml = '<div class="specs-amenities-grid">' + room.amenities.map(function (a) {
+        return '<div class="specs-amenities-col"><h4>' + a.group + "</h4><p>" + a.items + "</p></div>";
+      }).join("") + "</div>";
+
+      document.getElementById("specsModalBody").innerHTML = room.description + amenitiesHtml;
+      activeSpecId = id;
       openModal(specsModal);
     });
   });
 
-  specsBookBtn.addEventListener("click", function () {
-    closeAllModals();
-    openBookingModal({ house: activeSpecTarget });
-  });
+  if (specsBookBtn) {
+    specsBookBtn.addEventListener("click", function () {
+      closeAllModals();
+      openBookingModal({ house: activeSpecId });
+    });
+  }
 
   syncAllBookingInputs();
 })();

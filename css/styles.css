@@ -1,15 +1,13 @@
 /* ==========================================================================
-   База отдыха «Бриз» (briz.club) — дизайн-система и стили (итерация 2)
-   Шрифт: Onest (современный геометрический гротеск, без кондовых засечек)
+   База отдыха «Бриз» (briz.club) — дизайн-система и стили (итерация 3)
+   Шрифт: Onest
    Палитра:
-   - Основной фон:     #F7F6F2 (тёплый молочный)
-   - Вторичный фон:    #EFECE6 (песочно-каменный)
+   - Основной фон:     #F7F6F2
+   - Вторичный фон:    #EFECE6
    - Карточки:         #FFFFFF
    - Акцент (бренд):   #3E5F46 (Натуральный зелёный) / hover #2E4935
    - Акцент (сезон):   #C89A6A (Натуральное дерево)
    - Глубокий хвойный: #1B2C22
-   - Текст основной:   #1C241E
-   - Текст вторичный:  #5C665E
    ========================================================================== */
 
 :root {
@@ -34,7 +32,7 @@
 
   --shadow-sm: 0 2px 10px rgba(20, 32, 24, 0.04);
   --shadow-md: 0 8px 24px rgba(20, 32, 24, 0.07);
-  --shadow-lg: 0 18px 44px rgba(15, 24, 18, 0.14);
+  --shadow-lg: 0 18px 44px rgba(15, 24, 18, 0.15);
 
   --radius-sm: 12px;
   --radius-md: 16px;
@@ -145,13 +143,13 @@ a {
 
 .section-subtitle {
   margin: 0;
-  max-width: 500px;
+  max-width: 560px;
   color: var(--text-muted);
   font-size: 0.96875rem;
   line-height: 1.55;
 }
 
-/* Кнопки — чистая геометрия 12px без «пухлых капсул» */
+/* Кнопки */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -201,6 +199,16 @@ a {
   background-color: var(--brand-green-soft);
 }
 
+.btn--ghost-light {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.btn--ghost-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .btn--sm {
   padding: 9px 16px;
   font-size: 0.875rem;
@@ -227,7 +235,7 @@ a {
 }
 
 /* ==========================================================================
-   1. ПОЛУПРОЗРАЧНАЯ ШАПКА (смена цвета логотипа #FFFFFF -> #3E5F46 при скролле)
+   1. ПОЛУПРОЗРАЧНАЯ ШАПКА
    ========================================================================== */
 .site-header {
   position: fixed;
@@ -261,7 +269,6 @@ a {
   gap: 16px;
 }
 
-/* Крупный чистый логотип без лишней подписи рядом */
 .brand-wrap {
   display: inline-flex;
   align-items: center;
@@ -296,7 +303,6 @@ a {
   opacity: 1;
 }
 
-/* Главное меню десктопа (крупный читаемый кегль 15.5px) */
 .main-nav {
   display: flex;
   align-items: center;
@@ -324,7 +330,6 @@ a {
   color: var(--brand-green);
 }
 
-/* Сезонный пункт «Новый год» */
 .nav-link--seasonal {
   background-color: rgba(200, 154, 106, 0.22);
   border: 1px solid rgba(200, 154, 106, 0.62);
@@ -333,7 +338,8 @@ a {
   margin-right: 4px;
 }
 
-.nav-link--seasonal:hover {
+.nav-link--seasonal:hover,
+.nav-link--seasonal.is-current {
   background-color: var(--brand-wood);
   border-color: var(--brand-wood);
   color: #1c1914;
@@ -345,7 +351,8 @@ a {
   color: #5b3e1b;
 }
 
-.site-header.is-scrolled .nav-link--seasonal:hover {
+.site-header.is-scrolled .nav-link--seasonal:hover,
+.site-header.is-scrolled .nav-link--seasonal.is-current {
   background-color: var(--brand-wood);
   color: #1c1914;
 }
@@ -412,7 +419,6 @@ a {
   color: var(--brand-green);
 }
 
-/* Мобильные контролы шапки */
 .mobile-controls {
   display: none;
   align-items: center;
@@ -537,7 +543,7 @@ a {
 
 .drawer-socials {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 8px;
 }
 
@@ -550,13 +556,13 @@ a {
   border-radius: 10px;
   border: 1px solid var(--border-strong);
   background: #ffffff;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--text-main);
 }
 
 /* ==========================================================================
-   2. ПЕРВЫЙ ЭКРАН (HERO) — 100% ШИРИНЫ БЕЗ ИСКАЖЕНИЯ ПРОПОРЦИЙ
+   2. ПЕРВЫЙ ЭКРАН (HERO) — 100% ШИРИНЫ БЕЗ ИСКАЖЕНИЙ
    ========================================================================== */
 .hero {
   position: relative;
@@ -569,6 +575,10 @@ a {
   overflow: hidden;
   padding-top: calc(var(--header-h) + 32px);
   padding-bottom: 34px;
+}
+
+.hero--subpage {
+  min-height: clamp(440px, 66svh, 620px);
 }
 
 .hero__bg {
@@ -593,7 +603,7 @@ a {
   inset: 0;
   background:
     linear-gradient(180deg, rgba(10, 18, 24, 0.46) 0%, rgba(10, 18, 24, 0.14) 38%, rgba(10, 18, 24, 0.74) 100%),
-    linear-gradient(90deg, rgba(10, 18, 24, 0.6) 0%, rgba(10, 18, 24, 0.2) 56%, rgba(10, 18, 24, 0) 100%);
+    linear-gradient(90deg, rgba(10, 18, 24, 0.56) 0%, rgba(10, 18, 24, 0.18) 54%, rgba(10, 18, 24, 0) 100%);
 }
 
 .hero__content {
@@ -601,14 +611,13 @@ a {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 28px;
 }
 
 .hero__text {
   max-width: 720px;
 }
 
-/* Аккуратный стеклянный чип рейтинга Яндекс Карт на главном экране */
 .yandex-hero-chip {
   display: inline-flex;
   align-items: center;
@@ -676,22 +685,13 @@ a {
 }
 
 .hero__subhead {
-  margin: 0 0 8px;
+  margin: 0;
   font-size: clamp(1.125rem, 1.8vw, 1.45rem);
   font-weight: 500;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.96);
 }
 
-.hero__lead {
-  margin: 0;
-  max-width: 560px;
-  font-size: 0.96875rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.84);
-}
-
-/* Плашка бронирования ровно по ширине блока контента (.container) */
 .hero-booking-wrap {
   width: 100%;
 }
@@ -766,7 +766,7 @@ a {
   background: var(--bg-page);
 }
 
-/* Парящая форма при скролле: ровно по ширине контента (1232px) */
+/* Парящая форма при скролле: ровно по ширине контента */
 .floating-booking {
   position: fixed;
   bottom: 14px;
@@ -878,7 +878,6 @@ a {
   display: inline-flex;
 }
 
-/* Мобильная нижняя sticky-плашка */
 .mobile-sticky-cta {
   display: none;
   position: fixed;
@@ -903,7 +902,7 @@ a {
 }
 
 /* ==========================================================================
-   3. СЕЗОННЫЙ БЛОК НОВЫЙ ГОД 2027 (строгий хвойный блок без декора-пятен)
+   3. СЕЗОННЫЙ БЛОК НОВЫЙ ГОД 2027 (с кнопкой перехода на страницу new-year.html)
    ========================================================================== */
 .ny-banner-section {
   padding-block: 36px 12px;
@@ -911,7 +910,7 @@ a {
 
 .ny-card {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.25fr 1fr;
   gap: 28px;
   align-items: center;
   background: #1e3126;
@@ -945,10 +944,16 @@ a {
 }
 
 .ny-card__desc {
-  margin: 0;
+  margin: 0 0 20px;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.9375rem;
   max-width: 540px;
+}
+
+.ny-card__cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .ny-card__packages {
@@ -980,7 +985,7 @@ a {
 }
 
 /* ==========================================================================
-   4. ДОМИКИ В 2 КОЛОНКИ (реальные портретные фото диптихами без обрезки)
+   4. ДОМИКИ В 2 КОЛОНКИ (реальные данные и тарифы Контур.Отеля)
    ========================================================================== */
 .houses-grid {
   display: grid;
@@ -1018,7 +1023,6 @@ a {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Парный вертикальный диптих — реальные 2:3 фото смотрятся идеально без искажений */
 .house-slider__slide {
   flex: 0 0 100%;
   height: 100%;
@@ -1158,72 +1162,51 @@ a {
   color: var(--brand-green);
 }
 
-.variants-box {
+.tariff-box {
   margin-top: auto;
   border-top: 1px solid var(--border-subtle);
   padding-top: 16px;
   margin-bottom: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
 }
 
-.variants-box__label {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  margin-bottom: 2px;
-}
-
-.variant-row {
+.tariff-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding: 11px 14px;
+  gap: 14px;
+  padding: 13px 16px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-page);
-  cursor: pointer;
-  text-align: left;
-  transition: border-color var(--transition), background-color var(--transition);
-}
-
-.variant-row:hover {
-  border-color: var(--brand-green);
-}
-
-.variant-row.is-selected {
+  border: 1px solid rgba(62, 95, 70, 0.25);
   background: var(--brand-green-soft);
-  border-color: var(--brand-green);
 }
 
-.variant-row__info strong {
+.tariff-row__info strong {
   display: block;
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--text-main);
+  margin-bottom: 2px;
 }
 
-.variant-row__info span {
+.tariff-row__info span {
   display: block;
   font-size: 0.8125rem;
   color: var(--text-muted);
 }
 
-.variant-row__price {
+.tariff-row__price {
   text-align: right;
   flex-shrink: 0;
 }
 
-.variant-row__price strong {
+.tariff-row__price strong {
   display: block;
-  font-size: 0.96875rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   color: var(--brand-green);
 }
 
-.variant-row__price span {
+.tariff-row__price span {
   font-size: 0.75rem;
   color: var(--text-muted);
 }
@@ -1237,13 +1220,18 @@ a {
 }
 
 /* ==========================================================================
-   5. КОМПАКТНАЯ ФОТОГАЛЕРЕЯ С ШОППИНГ-ТЕГАМИ И ЛАЙТБОКСОМ
+   5. ПОЛНОШИРИННАЯ ФОТОГАЛЕРЕЯ С ШОППИНГ-ТЕГАМИ И ЛАЙТБОКСОМ
    ========================================================================== */
+.gallery-fullbleed {
+  width: 100%;
+  padding-inline: clamp(10px, 1.5vw, 24px);
+}
+
 .bento-gallery {
   display: grid;
-  grid-template-columns: 1.35fr 1fr 1fr;
-  grid-template-rows: 245px 245px;
-  gap: 12px;
+  grid-template-columns: 1.35fr 1fr 1fr 0.95fr;
+  grid-template-rows: 280px 280px;
+  gap: 10px;
 }
 
 .bento-item {
@@ -1254,7 +1242,7 @@ a {
   cursor: pointer;
 }
 
-.bento-item--lead {
+.bento-item--tall {
   grid-row: 1 / span 2;
 }
 
@@ -1391,26 +1379,27 @@ a {
 }
 
 /* ==========================================================================
-   6. ИНТЕРАКТИВНЫЙ МУЛЬТЯШНЫЙ ПЛАН ТЕРРИТОРИИ
+   6. ПОЛНОШИРИННЫЙ ПЛАН УЧАСТКА + ПЛАВАЮЩАЯ ПЛАШКА С ЛЕГЕНДОЙ
    ========================================================================== */
-.territory-wrap {
-  display: grid;
-  grid-template-columns: 1.55fr 1fr;
-  gap: 24px;
-  align-items: start;
+.section--map {
+  padding-bottom: 0;
+}
+
+.territory-fullbleed {
+  position: relative;
+  width: 100%;
+  background: #dce7e3;
+  overflow: hidden;
 }
 
 .territory-canvas {
   position: relative;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border-subtle);
-  background: #dce7e3;
+  width: 100%;
 }
 
 .territory-canvas img {
   width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -1442,20 +1431,61 @@ a {
   z-index: 6;
 }
 
-.territory-panel {
-  background: var(--bg-card);
+.territory-floating-card {
+  position: absolute;
+  top: 24px;
+  right: max(24px, calc((100vw - 1280px) / 2 + 24px));
+  width: 356px;
+  max-height: calc(100% - 48px);
+  z-index: 8;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 18px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.territory-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.territory-panel__title {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--brand-green);
+}
+
+.territory-toggle-btn {
   border: 1px solid var(--border-subtle);
-  padding: 20px;
-  box-shadow: var(--shadow-sm);
+  background: var(--bg-page);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.territory-toggle-btn:hover {
+  color: var(--text-main);
+  border-color: var(--border-strong);
 }
 
 .territory-detail {
-  padding: 16px;
+  padding: 14px;
   border-radius: var(--radius-sm);
   background: var(--bg-page);
   border: 1px solid var(--border-subtle);
-  margin-bottom: 14px;
 }
 
 .territory-detail__badge {
@@ -1470,14 +1500,15 @@ a {
 
 .territory-detail__title {
   margin: 0 0 6px;
-  font-size: 1.0625rem;
+  font-size: 1.03125rem;
   font-weight: 500;
 }
 
 .territory-detail__desc {
   margin: 0 0 12px;
-  font-size: 0.875rem;
+  font-size: 0.84375rem;
   color: var(--text-muted);
+  line-height: 1.45;
 }
 
 .territory-legend {
@@ -1486,20 +1517,26 @@ a {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4px;
+  gap: 3px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.territory-floating-card.is-legend-collapsed .territory-legend {
+  display: none;
 }
 
 .territory-legend button {
   width: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
+  gap: 9px;
+  padding: 7px 9px;
   border-radius: 10px;
   border: 1px solid transparent;
   background: transparent;
   text-align: left;
-  font-size: 0.875rem;
+  font-size: 0.84375rem;
   font-weight: 400;
   color: var(--text-main);
   cursor: pointer;
@@ -1517,8 +1554,8 @@ a {
 }
 
 .territory-legend__num {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: var(--brand-green);
   color: #ffffff;
@@ -1536,7 +1573,7 @@ a {
 }
 
 /* ==========================================================================
-   7. УСЛУГИ И ПРОКАТ (списком карточек, без карусели)
+   7. УСЛУГИ И ПРОКАТ
    ========================================================================== */
 .filter-tabs {
   display: flex;
@@ -1649,27 +1686,54 @@ a {
 }
 
 /* ==========================================================================
-   8. НАША ФИЛОСОФИЯ (замоканный смысловой блок)
+   8. ПОЛНОШИРИННАЯ ФИЛОСОФИЯ + ПЛАШКА С ТЕКСТОМ СПРАВА
    ========================================================================== */
-.philosophy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.05fr;
-  gap: 40px;
-  align-items: center;
-}
-
-.philosophy-media {
+.philosophy-fullbleed {
   position: relative;
-  border-radius: var(--radius-lg);
+  width: 100%;
+  min-height: clamp(540px, 72vh, 760px);
+  display: flex;
+  align-items: center;
+  padding-block: 64px;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  aspect-ratio: 4 / 3;
 }
 
-.philosophy-media img {
+.philosophy-fullbleed__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.philosophy-fullbleed__bg img {
   width: 100%;
   height: 100%;
+  max-width: none;
   object-fit: cover;
+  object-position: center;
+}
+
+.philosophy-fullbleed__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(12, 20, 16, 0.08) 0%, rgba(12, 20, 16, 0.35) 100%);
+}
+
+.philosophy-fullbleed .container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.philosophy-card {
+  width: min(100%, 490px);
+  background: rgba(247, 246, 242, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: var(--radius-lg);
+  padding: 34px 36px;
+  box-shadow: var(--shadow-lg);
 }
 
 .philosophy-draft-note {
@@ -1686,39 +1750,38 @@ a {
 }
 
 .philosophy-quote {
-  font-size: clamp(1.25rem, 1.9vw, 1.55rem);
+  font-size: 1.15rem;
   font-weight: 500;
-  line-height: 1.32;
-  letter-spacing: -0.015em;
+  line-height: 1.38;
+  letter-spacing: -0.01em;
   color: var(--text-main);
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
 .philosophy-text {
-  margin: 0 0 12px;
+  margin: 0 0 18px;
   color: var(--text-muted);
-  font-size: 0.96875rem;
+  font-size: 0.9375rem;
 }
 
 .philosophy-pillars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 24px;
-  padding-top: 20px;
+  gap: 12px;
+  padding-top: 16px;
   border-top: 1px solid var(--border-subtle);
 }
 
 .philosophy-pillars strong {
   display: block;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   font-weight: 500;
   color: var(--brand-green);
   margin-bottom: 2px;
 }
 
 .philosophy-pillars span {
-  font-size: 0.8125rem;
+  font-size: 0.78rem;
   color: var(--text-muted);
 }
 
@@ -1868,7 +1931,7 @@ a {
 }
 
 /* ==========================================================================
-   10. КОНТАКТЫ И СОЦСЕТИ (спокойный табличный стиль без жирного шума)
+   10. КОНТАКТЫ И СОЦСЕТИ
    ========================================================================== */
 .contacts-grid {
   display: grid;
@@ -2064,7 +2127,7 @@ a {
 }
 
 /* ==========================================================================
-   МОДАЛЬНЫЕ ОКНА (Контур.Отель, Планировка дома, Лайтбокс)
+   МОДАЛЬНЫЕ ОКНА И ВЫДАЧА ДОСТУПНЫХ ДОМОВ КОНТУР.ОТЕЛЯ
    ========================================================================== */
 .modal {
   position: fixed;
@@ -2084,7 +2147,7 @@ a {
 
 .modal__dialog {
   width: 100%;
-  max-width: 660px;
+  max-width: 760px;
   max-height: 90vh;
   overflow-y: auto;
   background: var(--bg-card);
@@ -2113,23 +2176,27 @@ a {
 
 .modal__title {
   margin: 0 0 6px;
-  font-size: 1.65rem;
+  font-size: 1.6rem;
   font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
 
 .modal__subtitle {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   font-size: 0.9375rem;
   color: var(--text-muted);
 }
 
 .kontur-form-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin-bottom: 18px;
+}
+
+.kontur-form-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .kontur-input-box {
@@ -2146,7 +2213,7 @@ a {
 
 .kontur-input-box input,
 .kontur-input-box select {
-  padding: 11px 13px;
+  padding: 10px 12px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-strong);
   font-size: 0.9375rem;
@@ -2154,28 +2221,98 @@ a {
   color: var(--text-main);
 }
 
+.kontur-rooms-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.kontur-room-offer {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  background: var(--bg-page);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.kontur-room-offer.is-selected {
+  border-color: var(--brand-green);
+  background: var(--brand-green-soft);
+}
+
+.kontur-room-offer.is-small-capacity {
+  opacity: 0.88;
+  background: #ffffff;
+  border-style: dashed;
+}
+
+.kontur-room-offer__title {
+  font-size: 1.0625rem;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.kontur-room-offer__meta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.kontur-room-offer__tariff {
+  font-size: 0.8125rem;
+  color: var(--brand-green);
+  font-weight: 500;
+}
+
+.kontur-room-offer__right {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.kontur-room-offer__price {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.kontur-section-note {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 6px 0 2px;
+}
+
 .kontur-summary {
   background: var(--bg-page);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 16px 18px;
-  margin-bottom: 18px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
 }
 
 .kontur-summary__row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 6px;
-  font-size: 0.9375rem;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
 }
 
 .kontur-summary__total {
   border-top: 1px solid var(--border-subtle);
-  padding-top: 10px;
-  margin-top: 8px;
+  padding-top: 8px;
+  margin-top: 6px;
   font-weight: 600;
-  font-size: 1.0625rem;
+  font-size: 1.03125rem;
   color: var(--brand-green);
 }
 
@@ -2184,6 +2321,30 @@ a {
   border-radius: var(--radius-md);
   background: var(--brand-green-soft);
   border: 1px solid rgba(62, 95, 70, 0.35);
+}
+
+/* Попап характеристик и удобств */
+.specs-amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.specs-amenities-col h4 {
+  margin: 0 0 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--brand-green);
+}
+
+.specs-amenities-col p {
+  margin: 0;
+  font-size: 0.84375rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
 /* Лайтбокс галереи */
@@ -2267,6 +2428,44 @@ a {
 }
 
 /* ==========================================================================
+   СТРАНИЦА НОВЫЙ ГОД 2027 (new-year.html)
+   ========================================================================== */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.program-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+}
+
+.program-card__date {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--brand-green);
+  margin-bottom: 8px;
+}
+
+.program-card__title {
+  margin: 0 0 8px;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.program-card__text {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
    АДАПТИВ (НОУТБУКИ, ПЛАНШЕТЫ И МОБИЛЬНЫЕ УСТРОЙСТВА)
    ========================================================================== */
 @media (max-width: 1280px) {
@@ -2290,12 +2489,22 @@ a {
     display: flex;
   }
 
-  .territory-wrap,
+  /* На экранах < 1120px плавающая легенда карты переходит под схему */
+  .territory-floating-card {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin: 16px;
+    box-shadow: var(--shadow-sm);
+    background: var(--bg-card);
+  }
+
   .yandex-reviews-layout {
     grid-template-columns: 1fr;
   }
 
-  .reviews-cards-grid {
+  .reviews-cards-grid,
+  .program-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -2342,18 +2551,16 @@ a {
   .ny-card,
   .houses-grid,
   .services-list,
-  .philosophy-grid,
   .contacts-grid {
     grid-template-columns: 1fr;
   }
 
   .bento-gallery {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 230px 180px 180px;
+    grid-template-rows: 240px 200px 200px 200px;
   }
 
-  .bento-item--lead {
-    grid-column: 1 / -1;
+  .bento-item--tall {
     grid-row: auto;
   }
 }
@@ -2381,7 +2588,10 @@ a {
     padding-bottom: 26px;
   }
 
-  .booking-form {
+  .booking-form,
+  .kontur-form-grid,
+  .kontur-form-grid--2,
+  .specs-amenities-grid {
     grid-template-columns: 1fr;
   }
 
@@ -2395,7 +2605,7 @@ a {
 
   .bento-gallery {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, 220px);
+    grid-template-rows: repeat(6, 220px);
   }
 
   .service-row {
@@ -2408,14 +2618,23 @@ a {
     height: 176px;
   }
 
+  .philosophy-fullbleed {
+    min-height: auto;
+    padding-block: 36px;
+  }
+
+  .philosophy-card {
+    padding: 24px 20px;
+  }
+
   .contact-row {
     grid-template-columns: 1fr;
     gap: 4px;
   }
 
   .reviews-cards-grid,
-  .kontur-form-grid,
-  .philosophy-pillars {
+  .philosophy-pillars,
+  .program-grid {
     grid-template-columns: 1fr;
   }
 }
