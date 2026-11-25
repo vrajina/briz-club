@@ -2338,6 +2338,123 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 1.5;
 }
 
+/* Fallback отзывов, FAQ, копирование координат и пресеты дат */
+.yandex-fallback-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+  min-height: 220px;
+}
+
+.yandex-fallback-card p {
+  margin: 0;
+  font-size: 0.96875rem;
+  color: var(--text-muted);
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.faq-list {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-icon {
+  font-size: 1.35rem;
+  line-height: 1;
+  color: var(--brand-green);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-item__body {
+  padding: 0 0 18px;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  max-width: 680px;
+}
+
+.copy-coords-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition), border-color var(--transition);
+}
+
+.copy-coords-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.52);
+}
+
+.kontur-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.kontur-preset-chip {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-sand);
+  color: var(--text-main);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition), color var(--transition), background-color var(--transition);
+}
+
+.kontur-preset-chip:hover {
+  border-color: var(--brand-green);
+  color: var(--brand-green);
+  background: var(--brand-green-soft);
+}
+
 /* ==========================================================================
    АДАПТИВ (НОУТБУКИ, ПЛАНШЕТЫ И МОБИЛЬНЫЕ УСТРОЙСТВА)
    ========================================================================== */
@@ -2391,6 +2508,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   .contacts-split {
     grid-template-columns: 1fr;
+  }
+
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .program-grid {
@@ -2742,6 +2864,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .yandex-live-iframe {
     height: 720px;
     min-height: 640px;
+  }
+
+  .faq-item summary {
+    font-size: 1rem;
+    padding: 15px 0;
   }
 
   .contacts-panel {

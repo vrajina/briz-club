@@ -6,7 +6,7 @@
  * GET /api/kontur?arrival=YYYY-MM-DD&departure=YYYY-MM-DD&adults=2
  *                                     -> свободные домики и точные цены (getFreeRooms)
  */
-const KONTUR_TOKEN = "25036D41-AC41-41C1-8010-C542D21DD847";
+const KONTUR_TOKEN = process.env.KONTUR_WIDGET_TOKEN || "";
 const PMS_BASE = "https://pms.frontdesk24.ru/api/online";
 
 async function postJson(endpoint, body) {
@@ -32,6 +32,15 @@ module.exports = async function handler(req, res) {
 
   if (req.method === "OPTIONS") {
     res.status(200).end();
+    return;
+  }
+
+  if (!KONTUR_TOKEN) {
+    res.status(200).json({
+      ok: false,
+      configured: false,
+      message: "Set KONTUR_WIDGET_TOKEN in Vercel Environment Variables to enable live PMS sync"
+    });
     return;
   }
 

@@ -87,6 +87,14 @@
     note: ""
   };
 
+  function pluralNights(n) {
+    var mod10 = n % 10;
+    var mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return n + "\u00A0ночь";
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return n + "\u00A0ночи";
+    return n + "\u00A0ночей";
+  }
+
   function syncAllBookingInputs() {
     document.querySelectorAll(".js-checkin").forEach(function (el) {
       el.value = bookingState.checkin;
@@ -96,6 +104,21 @@
     });
     document.querySelectorAll(".js-guests").forEach(function (el) {
       el.value = bookingState.guests;
+    });
+
+    var submitLabel = "Проверить наличие";
+    if (bookingState.checkin && bookingState.checkout) {
+      var d1 = new Date(bookingState.checkin + "T14:00:00");
+      var d2 = new Date(bookingState.checkout + "T12:00:00");
+      if (!isNaN(d1.getTime()) && !isNaN(d2.getTime()) && d2 > d1) {
+        var nights = Math.round((d2 - d1) / 86400000);
+        if (nights >= 1 && nights <= 60) {
+          submitLabel = "Проверить · " + pluralNights(nights);
+        }
+      }
+    }
+    document.querySelectorAll(".js-booking-form .booking-submit").forEach(function (btn) {
+      btn.textContent = submitLabel;
     });
   }
 
@@ -886,6 +909,57 @@
     specsBookBtn.addEventListener("click", function () {
       closeAllModals();
       openBookingModal({ house: activeSpecId });
+    });
+  }
+
+  // Быстрые пресеты дат в окне подбора
+  document.querySelectorAll(".js-date-preset").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var preset = btn.getAttribute("data-preset");
+      var now = new Date();
+      var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      var end;
+
+      if (preset === "weekend") {
+        var daysToFri = (5 - start.getDay() + 7) % 7 || 7;
+        start = new Date(start.getTime() + daysToFri * 86400000);
+        end = new Date(start.getTime() + 2 * 86400000);
+      } else if (preset === "midweek") {
+        var daysToTue = (2 - start.getDay() + 7) % 7 || 7;
+        start = new Date(start.getTime() + daysToTue * 86400000);
+        end = new Date(start.getTime() + 2 * 86400000);
+      } else {
+        bookingState.checkin = "2026-12-31";
+        bookingState.checkout = "2027-01-03";
+        if (modalCheckin) modalCheckin.value = bookingState.checkin;
+        if (modalCheckout) modalCheckout.value = bookingState.checkout;
+        syncAllBookingInputs();
+        renderKonturRooms();
+        return;
+      }
+
+      bookingState.checkin = formatIsoDate(start);
+      bookingState.checkout = formatIsoDate(end);
+      if (modalCheckin) modalCheckin.value = bookingState.checkin;
+      if (modalCheckout) modalCheckout.value = bookingState.checkout;
+      syncAllBookingInputs();
+      renderKonturRooms();
+    });
+  });
+
+  // Копирование координат для навигатора в один клик
+  var copyCoordsBtn = document.getElementById("copyCoordsBtn");
+  if (copyCoordsBtn) {
+    var defaultCoordsLabel = copyCoordsBtn.textContent;
+    copyCoordsBtn.addEventListener("click", function () {
+      var coords = copyCoordsBtn.getAttribute("data-coords") || "53.4718, 50.0384";
+      if (navigator.clipboard && typeof navigator.clipboard.writeText === "function") {
+        navigator.clipboard.writeText(coords).catch(function () {});
+      }
+      copyCoordsBtn.textContent = "Скопировано: " + coords;
+      setTimeout(function () {
+        copyCoordsBtn.textContent = defaultCoordsLabel;
+      }, 2000);
     });
   }
 
