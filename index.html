@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>База отдыха «Бриз» — тёплые барнхаусы на берегу Волги под Самарой</title>
+  <title>База отдыха «Бриз» — тёплые барнхаусы на берегу Волги под Самарой</title>
   <meta name="description" content="Загородный отдых в сосновом лесу на берегу Волги (30 минут от Самары). Двухэтажные барнхаусы 70 и 130 м² с панорамными окнами, камином, русской баней и сибирским банным чаном.">
   <link rel="icon" type="image/png" href="assets/images/logo-briz-green.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <!-- =======================================================================
-       1. ПОЛУПРОЗРАЧНАЯ ШАПКА (смена цвета логотипа #FFFFFF -> #3E5F46 при скролле)
+       1. ПОЛУПРОЗРАЧНАЯ ШАПКА (смена цвета логотипа #FFFFFF -> #3E5F46 при скролле)
        ======================================================================= -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -23,16 +23,15 @@
           <img src="assets/images/logo-briz-white.png" alt="Бриз" class="brand-logo__white">
           <img src="assets/images/logo-briz-green.png" alt="" class="brand-logo__green" aria-hidden="true">
         </span>
-        <span class="brand-caption">
-          <span class="brand-caption__place">Берег Волги · Курумоч</span>
-          <span class="brand-caption__rating">★ 5.0 Яндекс Карты</span>
-        </span>
       </a>
 
       <nav class="main-nav" aria-label="Главное меню">
-        <a href="#new-year" class="nav-link nav-link--seasonal">🎄 Новый год</a>
-        <a href="#barn-70" class="nav-link" data-house-jump="barn70">Барн 70</a>
-        <a href="#barn-130" class="nav-link" data-house-jump="barn130">Барн 130</a>
+        <a href="#new-year" class="nav-link nav-link--seasonal">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L6.5 9h3.2L5 15h4.2L4 20h16l-5.2-5H19l-4.7-6h3.2L12 2z"/><path d="M12 20v2"/></svg>
+          <span>Новый год</span>
+        </a>
+        <a href="#barn-70" class="nav-link" data-house-jump="barn70">Барн 70</a>
+        <a href="#barn-130" class="nav-link" data-house-jump="barn130">Барн 130</a>
         <a href="#services" class="nav-link">Услуги</a>
         <a href="#philosophy" class="nav-link">Философия</a>
         <a href="#reviews" class="nav-link">Отзывы</a>
@@ -40,17 +39,31 @@
       </nav>
 
       <div class="header-right">
+        <div class="header-socials" aria-label="Социальные сети и мессенджеры">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="social-icon-link" aria-label="ВКонтакте">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+          </a>
+          <a href="https://t.me/+79372014444" target="_blank" rel="noopener" class="social-icon-link" aria-label="Telegram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5L19 7l-7 10 5 3.5L21 5z"/></svg>
+          </a>
+          <a href="https://wa.me/79372014444" target="_blank" rel="noopener" class="social-icon-link" aria-label="WhatsApp">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.56 7.47L3 20.5l1.56-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+          </a>
+        </div>
         <a href="tel:+79372014444" class="header-phone">+7 (937) 201-44-44</a>
       </div>
 
       <!-- Мобильная шапка: крупный лого + НГ’27 + звонок + бургер -->
       <div class="mobile-controls">
-        <a href="#new-year" class="mobile-ny-pill">🎄 НГ’27</a>
+        <a href="#new-year" class="mobile-ny-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L6.5 9h3.2L5 15h4.2L4 20h16l-5.2-5H19l-4.7-6h3.2L12 2z"/></svg>
+          <span>НГ’27</span>
+        </a>
         <a href="tel:+79372014444" class="icon-btn" aria-label="Позвонить на базу Бриз">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </a>
         <button type="button" class="icon-btn" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
         </button>
       </div>
     </div>
@@ -62,21 +75,28 @@
       <div>
         <div class="mobile-drawer__top">
           <img src="assets/images/logo-briz-green.png" alt="Бриз" style="height:40px;width:auto;">
-          <button type="button" class="icon-btn" id="drawerCloseBtn" aria-label="Закрыть меню" style="background:#fff;color:#1C241E;border-color:rgba(28,36,30,0.2);">✕</button>
+          <button type="button" class="icon-btn" id="drawerCloseBtn" aria-label="Закрыть меню" style="background:#fff;color:#1C241E;border-color:rgba(28,36,30,0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </button>
         </div>
         <nav class="mobile-drawer__nav" aria-label="Мобильное меню">
-          <a href="#new-year" class="mobile-drawer__link mobile-drawer__link--ny"><span>🎄 Новый год 2027</span><span>→</span></a>
-          <a href="#barn-70" class="mobile-drawer__link" data-house-jump="barn70"><span>Барн 70 (1–4 гостя)</span><span>→</span></a>
-          <a href="#barn-130" class="mobile-drawer__link" data-house-jump="barn130"><span>Барн 130 (до 6 гостей)</span><span>→</span></a>
+          <a href="#new-year" class="mobile-drawer__link mobile-drawer__link--ny"><span>Новый год 2027</span><span>→</span></a>
+          <a href="#barn-70" class="mobile-drawer__link" data-house-jump="barn70"><span>Барн 70 (1–4 гостя)</span><span>→</span></a>
+          <a href="#barn-130" class="mobile-drawer__link" data-house-jump="barn130"><span>Барн 130 (до 6 гостей)</span><span>→</span></a>
           <a href="#gallery" class="mobile-drawer__link"><span>Фотогалерея</span><span>→</span></a>
           <a href="#map" class="mobile-drawer__link"><span>План территории</span><span>→</span></a>
-          <a href="#services" class="mobile-drawer__link"><span>Услуги и прокат</span><span>→</span></a>
+          <a href="#services" class="mobile-drawer__link"><span>Услуги и прокат</span><span>→</span></a>
           <a href="#philosophy" class="mobile-drawer__link"><span>Наша философия</span><span>→</span></a>
           <a href="#reviews" class="mobile-drawer__link"><span>Отзывы гостей</span><span>→</span></a>
-          <a href="#contacts" class="mobile-drawer__link"><span>Контакты и проезд</span><span>→</span></a>
+          <a href="#contacts" class="mobile-drawer__link"><span>Контакты и проезд</span><span>→</span></a>
         </nav>
       </div>
       <div class="mobile-drawer__footer">
+        <div class="drawer-socials">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="drawer-social-btn">ВКонтакте</a>
+          <a href="https://t.me/+79372014444" target="_blank" rel="noopener" class="drawer-social-btn">Telegram</a>
+          <a href="https://wa.me/79372014444" target="_blank" rel="noopener" class="drawer-social-btn">WhatsApp</a>
+        </div>
         <a href="tel:+79372014444" class="btn btn--outline" style="width:100%;">+7 (937) 201-44-44</a>
         <button type="button" class="btn btn--primary js-open-booking" style="width:100%;">Забронировать домик</button>
       </div>
@@ -86,29 +106,41 @@
   <main id="top">
 
     <!-- =====================================================================
-         2. ГЛАВНЫЙ БАННЕР + ФОРМА БРОНИРОВАНИЯ ВНИЗУ ПОВЕРХ БАННЕРА (ДЕСКТОП)
+         2. ГЛАВНЫЙ БАННЕР — 100% ШИРИНЫ БЕЗ ИСКАЖЕНИЙ + ПЛАШКА БРОНИ ПО СЕТКЕ
          ===================================================================== -->
     <section class="hero" id="heroSection">
       <div class="hero__bg">
-        <img src="assets/images/hero-winter.jpg" alt="Зимние барнхаусы базы отдыха Бриз на берегу Волги в тёплых огнях">
+        <img src="assets/images/hero-winter.jpg" alt="Зимние барнхаусы базы отдыха Бриз на берегу Волги">
         <div class="hero__overlay"></div>
       </div>
 
       <div class="container hero__content">
         <div class="hero__text">
-          <div class="hero__badge">
-            <span>★ 5.0 на Яндекс Картах</span>
-            <span>·</span>
-            <span>Берег Волги · 30 мин от Самары</span>
-          </div>
-          <h1 class="hero__title">Тёплые барнхаусы у воды с видом на Жигулёвские горы</h1>
+          <a href="#reviews" class="yandex-hero-chip" aria-label="Рейтинг 5,0 на Яндекс Картах — перейти к отзывам">
+            <span class="yandex-hero-chip__pin" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="#FC3F1D"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+            </span>
+            <span class="yandex-hero-chip__score">5,0</span>
+            <span class="yandex-hero-chip__stars" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="yandex-hero-chip__sep" aria-hidden="true"></span>
+            <span class="yandex-hero-chip__label">Яндекс Карты · 480+ отзывов</span>
+          </a>
+
+          <h1 class="hero__title">Мгновения, которые останутся с тобой</h1>
+          <p class="hero__subhead">Выбери своё…</p>
           <p class="hero__lead">
-            Камерный отдых в сосновом лесу Курумоча: панорамные окна в пол, дровяной камин, горячий сибирский чан под открытым небом и приватные террасы с мангалом.
+            Тёплые барнхаусы в сосновом лесу на берегу Волги — в 30 минутах от Самары.
           </p>
         </div>
 
-        <!-- Плашка бронирования поверх самого низа баннера (на десктопе) -->
-        <div>
+        <!-- Плашка бронирования ровно по ширине контента -->
+        <div class="hero-booking-wrap">
           <div class="booking-bar" id="heroBookingBar">
             <form class="booking-form js-booking-form" data-source="hero">
               <label class="booking-field">
@@ -122,28 +154,28 @@
               <label class="booking-field">
                 <span class="booking-field__label">Гости</span>
                 <select name="guests" class="booking-field__control js-guests">
-                  <option value="2">2 гостя</option>
-                  <option value="3">3 гостя</option>
-                  <option value="4">4 гостя</option>
-                  <option value="5">5 гостей</option>
-                  <option value="6">6 гостей</option>
+                  <option value="2">2 гостя</option>
+                  <option value="3">3 гостя</option>
+                  <option value="4">4 гостя</option>
+                  <option value="5">5 гостей</option>
+                  <option value="6">6 гостей</option>
                 </select>
               </label>
               <label class="booking-field">
                 <span class="booking-field__label">Коттедж</span>
                 <select name="house" class="booking-field__control js-house">
                   <option value="all">Все варианты домиков</option>
-                  <option value="barn70-2">Барн 70 (1–2 гостя)</option>
-                  <option value="barn70-4">Барн 70 (3–4 гостя)</option>
-                  <option value="barn130">Барн 130 (до 6 гостей)</option>
+                  <option value="barn70-2">Барн 70 (до 2 гостей)</option>
+                  <option value="barn70-4">Барн 70 (3–4 гостя)</option>
+                  <option value="barn130">Барн 130 (до 6 гостей)</option>
                 </select>
               </label>
               <button type="submit" class="btn btn--primary booking-submit">Найти домик</button>
             </form>
           </div>
           <div class="booking-bar__note">
-            <span>Синхронизация свободных дат и тарифов через модуль «Контур.Отель» · Заезд с 15:00, выезд до 12:00</span>
-            <span>Можно с небольшими питомцами по согласованию</span>
+            <span>Синхронизация свободных дат через «Контур.Отель» · Заезд после 14:00, выезд до 12:00</span>
+            <span>Возможно размещение с питомцем по согласованию</span>
           </div>
         </div>
       </div>
@@ -165,23 +197,23 @@
             <label class="booking-field">
               <span class="booking-field__label">Гости</span>
               <select name="guests" class="booking-field__control js-guests">
-                <option value="2">2 гостя</option>
-                <option value="3">3 гостя</option>
-                <option value="4">4 гостя</option>
-                <option value="5">5 гостей</option>
-                <option value="6">6 гостей</option>
+                <option value="2">2 гостя</option>
+                <option value="3">3 гостя</option>
+                <option value="4">4 гостя</option>
+                <option value="5">5 гостей</option>
+                <option value="6">6 гостей</option>
               </select>
             </label>
             <label class="booking-field">
               <span class="booking-field__label">Коттедж</span>
               <select name="house" class="booking-field__control js-house">
                 <option value="all">Все домики</option>
-                <option value="barn70-2">Барн 70 (1–2 гостя)</option>
-                <option value="barn70-4">Барн 70 (3–4 гостя)</option>
-                <option value="barn130">Барн 130 (до 6 гостей)</option>
+                <option value="barn70-2">Барн 70 (до 2 гостей)</option>
+                <option value="barn70-4">Барн 70 (3–4 гостя)</option>
+                <option value="barn130">Барн 130 (до 6 гостей)</option>
               </select>
             </label>
-            <button type="submit" class="btn btn--primary booking-submit">Проверить даты и цены</button>
+            <button type="submit" class="btn btn--primary booking-submit">Проверить даты и цены</button>
           </form>
         </div>
       </div>
@@ -194,24 +226,27 @@
       <div class="container">
         <div class="ny-card">
           <div>
-            <span class="ny-card__eyebrow">🎄 Открыто бронирование на зиму 2026/2027</span>
-            <h2 class="ny-card__title">Новый год и каникулы в сосновом лесу у Волги</h2>
+            <span class="ny-card__eyebrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L6.5 9h3.2L5 15h4.2L4 20h16l-5.2-5H19l-4.7-6h3.2L12 2z"/></svg>
+              <span>Открыто бронирование на зиму 2026/2027</span>
+            </span>
+            <h2 class="ny-card__title">Новый год и каникулы в сосновом лесу у Волги</h2>
             <p class="ny-card__desc">
-              Живая наряженная ёлка у вашего крыльца, праздничная иллюминация территории, камин с запасом берёзовых дров, сибирский чан с пихтой и никаких шумных банкетных залов — только ваша компания.
+              Живая наряженная ёлка у вашего крыльца, праздничная подсветка территории, тёплый дом с камином, сибирский чан с пихтой и никаких шумных банкетных залов — только ваша компания.
             </p>
           </div>
           <div class="ny-card__packages">
             <div class="ny-package-row">
               <div>
-                <strong>Новогодняя ночь · 31 дек — 3 янв</strong>
-                <span>Заезд на 3 суток · Барн 70 или Барн 130</span>
+                <strong>Новогодняя ночь · 31 дек — 3 янв</strong>
+                <span>Заезд на 3 суток · Барн 70 или Барн 130</span>
               </div>
               <button type="button" class="btn btn--wood btn--sm js-book-ny" data-checkin="2026-12-31" data-checkout="2027-01-03">Выбрать дом</button>
             </div>
             <div class="ny-package-row">
               <div>
-                <strong>Рождественские каникулы · 3 — 8 янв</strong>
-                <span>От 2 суток · Скидка при заезде от 4 ночей</span>
+                <strong>Рождественские каникулы · 3–8 янв</strong>
+                <span>От 2 суток · Выгоднее при заезде от 4 ночей</span>
               </div>
               <button type="button" class="btn btn--wood btn--sm js-book-ny" data-checkin="2027-01-03" data-checkout="2027-01-06">Выбрать даты</button>
             </div>
@@ -221,7 +256,7 @@
     </section>
 
     <!-- =====================================================================
-         4. ДОМИКИ (ДВЕ КОЛОНКИ ОДНИМ ГОРИЗОНТАЛЬНЫМ БЛОКОМ, БЕЗ КНОПОК-ТЕГОВ)
+         4. ДОМИКИ В 2 КОЛОНКИ (РЕАЛЬНЫЕ ФОТО И ЧЕСТНЫЕ ВАРИАНТЫ РАЗМЕЩЕНИЯ)
          ===================================================================== -->
     <section class="section" id="houses">
       <div class="container">
@@ -231,78 +266,90 @@
             <h2 class="section-title">Два формата барнхаусов</h2>
           </div>
           <p class="section-subtitle">
-            Сравните вместимость и выберите подходящий коттедж. В каждом доме — тёплые полы, оборудованная кухня, панорамные окна, приватная терраса и мангал.
+            Сравните планировку и выберите подходящий коттедж. В каждом доме — оборудованная кухня, панорамные окна, умная колонка с ТВ, терраса и крытая мангальная зона.
           </p>
         </div>
 
         <div class="houses-grid">
-          <!-- КАРТОЧКА 1: БАРН 70 (сразу оба варианта размещения!) -->
+          <!-- КАРТОЧКА 1: БАРН 70 -->
           <article class="house-card" id="barn-70" data-house-card="barn70">
             <div class="house-slider" data-slider>
               <div class="house-slider__track">
-                <div class="house-slider__slide"><img src="assets/images/barn70-interior.jpg" alt="Интерьер двухэтажного коттеджа Барн 70 с антресолью"></div>
-                <div class="house-slider__slide"><img src="assets/images/real-terrace.jpg" alt="Терраса коттеджа среди сосен"></div>
-                <div class="house-slider__slide"><img src="assets/images/hero-winter.jpg" alt="Фасад барнхаусов Бриз в зимней иллюминации"></div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-exterior-5.jpg" alt="Фасад коттеджа Барн среди сосен" class="js-open-lightbox" data-index="3">
+                  <img src="assets/images/house-living-window.jpg" alt="Гостиная с панорамным остеклением и выходом на террасу" class="js-open-lightbox" data-index="5">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-bedroom-1.jpg" alt="Спальня с двуспальной кроватью" class="js-open-lightbox" data-index="6">
+                  <img src="assets/images/house-mezzanine.jpg" alt="Спальная антресоль 2 этажа под мансардным окном" class="js-open-lightbox" data-index="7">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-kitchen.jpg" alt="Оборудованная кухня с посудой" class="js-open-lightbox" data-index="8">
+                  <img src="assets/images/house-bathroom.jpg" alt="Санузел с подсветкой и полотенцами" class="js-open-lightbox" data-index="9">
+                </div>
               </div>
-              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущее фото">‹</button>
-              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующее фото">›</button>
+              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
               <div class="house-slider__dots"></div>
             </div>
 
             <div class="house-card__body">
               <div class="house-card__header">
                 <h3 class="house-card__title">Барн Хаус-70</h3>
-                <span class="house-card__count">Уютный формат</span>
+                <span class="house-card__count">1–4 гостя</span>
               </div>
-              <p class="house-card__meta">70 м² · 2 этажа · 1–4 гостя · Терраса с видом на сосны</p>
+              <p class="house-card__meta">70 м² · 2 этажа · Терраса и индивидуальная пергола</p>
 
               <ul class="house-features">
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/><path d="M9 21v-6h6v6"/></svg>
-                  <span>Панорамная спальня-антресоль на 2 этаже</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10.5L12 3l9 7.5V21H3V10.5z"/><path d="M9 21v-6h6v6"/></svg>
+                  <span>Спальня на 1 этаже и антресоль наверху</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
-                  <span>Кухня-гостиная с плитой, холодильником и посудой</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 4v16"/></svg>
+                  <span>Кухня с плитой, СВЧ, холодильником и посудой</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 14h16M6 14v5M18 14v5M7 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"/></svg>
-                  <span>Собственная терраса и мангальная зона</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 14h16M6 14v5M18 14v5M7 10V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v4"/></svg>
+                  <span>Кресла на террасе и мангальная зона</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 8l7 4 7-4M5 16l7-4 7 4"/></svg>
-                  <span>Кондиционер, тёплый пол и стабильный Wi-Fi</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M5 8l7 4 7-4M5 16l7-4 7 4"/></svg>
+                  <span>Кондиционер, тёплый пол, ТВ и Wi-Fi</span>
                 </li>
               </ul>
 
-              <!-- Оба варианта размещения сразу видны и кликабельны -->
               <div class="variants-box" role="radiogroup" aria-label="Варианты размещения в Барн 70">
-                <div class="variants-box__label">Оба варианта размещения (нажмите для выбора):</div>
+                <div class="variants-box__label">Варианты размещения по числу гостей:</div>
                 <button type="button" class="variant-row is-selected" data-variant="barn70-2">
                   <div class="variant-row__info">
-                    <strong>Вариант 1 · Для двоих (1–2 гостя)</strong>
-                    <span>Основная двуспальная кровать на антресоли + гостиная</span>
+                    <strong>Основное размещение · до 2 гостей</strong>
+                    <span>Изолированная спальня на 1 этаже и кухня-гостиная</span>
                   </div>
                   <div class="variant-row__price">
-                    <strong>от 7 500 ₽</strong>
-                    <span>будни / от 10 500 ₽ вых.</span>
+                    <strong>от 6 500 ₽</strong>
+                    <span>будни / от 10 000 ₽ вых.</span>
                   </div>
                 </button>
                 <button type="button" class="variant-row" data-variant="barn70-4">
                   <div class="variant-row__info">
-                    <strong>Вариант 2 · Семейный (3–4 гостя)</strong>
-                    <span>Спальня на 2 этаже + раскладной диван в гостиной на 1 этаже</span>
+                    <strong>С доп. местами · 3–4 гостя</strong>
+                    <span>+ спальная антресоль 2 этажа с раскладным креслом</span>
                   </div>
                   <div class="variant-row__price">
-                    <strong>от 9 500 ₽</strong>
-                    <span>будни / от 12 500 ₽ вых.</span>
+                    <strong>от 8 500 ₽</strong>
+                    <span>будни / от 12 000 ₽ вых.</span>
                   </div>
                 </button>
               </div>
 
               <div class="house-card__actions">
-                <button type="button" class="btn btn--primary js-open-booking" data-house-target="barn70">Забронировать Барн 70</button>
-                <button type="button" class="text-link js-open-specs" data-spec="barn70">Планировка и оснащение →</button>
+                <button type="button" class="btn btn--primary js-open-booking" data-house-target="barn70">Забронировать Барн 70</button>
+                <button type="button" class="text-link js-open-specs" data-spec="barn70">Планировка и оснащение →</button>
               </div>
             </div>
           </article>
@@ -311,68 +358,81 @@
           <article class="house-card" id="barn-130" data-house-card="barn130">
             <div class="house-slider" data-slider>
               <div class="house-slider__track">
-                <div class="house-slider__slide"><img src="assets/images/barn130-interior.jpg" alt="Двусветная гостиная с дровяным камином в коттедже Барн 130"></div>
-                <div class="house-slider__slide"><img src="assets/images/hero-winter.jpg" alt="Барн 130 на берегу Волги в вечерних гирляндах"></div>
-                <div class="house-slider__slide"><img src="assets/images/aerial-winter.jpg" alt="Первая линия коттеджей Барн 130 над набережной Волги"></div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-living-top.jpg" alt="Двусветная гостиная с панорамными окнами сверху" class="js-open-lightbox" data-index="1">
+                  <img src="assets/images/real-terrace.jpg" alt="Терраса коттеджа с деревянным креслом среди сосен" class="js-open-lightbox" data-index="10">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-bedroom-loft.jpg" alt="Спальня второго этажа с гардеробом" class="js-open-lightbox" data-index="11">
+                  <img src="assets/images/house-second-floor.jpg" alt="Галерея второго этажа с видом на треугольный витраж" class="js-open-lightbox" data-index="12">
+                </div>
+                <div class="house-slider__slide">
+                  <img src="assets/images/house-pergola.jpg" alt="Крытая индивидуальная беседка-пергола с мангалом" class="js-open-lightbox" data-index="4">
+                  <img src="assets/images/house-kitchen.jpg" alt="Кухня со всей техникой и посудой" class="js-open-lightbox" data-index="8">
+                </div>
               </div>
-              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущее фото">‹</button>
-              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующее фото">›</button>
+              <button type="button" class="house-slider__nav house-slider__nav--prev" aria-label="Предыдущие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <button type="button" class="house-slider__nav house-slider__nav--next" aria-label="Следующие фото">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
               <div class="house-slider__dots"></div>
             </div>
 
             <div class="house-card__body">
               <div class="house-card__header">
                 <h3 class="house-card__title">Барн Хаус-130</h3>
-                <span class="house-card__count">5 коттеджей на 1 линии</span>
+                <span class="house-card__count">5 коттеджей · до 6 гостей</span>
               </div>
-              <p class="house-card__meta">130 м² · 2 этажа · до 6 гостей (+ доп. места) · Дровяной камин</p>
+              <p class="house-card__meta">130 м² · 2 этажа · 3 спальные зоны · Камин и 2 санузла</p>
 
               <ul class="house-features">
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2c1.5 3.5 5 5.5 5 10a5 5 0 1 1-10 0c0-2.5 1.5-4.5 2.5-6 0 1.5 1 2.5 2 2.5C12.5 6.5 12 4 12 2z"/></svg>
-                  <span>Живой дровяной камин и второй свет в гостиной</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2c1.5 3.5 5 5.5 5 10a5 5 0 1 1-10 0c0-2.5 1.5-4.5 2.5-6 0 1.5 1 2.5 2 2.5C12.5 6.5 12 4 12 2z"/></svg>
+                  <span>Живой камин и второй свет в гостиной</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7v11M21 7v11M3 14h18M7 10h4M13 10h4"/></svg>
-                  <span>3 спальни: комната на 1 этаже + 2 спальни наверху</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7v11M21 7v11M3 14h18M7 10h4M13 10h4"/></svg>
+                  <span>Гостевая на 1 этаже + 2 спальни на 2 этаже</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 21h10M9 17h6M5 7h14l-1 8H6L5 7z"/></svg>
-                  <span>2 санузла, стиральная машина и полная сервировка</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 21h10M9 17h6M5 7h14l-1 8H6L5 7z"/></svg>
+                  <span>2 санузла, стиральная машина, посуда</span>
                 </li>
                 <li>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l4-4 4 4 5-6 5 6"/><path d="M2 20h20"/></svg>
-                  <span>Вид на волжскую протоку и крытая барбекю-пергола</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l4-4 4 4 5-6 5 6"/><path d="M2 20h20"/></svg>
+                  <span>Вид на протоку и крытая барбекю-пергола</span>
                 </li>
               </ul>
 
               <div class="variants-box">
-                <div class="variants-box__label">Размещение всей компанией или семьёй:</div>
+                <div class="variants-box__label">Стоимость аренды коттеджа целиком:</div>
                 <div class="variant-row is-selected" style="cursor:default;">
                   <div class="variant-row__info">
-                    <strong>Целый коттедж (до 6 основных гостей)</strong>
-                    <span>Возможно до 2 дополнительных спальных мест по запросу</span>
+                    <strong>Стандартный заезд · до 6 гостей</strong>
+                    <span>Заезд после 14:00, выезд до 12:00 · возможны доп. места</span>
                   </div>
                   <div class="variant-row__price">
-                    <strong>от 13 500 ₽</strong>
-                    <span>будни / от 17 500 ₽ вых.</span>
+                    <strong>от 7 000 ₽</strong>
+                    <span>будни / от 13 000 ₽ вых.</span>
                   </div>
                 </div>
                 <div class="variant-row" style="cursor:default;background:#fff;">
                   <div class="variant-row__info">
-                    <strong>Праздники и пакет «Новый год»</strong>
-                    <span>Растопленный камин к заезду и живая ель у террасы</span>
+                    <strong>Праздничные и новогодние даты</strong>
+                    <span>Точный расчёт по календарю в модуле «Контур.Отель»</span>
                   </div>
                   <div class="variant-row__price">
-                    <strong>по тарифу</strong>
-                    <span>уточнить в календаре</span>
+                    <strong>по календарю</strong>
+                    <span>предоплата 50%</span>
                   </div>
                 </div>
               </div>
 
               <div class="house-card__actions">
-                <button type="button" class="btn btn--primary js-open-booking" data-house-target="barn130">Забронировать Барн 130</button>
-                <button type="button" class="text-link js-open-specs" data-spec="barn130">Планировка и оснащение →</button>
+                <button type="button" class="btn btn--primary js-open-booking" data-house-target="barn130">Забронировать Барн 130</button>
+                <button type="button" class="text-link js-open-specs" data-spec="barn130">Планировка и оснащение →</button>
               </div>
             </div>
           </article>
@@ -387,96 +447,96 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Атмосфера и детали</span>
-            <h2 class="section-title">Галерея с быстрыми тегами</h2>
+            <span class="section-eyebrow">Атмосфера и детали</span>
+            <h2 class="section-title">Галерея с быстрыми тегами</h2>
           </div>
           <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
-            <p class="section-subtitle">Наведите на светящуюся точку, чтобы перейти к домику или услуге, либо нажмите на фото для крупного просмотра.</p>
-            <button type="button" class="btn btn--outline btn--sm js-open-lightbox" data-index="0">Развернуть галерею</button>
+            <p class="section-subtitle">Наведите на светящуюся точку, чтобы перейти к домику или услуге, либо нажмите на фото для крупного просмотра.</p>
+            <button type="button" class="btn btn--outline btn--sm js-open-lightbox" data-index="0">Смотреть все 13 фото</button>
           </div>
         </div>
 
         <div class="bento-gallery">
-          <!-- Фото 0 (крупное слева) -->
+          <!-- Фото 0 -->
           <div class="bento-item bento-item--lead js-open-lightbox" data-index="0">
-            <img src="assets/images/hero-winter.jpg" alt="Территория Бриз вечером в гирляндах">
-            <span class="bento-item__caption">Территория и барнхаусы в сумерках</span>
+            <img src="assets/images/hero-winter.jpg" alt="Вечерние барнхаусы Бриза в огнях">
+            <span class="bento-item__caption">Территория и барнхаусы в сумерках</span>
 
             <div class="shop-tag" style="left:18%;top:56%;">
               <button type="button" class="shop-tag__dot" aria-label="Подробнее про Барн 130">+</button>
               <div class="shop-tag__popover">
                 <span class="shop-tag__title">Барн Хаус-130</span>
-                <span class="shop-tag__meta">2 этажа, камин, до 6 гостей · от 13 500 ₽</span>
-                <a href="#barn-130" class="shop-tag__cta js-tag-link" data-house-jump="barn130">К дому →</a>
+                <span class="shop-tag__meta">2 этажа, камин, до 6 гостей · от 7 000 ₽</span>
+                <a href="#barn-130" class="shop-tag__cta js-tag-link" data-house-jump="barn130">К дому →</a>
               </div>
             </div>
 
             <div class="shop-tag" style="left:51%;top:80%;">
               <button type="button" class="shop-tag__dot" aria-label="Подробнее про беседку и мангал">+</button>
               <div class="shop-tag__popover">
-                <span class="shop-tag__title">Терраса и гриль-пергола</span>
-                <span class="shop-tag__meta">У каждого коттеджа · угли и наборы в прокате</span>
-                <a href="#services" class="shop-tag__cta js-tag-link">К услугам →</a>
+                <span class="shop-tag__title">Гриль-пергола у дома</span>
+                <span class="shop-tag__meta">Включена в аренду · наборы углей и дров в услугах</span>
+                <a href="#services" class="shop-tag__cta js-tag-link">К услугам →</a>
               </div>
             </div>
           </div>
 
-          <!-- Фото 1 -->
+          <!-- Фото 1: реальный интерьер со 2 этажа -->
           <div class="bento-item js-open-lightbox" data-index="1">
-            <img src="assets/images/barn130-interior.jpg" alt="Гостиная Барн 130 с камином">
-            <span class="bento-item__caption">Камин и второй свет</span>
+            <img src="assets/images/house-living-top.jpg" alt="Двусветная гостиная барнхауса Бриз">
+            <span class="bento-item__caption">Гостиная и второй свет</span>
 
-            <div class="shop-tag" style="left:82%;top:64%;">
-              <button type="button" class="shop-tag__dot" aria-label="Подробнее про камин">+</button>
+            <div class="shop-tag" style="left:52%;top:64%;">
+              <button type="button" class="shop-tag__dot" aria-label="Подробнее про гостиную Барн 130">+</button>
               <div class="shop-tag__popover">
-                <span class="shop-tag__title">Живой дровяной камин</span>
-                <span class="shop-tag__meta">Установлен в коттеджах Барн 130</span>
-                <a href="#barn-130" class="shop-tag__cta js-tag-link" data-house-jump="barn130">Смотреть Барн 130 →</a>
+                <span class="shop-tag__title">Просторная гостиная</span>
+                <span class="shop-tag__meta">Панорамные окна в лес · выход на террасу</span>
+                <a href="#barn-130" class="shop-tag__cta js-tag-link" data-house-jump="barn130">Смотреть Барн 130 →</a>
               </div>
             </div>
           </div>
 
-          <!-- Фото 2 -->
+          <!-- Фото 2: банный чан -->
           <div class="bento-item js-open-lightbox" data-index="2">
             <img src="assets/images/banya-chan.jpg" alt="Сибирский банный чан на дровах">
-            <span class="bento-item__caption">Сибирский чан под открытым небом</span>
+            <span class="bento-item__caption">Сибирский чан на дровах</span>
 
             <div class="shop-tag" style="left:48%;top:54%;">
               <button type="button" class="shop-tag__dot" aria-label="Подробнее про банный чан">+</button>
               <div class="shop-tag__popover">
                 <span class="shop-tag__title">Сибирский банный чан</span>
-                <span class="shop-tag__meta">Запарка с пихтой и цитрусами · 5 000 ₽ / сеанс</span>
-                <a href="#services" class="shop-tag__cta js-tag-link">Забронировать чан →</a>
+                <span class="shop-tag__meta">Запарка с пихтой и цитрусами · 5 000 ₽ / сеанс</span>
+                <a href="#services" class="shop-tag__cta js-tag-link">Заказать чан →</a>
               </div>
             </div>
           </div>
 
-          <!-- Фото 3 -->
+          <!-- Фото 3: реальный фасад Барна 5 -->
           <div class="bento-item js-open-lightbox" data-index="3">
-            <img src="assets/images/barn70-interior.jpg" alt="Интерьер Барн 70 с антресолью">
-            <span class="bento-item__caption">Уютный Барн 70</span>
+            <img src="assets/images/house-exterior-5.jpg" alt="Реальный фасад коттеджа № 5 с террасой">
+            <span class="bento-item__caption">Коттедж среди сосен</span>
 
-            <div class="shop-tag shop-tag__popover--down" style="left:60%;top:26%;">
+            <div class="shop-tag shop-tag__popover--down" style="left:54%;top:56%;">
               <button type="button" class="shop-tag__dot" aria-label="Подробнее про Барн 70">+</button>
               <div class="shop-tag__popover">
                 <span class="shop-tag__title">Барн Хаус-70</span>
-                <span class="shop-tag__meta">Варианты 1–2 и 3–4 гостя · от 7 500 ₽</span>
-                <a href="#barn-70" class="shop-tag__cta js-tag-link" data-house-jump="barn70">Выбрать вариант →</a>
+                <span class="shop-tag__meta">Варианты до 2 и 3–4 гостей · от 6 500 ₽</span>
+                <a href="#barn-70" class="shop-tag__cta js-tag-link" data-house-jump="barn70">К Барн 70 →</a>
               </div>
             </div>
           </div>
 
-          <!-- Фото 4 -->
+          <!-- Фото 4: реальная пергола -->
           <div class="bento-item js-open-lightbox" data-index="4">
-            <img src="assets/images/winter-active.jpg" alt="Баня и зимний прокат лыж и коньков">
-            <span class="bento-item__caption">Баня и зимний прокат</span>
+            <img src="assets/images/house-pergola.jpg" alt="Индивидуальная крытая пергола со столом и мангалом">
+            <span class="bento-item__caption">Индивидуальная пергола</span>
 
-            <div class="shop-tag" style="left:28%;top:72%;">
-              <button type="button" class="shop-tag__dot" aria-label="Подробнее про прокат лыж и коньков">+</button>
+            <div class="shop-tag" style="left:50%;top:58%;">
+              <button type="button" class="shop-tag__dot" aria-label="Подробнее про зону барбекю">+</button>
               <div class="shop-tag__popover">
-                <span class="shop-tag__title">Зимний прокат инвентаря</span>
-                <span class="shop-tag__meta">Лыжи, коньки, тюбинги · от 350 ₽ / час</span>
-                <a href="#services" class="shop-tag__cta js-tag-link">Смотреть прокат →</a>
+                <span class="shop-tag__title">Ужин на огне у дома</span>
+                <span class="shop-tag__meta">Свой стол под навесом и мангал у каждого дома</span>
+                <a href="#services" class="shop-tag__cta js-tag-link">Угли, дрова и сеты →</a>
               </div>
             </div>
           </div>
@@ -485,17 +545,17 @@
     </section>
 
     <!-- =====================================================================
-         6. ИНТЕРАКТИВНАЯ МУЛЬТЯШНАЯ КАРТА ТЕРРИТОРИИ
+         6. ИНТЕРАКТИВНЫЙ МУЛЬТЯШНЫЙ ПЛАН ТЕРРИТОРИИ
          ===================================================================== -->
     <section class="section" id="map">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Территория 1:1 по реальному берегу</span>
+            <span class="section-eyebrow">Территория 1:1 по реальному берегу</span>
             <h2 class="section-title">План-схема базы «Бриз»</h2>
           </div>
           <p class="section-subtitle">
-            Нажимайте на номера на схеме или в списке справа — посмотрите расположение домиков, банного чана и выходов к Волге.
+            Нажимайте на номера на схеме или в списке справа — посмотрите расположение домиков, банного чана и выходов к Волге.
           </p>
         </div>
 
@@ -515,22 +575,22 @@
 
           <aside class="territory-panel" aria-label="Объекты на карте территории">
             <div class="territory-detail" id="territoryDetail">
-              <span class="territory-detail__badge" id="territoryDetailBadge">Объект № 2</span>
+              <span class="territory-detail__badge" id="territoryDetailBadge">Объект № 2</span>
               <h3 class="territory-detail__title" id="territoryDetailTitle">Коттеджи «Барн Хаус-130»</h3>
-              <p class="territory-detail__desc" id="territoryDetailDesc">Пять двухэтажных домов на первой линии над набережной. Внутри — дровяной камин и 3 спальни, снаружи — крытая терраса с мангалом.</p>
-              <a href="#barn-130" class="btn btn--primary btn--sm" id="territoryDetailBtn">Перейти к Барн 130</a>
+              <p class="territory-detail__desc" id="territoryDetailDesc">Пять двухэтажных домов на первой линии над набережной. Внутри — дровяной камин и 3 спальные зоны, снаружи — крытая терраса с мангалом.</p>
+              <a href="#barn-130" class="btn btn--primary btn--sm" id="territoryDetailBtn">Перейти к Барн 130</a>
             </div>
 
             <ul class="territory-legend" id="territoryLegend">
-              <li><button type="button" data-pin="1"><span class="territory-legend__num">1</span><span>Въезд, ресепшн и гостевая парковка</span></button></li>
-              <li><button type="button" class="is-active" data-pin="2"><span class="territory-legend__num">2</span><span>Коттеджи «Барн 130» (первая линия)</span></button></li>
-              <li><button type="button" data-pin="3"><span class="territory-legend__num">3</span><span>Коттеджи «Барн 70» (уютная лесная зона)</span></button></li>
-              <li><button type="button" data-pin="4"><span class="territory-legend__num">4</span><span>Русская баня на дровах</span></button></li>
-              <li><button type="button" data-pin="5"><span class="territory-legend__num">5</span><span>Сибирский банный чан под соснами</span></button></li>
-              <li><button type="button" data-pin="6"><span class="territory-legend__num">6</span><span>Каменная набережная и лестница к Волге</span></button></li>
-              <li><button type="button" data-pin="7"><span class="territory-legend__num">7</span><span>Прогулочный пирс и летний старт SUP</span></button></li>
-              <li><button type="button" data-pin="8"><span class="territory-legend__num">8</span><span>Крытый причал для катеров</span></button></li>
-              <li><button type="button" data-pin="9"><span class="territory-legend__num">9</span><span>Сосновые тропы и зимняя лыжня</span></button></li>
+              <li><button type="button" data-pin="1"><span class="territory-legend__num">1</span><span>Въезд, ресепшн и гостевая парковка</span></button></li>
+              <li><button type="button" class="is-active" data-pin="2"><span class="territory-legend__num">2</span><span>Коттеджи «Барн 130» (первая линия)</span></button></li>
+              <li><button type="button" data-pin="3"><span class="territory-legend__num">3</span><span>Коттеджи «Барн 70» (уютная лесная зона)</span></button></li>
+              <li><button type="button" data-pin="4"><span class="territory-legend__num">4</span><span>Русская баня на дровах</span></button></li>
+              <li><button type="button" data-pin="5"><span class="territory-legend__num">5</span><span>Сибирский банный чан под соснами</span></button></li>
+              <li><button type="button" data-pin="6"><span class="territory-legend__num">6</span><span>Каменная набережная и лестница к Волге</span></button></li>
+              <li><button type="button" data-pin="7"><span class="territory-legend__num">7</span><span>Прогулочный пирс и летний старт SUP</span></button></li>
+              <li><button type="button" data-pin="8"><span class="territory-legend__num">8</span><span>Крытый причал для катеров</span></button></li>
+              <li><button type="button" data-pin="9"><span class="territory-legend__num">9</span><span>Сосновые тропы и зимняя лыжня</span></button></li>
             </ul>
           </aside>
         </div>
@@ -538,34 +598,34 @@
     </section>
 
     <!-- =====================================================================
-         7. УСЛУГИ И ПРОКАТ (списком карточек, без карусели)
+         7. УСЛУГИ И ПРОКАТ (СПИСОК КАРТОЧЕК С УНИКАЛЬНЫМИ ИЛЛЮСТРАЦИЯМИ)
          ===================================================================== -->
     <section class="section section--sand" id="services">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Досуг и сервис</span>
-            <h2 class="section-title">Услуги и прокат</h2>
+            <span class="section-eyebrow">Досуг и сервис</span>
+            <h2 class="section-title">Услуги и прокат</h2>
           </div>
           <div class="filter-tabs" role="tablist" aria-label="Категории услуг">
             <button type="button" class="filter-tab is-active" data-filter="all">Все услуги</button>
-            <button type="button" class="filter-tab" data-filter="spa">Баня и чан</button>
+            <button type="button" class="filter-tab" data-filter="spa">Баня и чан</button>
             <button type="button" class="filter-tab" data-filter="winter">Зимний прокат</button>
-            <button type="button" class="filter-tab" data-filter="summer">Вода и лето</button>
+            <button type="button" class="filter-tab" data-filter="summer">Вода и лето</button>
           </div>
         </div>
 
         <div class="services-list" id="servicesList">
           <article class="service-row" data-category="spa">
             <div class="service-row__thumb">
-              <img src="assets/images/banya-chan.jpg" alt="Сибирский банный чан">
+              <img src="assets/images/banya-chan.jpg" alt="Сибирский банный чан на дровах">
             </div>
             <div class="service-row__body">
               <div class="service-row__tag">Хит зимнего сезона</div>
-              <h3 class="service-row__title">Сибирский банный чан на дровах</h3>
-              <p class="service-row__desc">Парение под открытым небом среди сосен. Подготовим воду 40 °C, добавим пихтовые ветки и цитрусы.</p>
+              <h3 class="service-row__title">Сибирский банный чан на дровах</h3>
+              <p class="service-row__desc">Парение под открытым небом среди сосен. Подготовим воду 40 °C, добавим пихтовые ветки и цитрусы.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">5 000 ₽ / сеанс</span>
+                <span class="service-row__price">5 000 ₽ / сеанс</span>
                 <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Сибирский банный чан">Заказать</button>
               </div>
             </div>
@@ -573,14 +633,14 @@
 
           <article class="service-row" data-category="spa">
             <div class="service-row__thumb">
-              <img src="assets/images/winter-active.jpg" alt="Русская баня на дровах">
+              <img src="assets/images/service-banya.jpg" alt="Интерьер русской бани на дровах с дубовыми вениками">
             </div>
             <div class="service-row__body">
-              <div class="service-row__tag">Пар и отдых</div>
-              <h3 class="service-row__title">Русская баня с панорамным окном</h3>
-              <p class="service-row__desc">Отдельный сруб на дровах, комната отдыха, травяной самовар, берёзовые и дубовые веники. От 2 часов.</p>
+              <div class="service-row__tag">Пар и отдых</div>
+              <h3 class="service-row__title">Русская баня с панорамным окном</h3>
+              <p class="service-row__desc">Отдельный сруб на дровах, комната отдыха, травяной самовар, берёзовые и дубовые веники. От 2 часов.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">от 3 000 ₽ / 2 часа</span>
+                <span class="service-row__price">от 3 000 ₽ / 2 ч</span>
                 <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Русская баня">Заказать</button>
               </div>
             </div>
@@ -588,14 +648,14 @@
 
           <article class="service-row" data-category="spa">
             <div class="service-row__thumb">
-              <img src="assets/images/hero-winter.jpg" alt="Индивидуальная подогреваемая купель">
+              <img src="assets/images/service-kupel.jpg" alt="Подогреваемая деревянная купель на террасе вечером">
             </div>
             <div class="service-row__body">
               <div class="service-row__tag">Приватный релакс</div>
-              <h3 class="service-row__title">Подогреваемая купель у террасы</h3>
-              <p class="service-row__desc">Тёплая купель к вашему вечернему отдыху — идеально после прогулки по морозному берегу.</p>
+              <h3 class="service-row__title">Подогреваемая купель у террасы</h3>
+              <p class="service-row__desc">Тёплая купель к вашему вечернему отдыху — идеально после прогулки по морозному берегу.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">4 500 ₽ / вечер</span>
+                <span class="service-row__price">4 500 ₽ / вечер</span>
                 <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Подогреваемая купель">Заказать</button>
               </div>
             </div>
@@ -603,14 +663,14 @@
 
           <article class="service-row" data-category="winter">
             <div class="service-row__thumb">
-              <img src="assets/images/winter-active.jpg" alt="Прокат беговых лыж и коньков">
+              <img src="assets/images/winter-active.jpg" alt="Стойка с беговыми лыжами и коньками в сосновом лесу">
             </div>
             <div class="service-row__body">
               <div class="service-row__tag">Зима</div>
-              <h3 class="service-row__title">Прокат лыж, коньков и тюбингов</h3>
-              <p class="service-row__desc">Готовая лесная трасса прямо от территории базы, детские и взрослые размеры ботинок.</p>
+              <h3 class="service-row__title">Прокат лыж, коньков и тюбингов</h3>
+              <p class="service-row__desc">Готовая лесная трасса прямо от территории базы, детские и взрослые размеры ботинок.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">от 350 ₽ / час</span>
+                <span class="service-row__price">от 350 ₽ / час</span>
                 <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Зимний прокат">Уточнить размеры</button>
               </div>
             </div>
@@ -618,29 +678,29 @@
 
           <article class="service-row" data-category="winter">
             <div class="service-row__thumb">
-              <img src="assets/images/barn130-interior.jpg" alt="Гриль-набор и дрова для камина">
+              <img src="assets/images/service-bbq.jpg" alt="Мангальная зона у перголы с углями и дровами">
             </div>
             <div class="service-row__body">
-              <div class="service-row__tag">К барбекю и камину</div>
-              <h3 class="service-row__title">Дрова, уголь, решётки и розжиг</h3>
-              <p class="service-row__desc">Всё для ужина на огне у вашего коттеджа и поддержания живого огня в камине весь вечер.</p>
+              <div class="service-row__tag">К барбекю и камину</div>
+              <h3 class="service-row__title">Дрова, уголь, решётки и розжиг</h3>
+              <p class="service-row__desc">Всё для ужина на огне у вашего коттеджа и поддержания живого огня в камине весь вечер.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">от 900 ₽ / набор</span>
-                <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Набор для мангала">Добавить к заезду</button>
+                <span class="service-row__price">от 900 ₽ / набор</span>
+                <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Набор для мангала">Добавить к заезду</button>
               </div>
             </div>
           </article>
 
           <article class="service-row" data-category="summer">
             <div class="service-row__thumb">
-              <img src="assets/images/aerial-winter.jpg" alt="Прокат SUP-бордов, каяков и велосипедов на Волге">
+              <img src="assets/images/service-sup.jpg" alt="SUP-борды и каяк у деревянного пирса на Волге">
             </div>
             <div class="service-row__body">
-              <div class="service-row__tag">Тёплый сезон (май — сентябрь)</div>
-              <h3 class="service-row__title">SUP-борды, каяки, лодки и велосипеды</h3>
-              <p class="service-row__desc">Выход на тихую волжскую протоку с собственного пирса, спасжилеты и маршруты вдоль Жигулёвских гор.</p>
+              <div class="service-row__tag">Тёплый сезон (май — сентябрь)</div>
+              <h3 class="service-row__title">SUP-борды, каяки, лодки и велосипеды</h3>
+              <p class="service-row__desc">Выход на тихую волжскую протоку с собственного пирса, спасжилеты и маршруты вдоль Жигулёвских гор.</p>
               <div class="service-row__bottom">
-                <span class="service-row__price">от 500 ₽ / час</span>
+                <span class="service-row__price">от 500 ₽ / час</span>
                 <button type="button" class="btn btn--outline btn--sm js-open-booking" data-service-note="Летний прокат на воде">Забронировать</button>
               </div>
             </div>
@@ -659,31 +719,34 @@
             <img src="assets/images/aerial-winter.jpg" alt="Панорамный вид с высоты на береговую линию базы отдыха Бриз и Волгу">
           </div>
           <div>
-            <span class="philosophy-draft-note">✎ Черновик блока философии (для финализации с собственником)</span>
+            <span class="philosophy-draft-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+              <span>Черновик смыслового блока (для финализации с собственником)</span>
+            </span>
             <span class="section-eyebrow" style="display:block;">Философия «Бриза»</span>
-            <h2 class="section-title" style="margin-bottom:16px;">Тишина, которая возвращает к себе</h2>
+            <h2 class="section-title" style="margin-bottom:16px;">Тишина, которая возвращает к себе</h2>
             <p class="philosophy-quote">
-              «Мы строили это место не как шумный гостиничный комплекс, а как личный загородный дом, куда хочется уехать, чтобы услышать хруст снега и дыхание Волги».
+              «Мы строили это место не как шумный гостиничный комплекс, а как личный загородный дом, куда хочется уехать, чтобы услышать хруст снега и дыхание Волги».
             </p>
             <p class="philosophy-text">
-              В получасе от Самары ритм города остаётся по ту сторону леса. Здесь нет случайных компаний и громкой музыки — архитектура барнхаусов намеренно отступает перед соснами и видом на Жигулёвские горы.
+              В получасе от Самары ритм города остаётся по ту сторону леса. Здесь нет случайных компаний и громкой музыки — архитектура барнхаусов намеренно отступает перед соснами и видом на Жигулёвские горы.
             </p>
             <p class="philosophy-text">
-              Вы просыпаетесь с видом на протоку, разжигаете камин, паритесь в горячем чане под звёздами и возвращаете те самые простые вечера, на которые в городе вечно не хватает времени.
+              Вы просыпаетесь с видом на протоку, разжигаете камин, паритесь в горячем чане под звёздами и возвращаете те самые простые вечера, на которые в городе вечно не хватает времени.
             </p>
 
             <div class="philosophy-pillars">
               <div>
-                <strong>30 минут</strong>
-                <span>от города — без утомительной дороги</span>
+                <strong>30 минут</strong>
+                <span>от города — без утомительной дороги</span>
               </div>
               <div>
                 <strong>1-я линия</strong>
-                <span>свой выход к Волге и причалу</span>
+                <span>свой выход к Волге и причалу</span>
               </div>
               <div>
                 <strong>Камерность</strong>
-                <span>никаких банкетных толп и суеты</span>
+                <span>никаких банкетных толп и суеты</span>
               </div>
             </div>
           </div>
@@ -699,126 +762,157 @@
          ===================================================================== -->
 
     <!-- =====================================================================
-         9. ОТЗЫВЫ С ЯНДЕКС КАРТ (вместо блока «Ваши эмоции»)
+         9. ОТЗЫВЫ С ЯНДЕКС КАРТ (СТИЛИЗАЦИЯ ПОД ВИДЖЕТ + СЛОТ ПОД ЖИВОЙ IFRAME)
          ===================================================================== -->
     <section class="section section--sand" id="reviews">
       <div class="container">
         <div class="section-head">
           <div>
             <span class="section-eyebrow">Мнения гостей</span>
-            <h2 class="section-title">Отзывы на Яндекс Картах</h2>
+            <h2 class="section-title">Отзывы на Яндекс Картах</h2>
           </div>
           <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--outline btn--sm">
-            Открыть карточку на Яндекс Картах ↗
+            Открыть карточку на Яндекс Картах ↗
           </a>
         </div>
 
         <div class="yandex-reviews-layout">
-          <!-- Блок рейтинга в духе Яндекс Карт -->
           <div class="yandex-score-card">
             <div>
               <div class="yandex-badge">
                 <span class="yandex-badge__dot">Я</span>
-                <span>Яндекс Карты · Проверено</span>
+                <span>Яндекс Карты · Проверено</span>
               </div>
-              <div class="yandex-score-num">5.0</div>
-              <div class="yandex-stars" aria-label="Рейтинг 5 из 5">★★★★★</div>
-              <div style="font-size:0.9375rem;color:var(--text-muted);font-weight:500;">Более 480 оценок и отзывов гостей</div>
-              <span class="yandex-award">✓ Награда «Хорошее место»</span>
+              <div class="yandex-score-num">5,0</div>
+              <div class="yandex-stars" aria-label="Рейтинг 5 из 5">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div style="font-size:0.9375rem;color:var(--text-muted);">Более 480 оценок и отзывов гостей</div>
+              <span class="yandex-award">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Награда «Хорошее место»</span>
+              </span>
             </div>
 
             <div>
               <p class="yandex-widget-hint">
-                На боевом сайте в Тильде в этот слот встраивается официальный живой виджет отзывов Яндекса (<code>yandex.ru/maps-reviews-widget/...</code>).
+                В прототипе показана статичная вёрстка. На боевом сайте в Тильду вставляется живой <code>iframe</code> из Яндекс Бизнеса (в <code>js/app.js</code> для этого уже выделена константа <code>YANDEX_ORG_ID</code>).
               </p>
-              <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--primary btn--sm" style="width:100%;">Читать все отзывы на Яндексе</a>
+              <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--primary btn--sm" style="width:100%;">Читать все отзывы на Яндексе</a>
             </div>
           </div>
 
-          <div class="reviews-cards-grid">
-            <article class="review-card">
-              <div>
-                <div class="review-card__head">
-                  <span class="review-card__author">Анастасия К.</span>
-                  <span class="review-card__date">Яндекс Карты · ★★★★★</span>
+          <!-- Контейнер: если в js/app.js указать YANDEX_ORG_ID, сюда загрузится живой iframe Яндекс Карт -->
+          <div class="yandex-live-slot" id="yandexReviewsSlot">
+            <div class="reviews-cards-grid">
+              <article class="review-card">
+                <div>
+                  <div class="review-card__head">
+                    <span class="review-card__author">Анастасия К.</span>
+                    <span class="review-card__date">Яндекс Карты · 5,0</span>
+                  </div>
+                  <p class="review-card__text">
+                    «Снимали Барн 130 на выходные компанией. Дом идеально чистый, тёплые полы, настоящий камин с дровами, огромные окна в снег и сосны. Вечером заказывали банный чан с пихтой — невероятные ощущения!»
+                  </p>
                 </div>
-                <p class="review-card__text">
-                  «Снимали Барн 130 на выходные компанией. Дом идеально чистый, тёплые полы, настоящий камин с дровами, огромные окна в снег и сосны. Вечером заказывали банный чан с пихтой — невероятные ощущения!»
-                </p>
-              </div>
-              <span class="review-card__stay">Проживание: Барн Хаус-130</span>
-            </article>
+                <span class="review-card__stay">Проживание: Барн Хаус-130</span>
+              </article>
 
-            <article class="review-card">
-              <div>
-                <div class="review-card__head">
-                  <span class="review-card__author">Дмитрий М.</span>
-                  <span class="review-card__date">Яндекс Карты · ★★★★★</span>
+              <article class="review-card">
+                <div>
+                  <div class="review-card__head">
+                    <span class="review-card__author">Дмитрий М.</span>
+                    <span class="review-card__date">Яндекс Карты · 5,0</span>
+                  </div>
+                  <p class="review-card__text">
+                    «Очень ухоженная и тихая территория прямо у Волги. До Курумоча от города доехали за полчаса. На территории спокойно, никаких посторонних людей, мангал прямо у крыльца. Вернёмся на новогодние праздники.»
+                  </p>
                 </div>
-                <p class="review-card__text">
-                  «Очень ухоженная и тихая территория прямо у Волги. До Курумоча от города доехали за полчаса. На территории тихо, никаких посторонних людей, мангал прямо у крыльца. Вернёмся на новогодние праздники.»
-                </p>
-              </div>
-              <span class="review-card__stay">Проживание: Барн Хаус-70 (для двоих)</span>
-            </article>
+                <span class="review-card__stay">Проживание: Барн Хаус-70 (до 2 гостей)</span>
+              </article>
 
-            <article class="review-card">
-              <div>
-                <div class="review-card__head">
-                  <span class="review-card__author">Елена С.</span>
-                  <span class="review-card__date">Яндекс Карты · ★★★★★</span>
+              <article class="review-card">
+                <div>
+                  <div class="review-card__head">
+                    <span class="review-card__author">Елена С.</span>
+                    <span class="review-card__date">Яндекс Карты · 5,0</span>
+                  </div>
+                  <p class="review-card__text">
+                    «Ездили с детьми и собакой — заранее согласовали питомца, в домике продумана каждая мелочь на кухне и в ванной. Очень вежливые администраторы, помогли растопить мангал и подсказали прогулочный маршрут.»
+                  </p>
                 </div>
-                <p class="review-card__text">
-                  «Ездили с детьми и собакой — заранее согласовали питомца, в домике продумана каждая мелочь на кухне и в ванной. Очень вежливые администраторы, помогли растопить мангал и подсказали прогулочный маршрут.»
-                </p>
-              </div>
-              <span class="review-card__stay">Проживание: Барн Хаус-70 (семейный)</span>
-            </article>
+                <span class="review-card__stay">Проживание: Барн Хаус-70 (3–4 гостя)</span>
+              </article>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- =====================================================================
-         10. КОНТАКТЫ И КАК ДОБРАТЬСЯ
+         10. КОНТАКТЫ И СОЦСЕТИ (СПОКОЙНЫЙ ЧИТАЕМЫЙ СПИСОК)
          ===================================================================== -->
     <section class="section" id="contacts">
       <div class="container">
         <div class="section-head">
           <div>
-            <span class="section-eyebrow">Контакты и маршрут</span>
+            <span class="section-eyebrow">Контакты и маршрут</span>
             <h2 class="section-title">Как нас найти</h2>
           </div>
           <p class="section-subtitle">
-            Отвечаем ежедневно с 09:00 до 21:00, подскажем по свободным датам, бане и размещению с питомцами.
+            Отвечаем ежедневно с 09:00 до 21:00, подскажем по свободным датам, бане и размещению с питомцами.
           </p>
         </div>
 
         <div class="contacts-grid">
           <div class="contacts-card">
-            <div class="contact-items">
-              <div class="contact-item">
-                <span>Адрес базы отдыха</span>
-                <strong>Самарская обл., Волжский р-н, с.п. Курумоч, 81-й квартал Большецаревщинского участкового лесничества, 1А</strong>
+            <div class="contact-rows">
+              <div class="contact-row">
+                <div class="contact-row__label">Адрес базы</div>
+                <div class="contact-row__value">Самарская обл., Волжский р-н, с.п. Курумоч, 81-й квартал Большецаревщинского участкового лесничества, 1А</div>
               </div>
-              <div class="contact-item">
-                <span>Телефон отдела бронирования</span>
-                <a href="tel:+79372014444">+7 (937) 201-44-44</a>
+              <div class="contact-row">
+                <div class="contact-row__label">Телефон</div>
+                <div class="contact-row__value">
+                  <a href="tel:+79372014444" class="contact-row__phone">+7 (937) 201-44-44</a>
+                </div>
               </div>
-              <div class="contact-item">
-                <span>Режим заезда и выезда</span>
-                <strong>Заезд с 15:00 · Выезд до 12:00 (возможен ранний заезд по согласованию)</strong>
+              <div class="contact-row">
+                <div class="contact-row__label">Заезд и выезд</div>
+                <div class="contact-row__value">Заезд после 14:00 · Выезд до 12:00</div>
               </div>
-              <div class="contact-item">
-                <span>Навигатор и координаты</span>
-                <strong>53.4718, 50.0384 · ~30 минут от центра Самары</strong>
+              <div class="contact-row">
+                <div class="contact-row__label">Условия брони</div>
+                <div class="contact-row__value">Предоплата 50% при бронировании; возвратный депозит при заезде 5 000 ₽ (с питомцем — 10 000 ₽)</div>
+              </div>
+              <div class="contact-row">
+                <div class="contact-row__label">Как добраться</div>
+                <div class="contact-row__value">~30 минут от центра Самары, координаты для навигатора: 53.4718, 50.0384</div>
               </div>
             </div>
 
-            <div class="contact-messengers">
-              <a href="tel:+79372014444" class="btn btn--primary">Позвонить</a>
-              <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="btn btn--outline">Маршрут в Яндекс Навигаторе ↗</a>
-              <a href="https://vk.com/briz_club_samara" target="_blank" rel="noopener" class="btn btn--outline">ВКонтакте</a>
+            <div class="contact-actions">
+              <div class="contact-socials-row">
+                <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="social-pill">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+                  <span>ВКонтакте</span>
+                </a>
+                <a href="https://t.me/+79372014444" target="_blank" rel="noopener" class="social-pill">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5L19 7l-7 10 5 3.5L21 5z"/></svg>
+                  <span>Telegram</span>
+                </a>
+                <a href="https://wa.me/79372014444" target="_blank" rel="noopener" class="social-pill">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.56 7.47L3 20.5l1.56-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+                  <span>WhatsApp</span>
+                </a>
+                <a href="https://yandex.ru/maps/?text=%D0%B1%D0%B0%D0%B7%D0%B0%20%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%20%D0%91%D1%80%D0%B8%D0%B7%20%D0%9A%D1%83%D1%80%D1%83%D0%BC%D0%BE%D1%87" target="_blank" rel="noopener" class="social-pill">
+                  <span>Маршрут в Яндекс Картах ↗</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -826,12 +920,12 @@
             <img src="assets/images/aerial-winter.jpg" alt="Берег Волги у базы Бриз в Курумоче">
             <div class="route-card__overlay"></div>
             <div class="route-card__content">
-              <span style="display:inline-block;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,0.18);backdrop-filter:blur(6px);font-size:0.8125rem;font-weight:600;margin-bottom:10px;">
-                Волжский район · район Мастрюковских озёр и п. Волжский
+              <span style="display:inline-block;padding:5px 11px;border-radius:8px;background:rgba(255,255,255,0.16);backdrop-filter:blur(6px);font-size:0.8125rem;font-weight:500;margin-bottom:10px;">
+                Волжский район · район Мастрюковских озёр и п. Волжский
               </span>
-              <h3 style="margin:0 0 8px;font-family:var(--font-serif);font-size:1.85rem;line-height:1.15;">Первая береговая линия среди соснового леса</h3>
+              <h3 style="margin:0 0 8px;font-size:1.55rem;font-weight:500;line-height:1.18;letter-spacing:-0.015em;">Первая береговая линия среди соснового леса</h3>
               <p style="margin:0 0 16px;font-size:0.9375rem;color:rgba(255,255,255,0.88);max-width:460px;">
-                Удобный круглогодичный асфальтовый подъезд до ворот КПП, охраняемая парковка для гостей на территории.
+                Удобный круглогодичный асфальтовый подъезд до ворот КПП, охраняемая парковка для гостей на территории.
               </p>
               <button type="button" class="btn btn--wood btn--sm js-open-booking">Выбрать даты поездки</button>
             </div>
@@ -850,23 +944,36 @@
       <div class="footer-brand">
         <img src="assets/images/logo-briz-white.png" alt="Логотип Бриз">
         <div>
-          <strong style="display:block;color:#ffffff;font-size:0.95rem;">База отдыха «Бриз» · briz.club</strong>
-          <span style="font-size:0.8125rem;">Самарская область, берег Волги · Интерактивный прототип редизайна</span>
+          <span style="display:block;color:#ffffff;font-weight:500;font-size:0.95rem;">База отдыха «Бриз» · briz.club</span>
+          <span style="font-size:0.8125rem;">Самарская область, берег Волги · +7 (937) 201-44-44</span>
         </div>
       </div>
-      <div class="footer-links">
-        <a href="#new-year">Новый год 2027</a>
-        <a href="#barn-70">Барн 70</a>
-        <a href="#barn-130">Барн 130</a>
-        <a href="#map">План территории</a>
-        <a href="#services">Услуги</a>
-        <a href="#reviews">Отзывы</a>
+      <div class="footer-right">
+        <div class="footer-links">
+          <a href="#new-year">Новый год 2027</a>
+          <a href="#barn-70">Барн 70</a>
+          <a href="#barn-130">Барн 130</a>
+          <a href="#map">План территории</a>
+          <a href="#services">Услуги</a>
+          <a href="#reviews">Отзывы</a>
+        </div>
+        <div class="footer-socials" aria-label="Социальные сети">
+          <a href="https://vk.com/briz.club" target="_blank" rel="noopener" class="social-icon-link" aria-label="ВКонтакте">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974h-3.255c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.376 2.708z"/></svg>
+          </a>
+          <a href="https://t.me/+79372014444" target="_blank" rel="noopener" class="social-icon-link" aria-label="Telegram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 5L2 12.5l7 2.5L19 7l-7 10 5 3.5L21 5z"/></svg>
+          </a>
+          <a href="https://wa.me/79372014444" target="_blank" rel="noopener" class="social-icon-link" aria-label="WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.56 7.47L3 20.5l1.56-5.2A8.5 8.5 0 1 1 21 11.5z"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </footer>
 
   <!-- =======================================================================
-       КОМПАКТНЫЙ ПАРЯЩИЙ БАР БРОНИРОВАНИЯ ПРИ СКРОЛЛЕ (ДЕСКТОП)
+       ПАРЯЩИЙ БАР БРОНИРОВАНИЯ ПРИ СКРОЛЛЕ (ДЕСКТОП — РОВНО ПО ШИРИНЕ КОНТЕНТА)
        ======================================================================= -->
   <div class="floating-booking" id="floatingBooking" aria-label="Быстрое бронирование при прокрутке">
     <div class="floating-booking__row">
@@ -882,36 +989,39 @@
         <label class="floating-mini-field">
           <span>Гости</span>
           <select name="guests" class="js-guests">
-            <option value="2">2 гостя</option>
-            <option value="3">3 гостя</option>
-            <option value="4">4 гостя</option>
-            <option value="5">5 гостей</option>
-            <option value="6">6 гостей</option>
+            <option value="2">2 гостя</option>
+            <option value="3">3 гостя</option>
+            <option value="4">4 гостя</option>
+            <option value="5">5 гостей</option>
+            <option value="6">6 гостей</option>
           </select>
         </label>
         <label class="floating-mini-field">
           <span>Дом</span>
           <select name="house" class="js-house">
             <option value="all">Все домики</option>
-            <option value="barn70-2">Барн 70 (1–2)</option>
-            <option value="barn70-4">Барн 70 (3–4)</option>
-            <option value="barn130">Барн 130 (до 6)</option>
+            <option value="barn70-2">Барн 70 (до 2)</option>
+            <option value="barn70-4">Барн 70 (3–4)</option>
+            <option value="barn130">Барн 130 (до 6)</option>
           </select>
         </label>
-        <button type="submit" class="btn btn--primary btn--sm">Найти</button>
+        <button type="submit" class="btn btn--primary btn--sm">Найти домик</button>
       </form>
-      <button type="button" class="floating-collapse-btn" id="collapseFloatingBtn" title="Свернуть панель" aria-label="Свернуть панель бронирования">▾</button>
+      <button type="button" class="floating-collapse-btn" id="collapseFloatingBtn" title="Свернуть панель" aria-label="Свернуть панель бронирования">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
     </div>
     <button type="button" class="btn btn--primary btn--sm floating-booking__pill-restore" id="restoreFloatingBtn">
-      📅 Подобрать даты
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span>Подобрать даты</span>
     </button>
   </div>
 
   <!-- Нижний sticky-бар на мобильных -->
   <div class="mobile-sticky-cta" id="mobileStickyCta">
     <div>
-      <strong style="display:block;font-size:0.95rem;">от 7 500 ₽ / сутки</strong>
-      <span style="font-size:0.75rem;color:var(--text-muted);">Барн 70 и Барн 130 у Волги</span>
+      <strong style="display:block;font-weight:500;font-size:0.95rem;">от 6 500 ₽ / сутки</strong>
+      <span style="font-size:0.75rem;color:var(--text-muted);">Барн 70 и Барн 130 у Волги</span>
     </div>
     <button type="button" class="btn btn--primary btn--sm js-open-booking">Выбрать даты</button>
   </div>
@@ -921,14 +1031,15 @@
        ======================================================================= -->
   <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
     <div class="modal__dialog">
-      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">×</button>
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
       <span class="section-eyebrow">Онлайн-бронирование · Контур.Отель</span>
-      <h2 class="modal__title" id="bookingModalTitle">Подбор домика и расчёт стоимости</h2>
+      <h2 class="modal__title" id="bookingModalTitle">Подбор домика и расчёт стоимости</h2>
       <p class="modal__subtitle" id="bookingModalSubtitle">
-        Выберите даты и формат размещения. На боевом домене <code>briz.club</code> сюда также монтируется штатный виджет Контур.Отель (<code>#hotel-widget-container</code>).
+        Выберите даты и формат размещения. На боевом домене <code>briz.club</code> сюда также монтируется штатный виджет Контур.Отель (<code>#hotel-widget-container</code>).
       </p>
 
-      <!-- Контейнер для официального виджета Контур.Отель в Тильде -->
       <div id="hotel-widget-container"></div>
 
       <form id="konturSimForm">
@@ -944,20 +1055,20 @@
           <div class="kontur-input-box">
             <label for="modalHouse">Категория коттеджа</label>
             <select id="modalHouse">
-              <option value="barn70-2">Барн 70 — Для двоих (1–2 гостя)</option>
-              <option value="barn70-4">Барн 70 — Семейный (3–4 гостя)</option>
-              <option value="barn130">Барн 130 — С камином (до 6 гостей)</option>
+              <option value="barn70-2">Барн 70 — Основное размещение (до 2 гостей)</option>
+              <option value="barn70-4">Барн 70 — С доп. местами (3–4 гостя)</option>
+              <option value="barn130">Барн 130 — Коттедж с камином (до 6 гостей)</option>
             </select>
           </div>
           <div class="kontur-input-box">
             <label for="modalGuests">Количество гостей</label>
             <select id="modalGuests">
-              <option value="1">1 гость</option>
-              <option value="2" selected>2 гостя</option>
-              <option value="3">3 гостя</option>
-              <option value="4">4 гостя</option>
-              <option value="5">5 гостей</option>
-              <option value="6">6 гостей (+доп. места)</option>
+              <option value="1">1 гость</option>
+              <option value="2" selected>2 гостя</option>
+              <option value="3">3 гостя</option>
+              <option value="4">4 гостя</option>
+              <option value="5">5 гостей</option>
+              <option value="6">6 гостей (+доп. места)</option>
             </select>
           </div>
         </div>
@@ -970,21 +1081,21 @@
             <input type="text" id="guestName" placeholder="Например, Алексей" required>
           </div>
           <div class="kontur-input-box">
-            <label for="guestPhone">Телефон для подтверждения</label>
+            <label for="guestPhone">Телефон для подтверждения</label>
             <input type="tel" id="guestPhone" placeholder="+7 (9__) ___-__-__" required>
           </div>
         </div>
 
         <div class="kontur-input-box" style="margin-bottom:18px;">
           <label for="guestComment">Пожелания (банный чан, баня, питомец)</label>
-          <input type="text" id="guestComment" placeholder="Например: интересует банный чан на субботу вечером">
+          <input type="text" id="guestComment" placeholder="Например: интересует банный чан на субботу вечером">
         </div>
 
-        <button type="submit" class="btn btn--primary" style="width:100%;">Отправить заявку на бронь</button>
+        <button type="submit" class="btn btn--primary" style="width:100%;">Отправить заявку на бронь</button>
       </form>
 
       <div class="kontur-success" id="konturSuccess" style="display:none;">
-        <h3 style="margin:0 0 8px;">Заявка сформирована (демо прототипа)</h3>
+        <h3 style="margin:0 0 8px;font-weight:500;">Заявка сформирована (демо прототипа)</h3>
         <p id="konturSuccessText" style="margin:0 0 14px;font-size:0.9375rem;"></p>
         <button type="button" class="btn btn--outline btn--sm" id="konturResetBtn">Изменить параметры</button>
       </div>
@@ -996,13 +1107,15 @@
        ======================================================================= -->
   <div class="modal" id="specsModal" role="dialog" aria-modal="true" aria-labelledby="specsModalTitle">
     <div class="modal__dialog">
-      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">×</button>
-      <span class="section-eyebrow">Планировка и оснащение</span>
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть окно">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <span class="section-eyebrow">Планировка и оснащение</span>
       <h2 class="modal__title" id="specsModalTitle">Барн Хаус</h2>
       <p class="modal__subtitle" id="specsModalSubtitle"></p>
       <div id="specsModalBody" style="font-size:0.9375rem;line-height:1.6;"></div>
       <div style="margin-top:22px;display:flex;justify-content:flex-end;">
-        <button type="button" class="btn btn--primary" id="specsBookBtn">Перейти к выбору дат</button>
+        <button type="button" class="btn btn--primary" id="specsBookBtn">Перейти к выбору дат</button>
       </div>
     </div>
   </div>
@@ -1012,15 +1125,21 @@
        ======================================================================= -->
   <div class="modal" id="lightboxModal" role="dialog" aria-modal="true" aria-label="Крупный просмотр фото">
     <div class="modal__dialog lightbox-dialog">
-      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть фото" style="background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.2);">×</button>
+      <button type="button" class="modal__close" data-close-modal aria-label="Закрыть фото" style="background:rgba(255,255,255,0.14);color:#fff;border-color:rgba(255,255,255,0.2);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
       <div class="lightbox-stage">
         <img id="lightboxImg" src="assets/images/hero-winter.jpg" alt="">
-        <button type="button" class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" aria-label="Предыдущее фото">‹</button>
-        <button type="button" class="lightbox-nav lightbox-nav--next" id="lightboxNext" aria-label="Следующее фото">›</button>
+        <button type="button" class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" aria-label="Предыдущее фото">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button type="button" class="lightbox-nav lightbox-nav--next" id="lightboxNext" aria-label="Следующее фото">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
       <div class="lightbox-footer">
         <div>
-          <strong id="lightboxCaption" style="display:block;font-size:1rem;margin-bottom:2px;"></strong>
+          <strong id="lightboxCaption" style="display:block;font-weight:500;font-size:1rem;margin-bottom:2px;"></strong>
           <span id="lightboxCounter" style="font-size:0.8125rem;color:rgba(255,255,255,0.68);"></span>
         </div>
         <div class="lightbox-links" id="lightboxLinks"></div>

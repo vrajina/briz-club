@@ -5,6 +5,10 @@
 (function () {
   "use strict";
 
+  // Опционально: укажите цифровой ID организации в Яндекс Бизнесе (11–12 цифр),
+  // чтобы на боевом сайте автоматически загружался живой iframe виджета отзывов.
+  var YANDEX_ORG_ID = "";
+
   // --------------------------------------------------------------------------
   // 1. Хелперы и состояние бронирования (синхронизировано между всеми формами)
   // --------------------------------------------------------------------------
@@ -42,6 +46,15 @@
     });
   }
 
+  // Монтирование живого iframe Яндекс Карт, если задан YANDEX_ORG_ID
+  var yandexSlot = document.getElementById("yandexReviewsSlot");
+  if (YANDEX_ORG_ID && yandexSlot) {
+    yandexSlot.innerHTML =
+      '<iframe class="yandex-live-iframe" title="Отзывы гостей на Яндекс Картах" src="https://yandex.ru/maps-reviews-widget/' +
+      encodeURIComponent(YANDEX_ORG_ID) +
+      '?comments"></iframe>';
+  }
+
   // --------------------------------------------------------------------------
   // 2. Шапка при скролле + парящий бар бронирования + мобильная нижняя кнопка
   // --------------------------------------------------------------------------
@@ -71,7 +84,6 @@
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
 
-  // Сворачивание / разворачивание парящей формы на десктопе
   var collapseFloatingBtn = document.getElementById("collapseFloatingBtn");
   var restoreFloatingBtn = document.getElementById("restoreFloatingBtn");
   if (collapseFloatingBtn && restoreFloatingBtn) {
@@ -112,7 +124,6 @@
     });
   });
 
-  // Подсветка карточки домика при переходе из меню или галереи
   document.querySelectorAll("[data-house-jump]").forEach(function (link) {
     link.addEventListener("click", function () {
       var target = link.getAttribute("data-house-jump");
@@ -130,7 +141,7 @@
   });
 
   // --------------------------------------------------------------------------
-  // 4. Слайдеры фото внутри карточек домов и выбор варианта Барн 70
+  // 4. Слайдеры реальных фото внутри карточек домов и выбор варианта Барн 70
   // --------------------------------------------------------------------------
   document.querySelectorAll("[data-slider]").forEach(function (slider) {
     var track = slider.querySelector(".house-slider__track");
@@ -144,8 +155,9 @@
       var dot = document.createElement("button");
       dot.type = "button";
       dot.className = "house-slider__dot" + (i === 0 ? " is-active" : "");
-      dot.setAttribute("aria-label", "Фото " + (i + 1));
-      dot.addEventListener("click", function () {
+      dot.setAttribute("aria-label", "Слайд " + (i + 1));
+      dot.addEventListener("click", function (e) {
+        e.stopPropagation();
         goTo(i);
       });
       dotsContainer.appendChild(dot);
@@ -159,15 +171,16 @@
       });
     }
 
-    prevBtn.addEventListener("click", function () {
+    prevBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
       goTo(idx - 1);
     });
-    nextBtn.addEventListener("click", function () {
+    nextBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
       goTo(idx + 1);
     });
   });
 
-  // Переключение вариантов размещения внутри Барн 70
   var barn70Variants = document.querySelectorAll("[data-variant]");
   barn70Variants.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -182,7 +195,7 @@
   });
 
   // --------------------------------------------------------------------------
-  // 5. Фотогалерея: шоппинг-теги (на тач-устройствах) + полноэкранный лайтбокс
+  // 5. Фотогалерея: шоппинг-теги + полноэкранный лайтбокс (все реальные кадры)
   // --------------------------------------------------------------------------
   document.querySelectorAll(".shop-tag").forEach(function (tag) {
     var dot = tag.querySelector(".shop-tag__dot");
@@ -214,47 +227,71 @@
   var galleryData = [
     {
       src: "assets/images/hero-winter.jpg",
-      caption: "Вечерние барнхаусы «Бриза» в новогодней подсветке",
+      caption: "Вечерние барнхаусы «Бриза» в\u00A0новогодней подсветке",
       links: [
-        { label: "Барн 130 · от 13 500 ₽ →", href: "#barn-130" },
-        { label: "Барн 70 · от 7 500 ₽ →", href: "#barn-70" }
+        { label: "Барн 130 · от\u00A07\u00A0000\u00A0₽ →", href: "#barn-130" },
+        { label: "Барн 70 · от\u00A06\u00A0500\u00A0₽ →", href: "#barn-70" }
       ]
     },
     {
-      src: "assets/images/barn130-interior.jpg",
-      caption: "Двусветная гостиная Барн 130 с настоящим дровяным камином",
-      links: [
-        { label: "Забронировать Барн 130 →", href: "#barn-130" }
-      ]
+      src: "assets/images/house-living-top.jpg",
+      caption: "Двусветная гостиная с\u00A0панорамным остеклением и\u00A0видом на\u00A0лес",
+      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
     },
     {
       src: "assets/images/banya-chan.jpg",
-      caption: "Сибирский банный чан на дровах с пихтой и цитрусами",
-      links: [
-        { label: "Заказать банный чан (5 000 ₽) →", href: "#services" }
-      ]
+      caption: "Сибирский банный чан на\u00A0дровах с\u00A0пихтой и\u00A0цитрусами",
+      links: [{ label: "Заказать банный чан (5\u00A0000\u00A0₽) →", href: "#services" }]
     },
     {
-      src: "assets/images/barn70-interior.jpg",
-      caption: "Уютный интерьер Барн 70: спальня-антресоль и кухня-гостиная",
-      links: [
-        { label: "Оба варианта Барн 70 →", href: "#barn-70" }
-      ]
+      src: "assets/images/house-exterior-5.jpg",
+      caption: "Коттедж в\u00A0стиле барнхаус среди сосен",
+      links: [{ label: "Перейти к\u00A0Барн 70 →", href: "#barn-70" }]
+    },
+    {
+      src: "assets/images/house-pergola.jpg",
+      caption: "Индивидуальная крытая пергола со\u00A0столом и\u00A0мангалом",
+      links: [{ label: "Услуги и\u00A0наборы для\u00A0гриля →", href: "#services" }]
+    },
+    {
+      src: "assets/images/house-living-window.jpg",
+      caption: "Гостиная с\u00A0выходом на\u00A0приватную террасу",
+      links: [{ label: "Перейти к\u00A0Барн 70 →", href: "#barn-70" }]
+    },
+    {
+      src: "assets/images/house-bedroom-1.jpg",
+      caption: "Уютная спальня с\u00A0двуспальной кроватью на\u00A01\u00A0этаже",
+      links: [{ label: "Варианты размещения →", href: "#barn-70" }]
+    },
+    {
+      src: "assets/images/house-mezzanine.jpg",
+      caption: "Спальная антресоль 2\u00A0этажа под мансардным окном",
+      links: [{ label: "Барн 70 (3–4\u00A0гостя) →", href: "#barn-70" }]
+    },
+    {
+      src: "assets/images/house-kitchen.jpg",
+      caption: "Кухня с\u00A0полным комплектом посуды, плитой и\u00A0чайником",
+      links: [{ label: "Сравнить оба дома →", href: "#houses" }]
+    },
+    {
+      src: "assets/images/house-bathroom.jpg",
+      caption: "Современный санузел с\u00A0LED-зеркалом и\u00A0полотенцами",
+      links: [{ label: "Сравнить оба дома →", href: "#houses" }]
     },
     {
       src: "assets/images/real-terrace.jpg",
       caption: "Приватная терраса коттеджа среди хвойного леса",
-      links: [
-        { label: "Барн 70 · от 7 500 ₽ →", href: "#barn-70" },
-        { label: "Барн 130 · от 13 500 ₽ →", href: "#barn-130" }
-      ]
+      links: [{ label: "Барн 130 · от\u00A07\u00A0000\u00A0₽ →", href: "#barn-130" }]
     },
     {
-      src: "assets/images/winter-active.jpg",
-      caption: "Русская баня с панорамным окном и прокат лыж и коньков",
-      links: [
-        { label: "Услуги и зимний прокат →", href: "#services" }
-      ]
+      src: "assets/images/house-bedroom-loft.jpg",
+      caption: "Изолированная спальня на\u00A0втором этаже",
+      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
+    },
+    {
+      src: "assets/images/house-second-floor.jpg",
+      caption: "Галерея второго этажа с\u00A0видом на\u00A0витраж",
+      links: [{ label: "Смотреть Барн 130 →", href: "#barn-130" }]
     }
   ];
 
@@ -271,7 +308,7 @@
     lightboxImg.src = item.src;
     lightboxImg.alt = item.caption;
     lightboxCaption.textContent = item.caption;
-    lightboxCounter.textContent = "Фото " + (currentPhotoIdx + 1) + " из " + galleryData.length;
+    lightboxCounter.textContent = "Фото " + (currentPhotoIdx + 1) + " из\u00A0" + galleryData.length;
     lightboxLinks.innerHTML = "";
     item.links.forEach(function (lnk) {
       var a = document.createElement("a");
@@ -286,7 +323,8 @@
   }
 
   document.querySelectorAll(".js-open-lightbox").forEach(function (el) {
-    el.addEventListener("click", function () {
+    el.addEventListener("click", function (e) {
+      e.stopPropagation();
       var idx = parseInt(el.getAttribute("data-index") || "0", 10);
       renderLightbox(idx);
       openModal(lightboxModal);
@@ -305,65 +343,65 @@
   // --------------------------------------------------------------------------
   var territoryObjects = {
     "1": {
-      badge: "Объект № 1",
-      title: "Въезд, КПП и гостевая парковка",
-      desc: "Круглогодичный асфальтовый подъезд со стороны Курумоча. Охраняемая парковка внутри территории, регистрация гостей с 15:00.",
+      badge: "Объект №\u00A01",
+      title: "Въезд, КПП и\u00A0гостевая парковка",
+      desc: "Круглогодичный асфальтовый подъезд со\u00A0стороны Курумоча. Охраняемая парковка внутри территории, регистрация гостей после 14:00.",
       btnText: "Как добраться",
       btnHref: "#contacts"
     },
     "2": {
-      badge: "Объект № 2",
+      badge: "Объект №\u00A02",
       title: "Коттеджи «Барн Хаус-130»",
-      desc: "Пять двухэтажных домов на первой линии над набережной. Внутри — дровяной камин и 3 спальни, снаружи — крытая терраса с мангалом.",
-      btnText: "Перейти к Барн 130",
+      desc: "Пять двухэтажных домов на\u00A0первой линии над набережной. Внутри\u00A0— дровяной камин и\u00A03\u00A0спальные зоны, снаружи\u00A0— крытая терраса с\u00A0мангалом.",
+      btnText: "Перейти к\u00A0Барн 130",
       btnHref: "#barn-130"
     },
     "3": {
-      badge: "Объект № 3",
+      badge: "Объект №\u00A03",
       title: "Коттеджи «Барн Хаус-70»",
-      desc: "Камерные двухэтажные домики в тихой хвойной части. Доступны два варианта заселения: для двоих (1–2 гостя) и семейный (3–4 гостя).",
-      btnText: "Перейти к Барн 70",
+      desc: "Камерные двухэтажные домики в\u00A0тихой хвойной части. Основное размещение до\u00A02\u00A0гостей и\u00A0формат 3–4\u00A0гостя с\u00A0дополнительными местами на\u00A0антресоли.",
+      btnText: "Перейти к\u00A0Барн 70",
       btnHref: "#barn-70"
     },
     "4": {
-      badge: "Объект № 4",
-      title: "Русская баня на дровах",
-      desc: "Уютный сруб с панорамным окном, комнатой отдыха и душистыми вениками. От 3 000 ₽ за сеанс 2 часа.",
+      badge: "Объект №\u00A04",
+      title: "Русская баня на\u00A0дровах",
+      desc: "Уютный сруб с\u00A0панорамным окном, комнатой отдыха и\u00A0душистыми вениками. От\u00A03\u00A0000\u00A0₽ за\u00A0сеанс 2\u00A0часа.",
       btnText: "Смотреть тарифы бани",
       btnHref: "#services"
     },
     "5": {
-      badge: "Объект № 5",
+      badge: "Объект №\u00A05",
       title: "Сибирский банный чан под соснами",
-      desc: "Подвесной чан на живом огне прямо на деревянной террасе. Вода 40 °C с пихтой и грейпфрутом — 5 000 ₽ за сеанс.",
+      desc: "Подвесной чан на\u00A0живом огне прямо на\u00A0деревянной террасе. Вода 40\u00A0°C с\u00A0пихтой и\u00A0грейпфрутом\u00A0— 5\u00A0000\u00A0₽ за\u00A0сеанс.",
       btnText: "Заказать чан",
       btnHref: "#services"
     },
     "6": {
-      badge: "Объект № 6",
-      title: "Каменная набережная и лестница к Волге",
-      desc: "Укреплённый берег с прогулочной зоной, вечерней подсветкой и удобным спуском к воде.",
-      btnText: "Смотреть в галерее",
+      badge: "Объект №\u00A06",
+      title: "Каменная набережная и\u00A0лестница к\u00A0Волге",
+      desc: "Укреплённый берег с\u00A0прогулочной зоной, вечерней подсветкой и\u00A0удобным спуском к\u00A0воде.",
+      btnText: "Смотреть в\u00A0галерее",
       btnHref: "#gallery"
     },
     "7": {
-      badge: "Объект № 7",
-      title: "Прогулочный пирс и старт SUP-прогулок",
-      desc: "Деревянный пирс на протоке: место утреннего кофе, красивых закатных фото и старта на сапах и каяках летом.",
+      badge: "Объект №\u00A07",
+      title: "Прогулочный пирс и\u00A0старт SUP-прогулок",
+      desc: "Деревянный пирс на\u00A0протоке: место утреннего кофе, красивых закатных фото и\u00A0старта на\u00A0сапах и\u00A0каяках летом.",
       btnText: "Летний прокат",
       btnHref: "#services"
     },
     "8": {
-      badge: "Объект № 8",
+      badge: "Объект №\u00A08",
       title: "Крытый причал для катеров",
-      desc: "Собственный оборудованный спуск и швартовка водного транспорта на волжской протоке.",
-      btnText: "Уточнить по швартовке",
+      desc: "Собственный оборудованный спуск и\u00A0швартовка водного транспорта на\u00A0волжской протоке.",
+      btnText: "Уточнить по\u00A0швартовке",
       btnHref: "#contacts"
     },
     "9": {
-      badge: "Объект № 9",
-      title: "Лесные прогулочные тропы и лыжня",
-      desc: "Сразу за территорией начинается сосновый массив Большецаревщинского лесничества. Лыжи и коньки доступны в прокате.",
+      badge: "Объект №\u00A09",
+      title: "Лесные прогулочные тропы и\u00A0лыжня",
+      desc: "Сразу за\u00A0территорией начинается сосновый массив Большецаревщинского лесничества. Лыжи и\u00A0коньки доступны в\u00A0прокате.",
       btnText: "Зимний прокат",
       btnHref: "#services"
     }
@@ -392,7 +430,7 @@
   });
 
   // --------------------------------------------------------------------------
-  // 7. Фильтрация списка услуг (Баня и чан / Зима / Лето)
+  // 7. Фильтрация списка услуг
   // --------------------------------------------------------------------------
   var filterTabs = document.querySelectorAll(".filter-tab");
   var serviceRows = document.querySelectorAll("#servicesList .service-row");
@@ -453,13 +491,13 @@
   });
 
   var HOUSE_TARIFFS = {
-    "barn70-2": { name: "Барн 70 (1–2 гостя)", weekday: 7500, weekend: 10500, ny: 19000 },
-    "barn70-4": { name: "Барн 70 (3–4 гостя)", weekday: 9500, weekend: 12500, ny: 22000 },
-    "barn130": { name: "Барн 130 (до 6 гостей)", weekday: 13500, weekend: 17500, ny: 29000 }
+    "barn70-2": { name: "Барн 70 (основное размещение, до\u00A02\u00A0гостей)", weekday: 6500, weekend: 10000, ny: 18000 },
+    "barn70-4": { name: "Барн 70 (с\u00A0доп. местами, 3–4\u00A0гостя)", weekday: 8500, weekend: 12000, ny: 21000 },
+    "barn130": { name: "Барн 130 (коттедж с\u00A0камином, до\u00A06\u00A0гостей)", weekday: 7000, weekend: 13000, ny: 26000 }
   };
 
   function calculateStaySummary() {
-    var d1 = new Date(modalCheckin.value + "T15:00:00");
+    var d1 = new Date(modalCheckin.value + "T14:00:00");
     var d2 = new Date(modalCheckout.value + "T12:00:00");
     if (isNaN(d1.getTime()) || isNaN(d2.getTime()) || d2 <= d1) {
       d2 = new Date(d1.getTime() + 86400000);
@@ -477,7 +515,7 @@
       var cur = new Date(d1.getTime() + i * 86400000);
       var m = cur.getMonth() + 1;
       var day = cur.getDate();
-      var dow = cur.getDay(); // 5 = Пт, 6 = Сб
+      var dow = cur.getDay();
       if ((m === 12 && day >= 30) || (m === 1 && day <= 8)) {
         total += tariff.ny;
         nyDays++;
@@ -496,7 +534,7 @@
     konturSummary.innerHTML =
       '<div class="kontur-summary__row"><span>Выбранный дом</span><strong>' + tariff.name + "</strong></div>" +
       '<div class="kontur-summary__row"><span>Ночей проживания</span><strong>' + nights + " · " + rateNote + "</strong></div>" +
-      '<div class="kontur-summary__row kontur-summary__total"><span>Ориентировочная стоимость</span><span>' + total.toLocaleString("ru-RU") + " ₽</span></div>";
+      '<div class="kontur-summary__row kontur-summary__total"><span>Ориентировочная стоимость</span><span>' + total.toLocaleString("ru-RU") + "\u00A0₽</span></div>";
   }
 
   function openBookingModal(opts) {
@@ -518,7 +556,6 @@
     calculateStaySummary();
     openModal(bookingModal);
 
-    // Хук для боевого модуля Контур.Отель на продакшен-домене Тильды
     if (window.HotelWidget && typeof window.HotelWidget.add === "function") {
       try {
         window.HotelWidget.add({
@@ -526,7 +563,7 @@
           appearance: { container: "hotel-widget-container" }
         });
       } catch (err) {
-        // В локальном/тестовом режиме используется интерактивный расчёт
+        // В тестовом режиме используется встроенный расчёт
       }
     }
   }
@@ -535,7 +572,6 @@
     el.addEventListener("change", calculateStaySummary);
   });
 
-  // Сабмит любой из форм на странице (Hero / Mobile / Парящая)
   document.querySelectorAll(".js-booking-form").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -558,7 +594,6 @@
     });
   });
 
-  // Кнопки "Забронировать" и "Заказать" у услуг и домов
   document.querySelectorAll(".js-open-booking").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var target = btn.getAttribute("data-house-target");
@@ -576,7 +611,6 @@
     });
   });
 
-  // Кнопки новогоднего блока
   document.querySelectorAll(".js-book-ny").forEach(function (btn) {
     btn.addEventListener("click", function () {
       openBookingModal({
@@ -593,9 +627,9 @@
     var phone = document.getElementById("guestPhone").value.trim();
     var houseText = modalHouse.options[modalHouse.selectedIndex].text;
     document.getElementById("konturSuccessText").innerHTML =
-      "<strong>" + name + "</strong>, ваш запрос на <strong>" + houseText + "</strong> (" +
+      "<strong>" + name + "</strong>, ваш запрос на\u00A0<strong>" + houseText + "</strong> (" +
       modalCheckin.value + " — " + modalCheckout.value + ") принят. " +
-      "На боевом сайте <code>briz.club</code> эта кнопка передаёт параметры прямо в шахматку Контур.Отеля и отправляет подтверждение на номер <strong>" + phone + "</strong>.";
+      "На\u00A0боевом сайте <code>briz.club</code> эта кнопка передаёт параметры прямо в\u00A0шахматку Контур.Отеля и\u00A0отправляет подтверждение на\u00A0номер <strong>" + phone + "</strong>.";
     konturForm.style.display = "none";
     konturSuccess.style.display = "block";
   });
@@ -605,26 +639,25 @@
     konturSuccess.style.display = "none";
   });
 
-  // Модальное окно детальной планировки и комплектации
   var HOUSE_SPECS = {
     barn70: {
-      title: "Барн Хаус-70 — планировка и оснащение",
-      subtitle: "70 м² · 2 этажа · 1–2 гостя (романтический тариф) или 3–4 гостя (семейный тариф)",
+      title: "Барн Хаус-70 — планировка и\u00A0оснащение",
+      subtitle: "70\u00A0м² · 2\u00A0этажа · основное размещение до\u00A02\u00A0гостей или 3–4\u00A0гостя с\u00A0доп. местами",
       html:
-        "<p><strong>1 этаж:</strong> кухня-гостиная с панорамными окнами в лес, удобный диван (раскладной для 3–4 гостей), обеденный стол, душевая с туалетом и феном.</p>" +
-        "<p><strong>2 этаж (антресоль):</strong> спальня с широкой двуспальной кроватью и ортопедическим матрасом, мягким светом и видом на кроны сосен.</p>" +
-        "<p><strong>Кухня и техника:</strong> варочная панель, холодильник, чайник, полный набор посуды и бокалов, кондиционер, тёплые полы, Smart-TV, Wi-Fi.</p>" +
-        "<p><strong>Улица:</strong> собственная деревянная терраса и мангальная зона рядом с домом.</p>",
+        "<p><strong>1\u00A0этаж:</strong> кухня-гостиная с\u00A0панорамным остеклением и\u00A0выходом на\u00A0террасу, изолированная спальня с\u00A0двуспальной кроватью, санузел с\u00A0душем, LED-зеркалом и\u00A0феном.</p>" +
+        "<p><strong>2\u00A0этаж (антресоль):</strong> открытая спальная зона под мансардным окном с\u00A0дополнительным спальным местом и\u00A0раскладным креслом.</p>" +
+        "<p><strong>Кухня и\u00A0техника:</strong> индукционная плита, СВЧ, холодильник, чайник, полный набор посуды и\u00A0бокалов, кондиционер, тёплые полы, умная колонка с\u00A0ТВ и\u00A0Wi-Fi.</p>" +
+        "<p><strong>Улица:</strong> приватная терраса с\u00A0креслами и\u00A0крытая мангальная пергола рядом с\u00A0домом.</p>",
       targetHouse: "barn70-2"
     },
     barn130: {
-      title: "Барн Хаус-130 — планировка и оснащение",
-      subtitle: "130 м² · 2 этажа · до 6 основных гостей (+ до 2 доп. мест) · 5 коттеджей на базе",
+      title: "Барн Хаус-130 — планировка и\u00A0оснащение",
+      subtitle: "130\u00A0м² · 2\u00A0этажа · до\u00A06\u00A0основных гостей (+ доп. места) · 5\u00A0коттеджей на\u00A0базе",
       html:
-        "<p><strong>1 этаж:</strong> просторная двусветная гостиная с настоящим дровяным камином, большая обеденная зона, отдельная гостевая спальня/кабинет с двуспальным диваном, санузел с душем и стиральной машиной.</p>" +
-        "<p><strong>2 этаж:</strong> две изолированные спальни с двуспальными кроватями и отдельный дополнительный санузел.</p>" +
-        "<p><strong>Кухня и комфорт:</strong> вся бытовая техника, полный комплект посуды и бокалов для компании, кондиционирование, тёплые полы, полотенца и халаты.</p>" +
-        "<p><strong>Улица:</strong> вид на волжскую протоку и крытая беседка-пергола с мангалом.</p>",
+        "<p><strong>1\u00A0этаж:</strong> просторная двусветная гостиная с\u00A0дровяным камином, обеденная зона, отдельная гостевая комната с\u00A0двуспальным диваном, санузел с\u00A0душем и\u00A0стиральной машиной.</p>" +
+        "<p><strong>2\u00A0этаж:</strong> галерея со\u00A0вторым светом, две изолированные спальни с\u00A0двуспальными кроватями и\u00A0дополнительный туалет.</p>" +
+        "<p><strong>Кухня и\u00A0комфорт:</strong> вся бытовая техника, полный комплект посуды и\u00A0бокалов для компании, кондиционирование, тёплые полы, полотенца.</p>" +
+        "<p><strong>Улица:</strong> вид на\u00A0волжскую протоку и\u00A0крытая беседка-пергола с\u00A0мангалом.</p>",
       targetHouse: "barn130"
     }
   };
@@ -650,6 +683,5 @@
     openBookingModal({ house: activeSpecTarget });
   });
 
-  // Инициализация дат во всех формах
   syncAllBookingInputs();
 })();
