@@ -247,7 +247,7 @@ a {
 }
 
 .site-header.is-scrolled {
-  height: 74px;
+  height: 80px;
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(14px);
@@ -293,12 +293,6 @@ a {
   display: inline-block;
   width: 86px;
   height: 70px;
-  transition: width var(--transition), height var(--transition);
-}
-
-.site-header.is-scrolled .brand-logo {
-  width: 74px;
-  height: 60px;
 }
 
 .brand-logo img {
@@ -668,6 +662,93 @@ a {
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+/* Вариант v2 (центрированное меню + крупный логотип по центру баннера как в Forsthofgut) */
+.page-v2 .header-inner::after {
+  display: none;
+}
+
+.page-v2 .brand-wrap {
+  transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+}
+
+.page-v2 .site-header:not(.is-scrolled) .brand-wrap {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  pointer-events: none;
+}
+
+@media (min-width: 1121px) {
+  .page-v2 .header-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+  }
+
+  .page-v2 .brand-wrap {
+    justify-self: start;
+  }
+
+  .page-v2 .main-nav {
+    justify-self: center;
+    gap: 6px;
+  }
+
+  .page-v2 .header-right {
+    justify-self: end;
+  }
+}
+
+.page-v2 .hero {
+  justify-content: flex-start;
+  padding-top: calc(var(--header-h) + 18px);
+}
+
+.page-v2 .hero__overlay {
+  background:
+    linear-gradient(180deg, rgba(10, 18, 24, 0.56) 0%, rgba(10, 18, 24, 0.18) 40%, rgba(10, 18, 24, 0.72) 100%),
+    linear-gradient(90deg, rgba(10, 18, 24, 0.52) 0%, rgba(10, 18, 24, 0.16) 54%, rgba(10, 18, 24, 0) 100%);
+}
+
+.page-v2 .hero__content {
+  flex: 1;
+}
+
+.hero__center-brand {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: clamp(4px, 2.5vh, 26px) auto auto;
+  pointer-events: none;
+}
+
+.hero__center-logo {
+  width: 154px;
+  height: 140px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 26px rgba(8, 14, 20, 0.48));
+}
+
+.hero__center-divider {
+  display: block;
+  width: 26px;
+  height: 1px;
+  margin: 10px 0 8px;
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.hero__center-caption {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
 .hero__top-row {
@@ -2806,7 +2887,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   }
 
   .site-header.is-scrolled {
-    height: 68px;
+    height: 72px;
   }
 
   html {
@@ -2830,15 +2911,29 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
     height: 64px;
   }
 
-  .site-header.is-scrolled .brand-logo {
-    width: 70px;
-    height: 56px;
-  }
-
   .hero {
     min-height: clamp(430px, 68svh, 560px);
     padding-top: calc(var(--header-h) + 24px);
     padding-bottom: 18px;
+  }
+
+  .page-v2 .hero {
+    min-height: clamp(490px, 74svh, 620px);
+    padding-top: calc(var(--header-h) + 10px);
+  }
+
+  .hero__center-logo {
+    width: 116px;
+    height: 105px;
+  }
+
+  .hero__center-divider {
+    margin: 7px 0 6px;
+  }
+
+  .hero__center-caption {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
   }
 
   .hero--subpage {
