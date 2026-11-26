@@ -2156,15 +2156,27 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 }
 
 .footer-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
+  flex-shrink: 0;
 }
 
 .footer-brand img {
-  width: 48px;
-  height: 44px;
+  width: 74px;
+  height: 62px;
   object-fit: contain;
+}
+
+.footer-phone {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+  transition: opacity var(--transition);
+}
+
+.footer-phone:hover {
+  opacity: 0.85;
 }
 
 .footer-right {
