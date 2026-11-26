@@ -35,7 +35,7 @@
   --font-sans: "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   --container-max: 1320px;
-  --header-h: 82px;
+  --header-h: 84px;
   --transition: 0.24s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -247,7 +247,7 @@ a {
 }
 
 .site-header.is-scrolled {
-  height: 72px;
+  height: 74px;
   color: var(--text-main);
   background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(14px);
@@ -291,8 +291,14 @@ a {
 .brand-logo {
   position: relative;
   display: inline-block;
-  width: 72px;
-  height: 58px;
+  width: 86px;
+  height: 70px;
+  transition: width var(--transition), height var(--transition);
+}
+
+.site-header.is-scrolled .brand-logo {
+  width: 74px;
+  height: 60px;
 }
 
 .brand-logo img {
@@ -414,21 +420,26 @@ a {
 .header-socials {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
 }
 
 .social-icon-link {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
   color: inherit;
-  opacity: 0.82;
+  opacity: 0.92;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: opacity var(--transition), background-color var(--transition), color var(--transition);
+}
+
+.header-socials .social-icon-link svg {
+  width: 21px;
+  height: 21px;
 }
 
 .social-icon-link:hover {
@@ -438,7 +449,7 @@ a {
 
 .site-header.is-scrolled .social-icon-link {
   color: var(--text-main);
-  opacity: 0.75;
+  opacity: 0.88;
 }
 
 .site-header.is-scrolled .social-icon-link:hover {
@@ -620,7 +631,6 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   color: var(--text-light);
-  overflow: hidden;
   padding-top: calc(var(--header-h) + 32px);
   padding-bottom: 20px;
 }
@@ -708,21 +718,19 @@ a {
   width: 100%;
 }
 
-.booking-bar:not(.is-pinned) {
+.booking-bar:not(.is-pinned):not(.is-docked) {
   position: relative;
   z-index: 2;
 }
 
 .booking-bar {
   width: 100%;
-  background: rgba(31, 51, 38, 0.96);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  color: #ffffff;
+  background: linear-gradient(180deg, #d7b288 0%, #c89e70 100%);
+  color: #1c1914;
   border-radius: var(--radius-md);
   padding: 11px 11px 11px 22px;
-  box-shadow: 0 18px 44px rgba(10, 18, 13, 0.34);
-  border: 1px solid rgba(197, 155, 109, 0.38);
+  box-shadow: 0 16px 40px rgba(24, 18, 10, 0.22);
+  border: 1px solid rgba(120, 82, 42, 0.34);
 }
 
 .booking-form {
@@ -737,7 +745,7 @@ a {
   flex-direction: column;
   gap: 3px;
   padding: 4px 12px 4px 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid rgba(28, 25, 20, 0.15);
   min-width: 0;
   cursor: pointer;
 }
@@ -749,7 +757,7 @@ a {
 .booking-field__label {
   font-size: 0.75rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(28, 25, 20, 0.68);
 }
 
 .booking-field__control {
@@ -757,8 +765,8 @@ a {
   background: transparent;
   font-size: 0.9375rem;
   font-weight: 500;
-  color: #ffffff;
-  color-scheme: dark;
+  color: #1c1914;
+  color-scheme: light;
   padding: 2px 0;
   outline: none;
   width: 100%;
@@ -777,23 +785,24 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
-  filter: invert(1);
-  opacity: 0.85;
+  filter: none;
+  opacity: 0.72;
 }
 
 .booking-submit {
   padding: 14px 28px;
   font-size: 0.9375rem;
-  background: #cfa06b;
-  border-color: #cfa06b;
-  color: #1c1914;
-  font-weight: 600;
+  background: #2b4733;
+  border-color: #2b4733;
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(27, 44, 34, 0.22);
 }
 
 .booking-submit:hover {
-  background: #dbb07f;
-  border-color: #dbb07f;
-  color: #1c1914;
+  background: #1f3525;
+  border-color: #1f3525;
+  color: #ffffff;
 }
 
 .mobile-booking-section {
@@ -802,25 +811,50 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   background: var(--bg-sand);
 }
 
-/* Закрепление основной плашки бронирования при прокрутке на десктопе */
+.booking-dock-spacer {
+  display: none;
+}
+
+/* Закрепление основной плашки бронирования при прокрутке и парковка перед футером */
 @media (min-width: 1024px) {
-  .booking-bar.is-pinned {
-    position: fixed;
-    bottom: 18px;
+  .booking-dock-spacer {
+    display: block;
+    width: 100%;
+    min-height: 76px;
+    margin-top: 40px;
+  }
+
+  #contacts {
+    padding-bottom: 44px;
+  }
+
+  .booking-bar.is-pinned,
+  .booking-bar.is-docked {
     left: 0;
     right: 0;
     margin-inline: auto;
     width: calc(100% - 64px);
     max-width: calc(var(--container-max) - 64px);
     z-index: 95;
-    background: rgba(31, 51, 38, 0.97);
-    border: 1px solid rgba(197, 155, 109, 0.55);
-    box-shadow: 0 18px 46px rgba(10, 18, 13, 0.34);
+    background: linear-gradient(180deg, #d7b288 0%, #c89e70 100%);
+    border: 1px solid rgba(120, 82, 42, 0.38);
+    box-shadow: 0 16px 42px rgba(24, 18, 10, 0.22);
+  }
+
+  .booking-bar.is-pinned {
+    position: fixed;
+    bottom: 18px;
+  }
+
+  .booking-bar.is-docked {
+    position: absolute;
+    bottom: auto;
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1120px) {
-  .booking-bar.is-pinned {
+  .booking-bar.is-pinned,
+  .booking-bar.is-docked {
     width: calc(100% - 40px);
   }
 }
@@ -835,12 +869,12 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   gap: 8px;
   padding: 12px 18px;
   border-radius: var(--radius-pill);
-  background: #1f3326;
-  color: #ffffff;
-  border: 1px solid rgba(197, 155, 109, 0.55);
-  box-shadow: 0 10px 28px rgba(15, 24, 18, 0.28);
+  background: #cfa577;
+  color: #1c1914;
+  border: 1px solid rgba(120, 82, 42, 0.38);
+  box-shadow: 0 10px 28px rgba(15, 24, 18, 0.24);
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   opacity: 0;
   pointer-events: none;
   transform: translateY(14px);
@@ -854,7 +888,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 }
 
 .mobile-jump-btn:hover {
-  background: #2c4635;
+  background: #c39665;
 }
 
 /* ==========================================================================
@@ -2018,7 +2052,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 .site-footer {
   background: var(--bg-dark);
   color: rgba(255, 255, 255, 0.78);
-  padding-block: 42px 112px;
+  padding-block: 48px 44px;
 }
 
 .footer-inner {
@@ -2709,8 +2743,8 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 
   .mobile-booking-section .booking-bar {
     box-shadow: var(--shadow-md);
-    border: 1px solid rgba(197, 155, 109, 0.42);
-    background: #1f3326;
+    border: 1px solid rgba(120, 82, 42, 0.32);
+    background: linear-gradient(180deg, #d7b288 0%, #c89e70 100%);
     padding: 12px;
     border-radius: var(--radius-md);
   }
@@ -2723,7 +2757,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   .booking-field {
     border-right: none;
     border-bottom: none;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 251, 245, 0.56);
     border-radius: var(--radius-sm);
     padding: 8px 11px;
     gap: 2px;
@@ -2768,7 +2802,11 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 
 @media (max-width: 767px) {
   :root {
-    --header-h: 70px;
+    --header-h: 74px;
+  }
+
+  .site-header.is-scrolled {
+    height: 68px;
   }
 
   html {
@@ -2788,8 +2826,13 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   }
 
   .brand-logo {
-    width: 68px;
-    height: 54px;
+    width: 80px;
+    height: 64px;
+  }
+
+  .site-header.is-scrolled .brand-logo {
+    width: 70px;
+    height: 56px;
   }
 
   .hero {

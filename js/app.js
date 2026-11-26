@@ -24,7 +24,7 @@
       included: "Проживание · Завтрак",
       weekday: 8000,
       friday: 10000,
-      saturday: 12000,
+      saturday: 13500,
       nyEve: 38500,
       nyHoliday: 16500,
       description:
@@ -50,8 +50,8 @@
       tariffName: "Бархатный сезон 2026",
       included: "Проживание · Завтрак",
       weekday: 11500,
-      friday: 14500,
-      saturday: 16500,
+      friday: 13500,
+      saturday: 18000,
       nyEve: 55000,
       nyHoliday: 24500,
       description:
@@ -161,6 +161,7 @@
   var heroSection = document.getElementById("heroSection");
   var heroBookingSlot = document.getElementById("heroBookingSlot");
   var heroBookingBar = document.getElementById("heroBookingBar");
+  var bookingDockSpacer = document.getElementById("bookingDockSpacer");
   var mobileBookingSection = document.getElementById("mobile-booking");
   var mobileJumpBooking = document.getElementById("mobileJumpBooking");
   var desktopNavLinks = Array.prototype.slice.call(document.querySelectorAll('.main-nav a[href^="#"]'));
@@ -262,15 +263,38 @@
 
     if (heroBookingSlot && heroBookingBar) {
       if (window.innerWidth >= 1024) {
-        if (!heroBookingBar.classList.contains("is-pinned")) {
-          heroBookingSlot.style.minHeight = heroBookingBar.offsetHeight + "px";
+        var barHeight = heroBookingBar.offsetHeight;
+        if (barHeight > 0) {
+          if (!heroBookingBar.classList.contains("is-pinned") && !heroBookingBar.classList.contains("is-docked")) {
+            heroBookingSlot.style.minHeight = barHeight + "px";
+          }
+          if (bookingDockSpacer) {
+            bookingDockSpacer.style.minHeight = barHeight + "px";
+          }
         }
         var slotRect = heroBookingSlot.getBoundingClientRect();
-        var shouldPin = slotRect.bottom <= window.innerHeight - 20;
-        heroBookingBar.classList.toggle("is-pinned", shouldPin);
+        var pastHeroSlot = slotRect.bottom <= window.innerHeight - 18;
+        var shouldDock = false;
+        if (pastHeroSlot && bookingDockSpacer && heroSection) {
+          var dockRect = bookingDockSpacer.getBoundingClientRect();
+          if (dockRect.bottom <= window.innerHeight - 18) {
+            shouldDock = true;
+            var heroRect = heroSection.getBoundingClientRect();
+            heroBookingBar.style.top = Math.round(dockRect.top - heroRect.top) + "px";
+          }
+        }
+        if (!shouldDock) {
+          heroBookingBar.style.top = "";
+        }
+        heroBookingBar.classList.toggle("is-pinned", pastHeroSlot && !shouldDock);
+        heroBookingBar.classList.toggle("is-docked", shouldDock);
       } else {
-        heroBookingBar.classList.remove("is-pinned");
+        heroBookingBar.classList.remove("is-pinned", "is-docked");
+        heroBookingBar.style.top = "";
         heroBookingSlot.style.minHeight = "";
+        if (bookingDockSpacer) {
+          bookingDockSpacer.style.minHeight = "";
+        }
       }
     }
 
@@ -297,6 +321,9 @@
 
   window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("resize", handleScroll, { passive: true });
+  document.querySelectorAll(".faq-item").forEach(function (faq) {
+    faq.addEventListener("toggle", handleScroll);
+  });
   handleScroll();
 
   // Открытие нативного календаря при клике на любую область даты
@@ -806,29 +833,55 @@
     }
   });
 
+  function getKonturNightPrice(room, cur) {
+    var y = cur.getFullYear();
+    var m = cur.getMonth() + 1;
+    var day = cur.getDate();
+    var dow = cur.getDay();
+    var isBarn70 = room.id === "254819";
+
+    if (y === 2026 && m === 12) {
+      if (day === 31) {
+        return { price: room.nyEve, isNy: true, janClosed: false };
+      }
+      if (day >= 18) {
+        if (dow === 5) return { price: isBarn70 ? 11000 : 16500, isNy: false, janClosed: false };
+        if (dow === 6) return { price: isBarn70 ? 12000 : 18000, isNy: false, janClosed: false };
+        return { price: isBarn70 ? 10000 : 15000, isNy: false, janClosed: false };
+      }
+      if (dow === 5) return { price: isBarn70 ? 9000 : 13500, isNy: false, janClosed: false };
+      if (dow === 6) return { price: isBarn70 ? 10000 : 15000, isNy: false, janClosed: false };
+      return { price: isBarn70 ? 8000 : 12000, isNy: false, janClosed: false };
+    }
+
+    if ((y === 2026 && m === 12 && day >= 29) || (y === 2027 && m === 1 && day <= 8)) {
+      return { price: room.nyHoliday, isNy: true, janClosed: y === 2027 && m === 1 };
+    }
+
+    if (dow === 5) return { price: room.friday, isNy: false, janClosed: false };
+    if (dow === 6) return { price: room.saturday, isNy: false, janClosed: false };
+    return { price: room.weekday, isNy: false, janClosed: false };
+  }
+
   function computeRoomStay(room, d1, d2, nights) {
     var total = 0;
+    var firstNight = 0;
     var nyDays = 0;
+    var janUnpublishedDays = 0;
     for (var i = 0; i < nights; i++) {
       var cur = new Date(d1.getTime() + i * 86400000);
-      var m = cur.getMonth() + 1;
-      var day = cur.getDate();
-      var dow = cur.getDay();
-      if (m === 12 && day === 31) {
-        total += room.nyEve;
-        nyDays++;
-      } else if ((m === 12 && day >= 29) || (m === 1 && day <= 8)) {
-        total += room.nyHoliday;
-        nyDays++;
-      } else if (dow === 5) {
-        total += room.friday;
-      } else if (dow === 6) {
-        total += room.saturday;
-      } else {
-        total += room.weekday;
-      }
+      var step = getKonturNightPrice(room, cur);
+      if (i === 0) firstNight = step.price;
+      total += step.price;
+      if (step.isNy) nyDays++;
+      if (step.janClosed) janUnpublishedDays++;
     }
-    return { total: total, firstNight: Math.round(total / nights), nyDays: nyDays };
+    return {
+      total: total,
+      firstNight: firstNight,
+      nyDays: nyDays,
+      janUnpublishedDays: janUnpublishedDays
+    };
   }
 
   function renderKonturRooms() {
@@ -900,11 +953,16 @@
     var chosen = KONTUR_ROOMS[bookingState.selectedRoomId] || KONTUR_ROOMS["254820"];
     var chosenCalc = computeRoomStay(chosen, d1, d2, nights);
     var rateType = chosenCalc.nyDays > 0 ? "праздничный / новогодний тариф" : "тариф «Бархатный сезон 2026»";
+    var janNoteHtml = chosenCalc.janUnpublishedDays > 0
+      ? '<div class="kontur-summary__row" style="font-size:0.8125rem;color:var(--text-muted);margin-top:6px;"><span>Продажи на\u00A0январь 2027 в\u00A0Контуре ещё не\u00A0открыты — для\u00A01–8\u00A0января показан ориентировочный каникулярный тариф.</span></div>'
+      : "";
 
     konturSummary.innerHTML =
       '<div class="kontur-summary__row"><span>Выбранный дом</span><strong>' + chosen.title + " (" + guestsCount + "\u00A0гост.)</strong></div>" +
       '<div class="kontur-summary__row"><span>Период и\u00A0условия</span><span>' + nights + "\u00A0ноч. · " + rateType + " · завтрак включён</span></div>" +
-      '<div class="kontur-summary__row kontur-summary__total"><span>Итого (предоплата первых суток)</span><span>' + chosenCalc.total.toLocaleString("ru-RU") + "\u00A0₽</span></div>";
+      '<div class="kontur-summary__row"><span>Предоплата (1-е сутки)</span><span>' + chosenCalc.firstNight.toLocaleString("ru-RU") + "\u00A0₽</span></div>" +
+      '<div class="kontur-summary__row kontur-summary__total"><span>Итого за\u00A0' + nights + "\u00A0ноч.</span><span>" + chosenCalc.total.toLocaleString("ru-RU") + "\u00A0₽</span></div>" +
+      janNoteHtml;
 
     if (konturDirectLink) {
       konturDirectLink.href = "https://briz.club/booking?room-type=" + chosen.id;
