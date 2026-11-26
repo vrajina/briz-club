@@ -5,3 +5,9 @@ _raw_brand/
 photo_*.jpg
 .DS_Store
 Thumbs.db
+.env
+.env.*
+!.env.example
+.vercel/
+node_modules/
+
