@@ -17,9 +17,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=11">
+  <link rel="stylesheet" href="css/styles.css?v=12">
 </head>
-<body>
+<body class="page-v2">
 
   <!-- =======================================================================
        1. ПОЛУПРОЗРАЧНАЯ ШАПКА
@@ -116,10 +116,16 @@
     <section class="hero" id="heroSection">
       <div class="hero__bg">
         <img src="assets/images/hero-winter.jpg" alt="Зимние барнхаусы базы отдыха Бриз на берегу Волги">
+        <video class="hero__video" id="heroVideo" poster="assets/images/hero-winter.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>
         <div class="hero__overlay"></div>
       </div>
 
       <div class="container hero__content">
+        <div class="hero__center-brand">
+          <img src="assets/images/logo-briz-white.png" alt="База отдыха Бриз" class="hero__center-logo">
+          <span class="hero__center-divider" aria-hidden="true"></span>
+          <span class="hero__center-caption">База отдыха на&nbsp;Волге</span>
+        </div>
         <div class="hero__top-row">
           <div class="hero__text">
             <h1 class="hero__title">Мгновения, которые останутся с тобой</h1>
@@ -1096,6 +1102,6 @@
     </div>
   </div>
 
-  <script src="js/app.js?v=11"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>

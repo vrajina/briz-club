@@ -154,6 +154,61 @@
       '?comments"></iframe>';
   }
 
+  // Адаптивное фоновое видео в главном баннере (обрезаем вшитую чёрную концовку с логотипом)
+  var heroVideo = document.getElementById("heroVideo");
+  if (heroVideo) {
+    var reducedMotionQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    if (!reducedMotionQuery || !reducedMotionQuery.matches) {
+      var loadHeroVideoSource = function (mode) {
+        var basePath = mode === "mobile" ? "assets/videos/hero-mobile" : "assets/videos/hero-desktop";
+        heroVideo.dataset.videoMode = mode;
+        heroVideo.classList.remove("is-ready");
+        heroVideo.innerHTML =
+          '<source src="' + basePath + '.webm" type="video/webm">' +
+          '<source src="' + basePath + '.mp4" type="video/mp4">';
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        heroVideo.playsInline = true;
+        heroVideo.load();
+        var playPromise = heroVideo.play();
+        if (playPromise && typeof playPromise.catch === "function") {
+          playPromise.catch(function () {});
+        }
+      };
+
+      var markHeroVideoReady = function () {
+        heroVideo.classList.add("is-ready");
+      };
+
+      heroVideo.addEventListener("playing", markHeroVideoReady);
+      heroVideo.addEventListener("canplay", markHeroVideoReady);
+      heroVideo.addEventListener("timeupdate", function () {
+        var mode = heroVideo.dataset.videoMode === "mobile" ? "mobile" : "desktop";
+        var trimEnd = mode === "mobile" ? 12.8 : 15.7;
+        if (heroVideo.duration && isFinite(heroVideo.duration) && heroVideo.duration > 6) {
+          trimEnd = Math.min(trimEnd, heroVideo.duration - 3.35);
+        }
+        if (heroVideo.currentTime >= trimEnd) {
+          heroVideo.currentTime = 0.05;
+          var replayPromise = heroVideo.play();
+          if (replayPromise && typeof replayPromise.catch === "function") {
+            replayPromise.catch(function () {});
+          }
+        }
+      });
+
+      var syncHeroVideoViewport = function () {
+        var nextMode = window.innerWidth <= 767 ? "mobile" : "desktop";
+        if (heroVideo.dataset.videoMode !== nextMode) {
+          loadHeroVideoSource(nextMode);
+        }
+      };
+
+      syncHeroVideoViewport();
+      window.addEventListener("resize", syncHeroVideoViewport, { passive: true });
+    }
+  }
+
   // --------------------------------------------------------------------------
   // 2. Шапка при скролле + фиксация плашки бронирования + мобильная кнопка к датам + scrollspy
   // --------------------------------------------------------------------------
