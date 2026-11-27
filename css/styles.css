@@ -15,6 +15,11 @@
   --brand-wood: #c59b6d;
   --brand-wood-hover: #b28758;
   --brand-wood-soft: rgba(197, 155, 109, 0.16);
+  --ny-burgundy: #5c1f28;
+  --ny-burgundy-deep: #46161e;
+  --ny-burgundy-hover: #6d2631;
+  --ny-burgundy-soft: rgba(92, 31, 40, 0.09);
+  --ny-gold: #e4c197;
 
   --text-main: #1b211c;
   --text-muted: #555e58;
@@ -378,30 +383,31 @@ a {
 }
 
 .nav-link--seasonal {
-  background-color: rgba(197, 155, 109, 0.18);
-  border: 1px solid rgba(197, 155, 109, 0.48);
-  color: #fff6ea;
+  background-color: rgba(92, 31, 40, 0.58);
+  border: 1px solid rgba(228, 193, 151, 0.48);
+  color: #fff8f0;
   padding-inline: 13px;
   margin-right: 4px;
 }
 
 .nav-link--seasonal:hover,
 .nav-link--seasonal.is-current {
-  background-color: var(--brand-wood);
-  border-color: var(--brand-wood);
-  color: #1c1914;
+  background-color: var(--ny-burgundy-hover);
+  border-color: rgba(228, 193, 151, 0.65);
+  color: #ffffff;
 }
 
 .site-header.is-scrolled .nav-link--seasonal {
-  background-color: var(--brand-wood-soft);
-  border-color: rgba(197, 155, 109, 0.45);
-  color: #5b3e1b;
+  background-color: var(--ny-burgundy-soft);
+  border-color: rgba(92, 31, 40, 0.28);
+  color: var(--ny-burgundy);
 }
 
 .site-header.is-scrolled .nav-link--seasonal:hover,
 .site-header.is-scrolled .nav-link--seasonal.is-current {
-  background-color: var(--brand-wood);
-  color: #1c1914;
+  background-color: var(--ny-burgundy);
+  border-color: var(--ny-burgundy);
+  color: #ffffff;
 }
 
 .header-right {
@@ -486,8 +492,9 @@ a {
   border-radius: 6px;
   font-size: 0.8125rem;
   font-weight: 600;
-  background-color: var(--brand-wood);
-  color: #1b1711;
+  background-color: var(--ny-burgundy);
+  border: 1px solid rgba(228, 193, 151, 0.35);
+  color: #fff8f2;
 }
 
 .icon-btn {
@@ -577,8 +584,8 @@ a {
 }
 
 .mobile-drawer__link--ny {
-  background: var(--brand-wood-soft);
-  color: #5b3e1b;
+  background: var(--ny-burgundy-soft);
+  color: var(--ny-burgundy);
   margin-bottom: 4px;
 }
 
@@ -1012,7 +1019,9 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   grid-template-columns: 1.2fr 1fr;
   gap: 36px;
   align-items: center;
-  background: #1f3326;
+  background: linear-gradient(135deg, var(--ny-burgundy) 0%, var(--ny-burgundy-deep) 100%);
+  border: 1px solid rgba(228, 193, 151, 0.26);
+  box-shadow: 0 14px 36px rgba(42, 12, 17, 0.16);
   color: var(--text-light);
   border-radius: var(--radius-lg);
   padding: 38px 40px;
@@ -1020,7 +1029,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 
 .ny-card__eyebrow {
   display: block;
-  color: var(--brand-wood);
+  color: var(--ny-gold);
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1038,7 +1047,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 
 .ny-card__desc {
   margin: 0 0 22px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 245, 238, 0.8);
   font-size: 0.9375rem;
   max-width: 520px;
 }
@@ -1047,6 +1056,25 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.ny-card .btn--wood {
+  background-color: #dab489;
+  color: #261115;
+}
+
+.ny-card .btn--wood:hover {
+  background-color: #cca273;
+}
+
+.ny-card .btn--ghost-light {
+  background-color: rgba(255, 248, 242, 0.1);
+  border-color: rgba(255, 236, 220, 0.34);
+  color: #fffaf5;
+}
+
+.ny-card .btn--ghost-light:hover {
+  background-color: rgba(255, 248, 242, 0.18);
 }
 
 .ny-dates-list {
@@ -1060,7 +1088,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   gap: 16px;
   padding-block: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 236, 224, 0.15);
 }
 
 .ny-date-row:first-child {
@@ -1082,7 +1110,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
 
 .ny-date-row__period span {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 245, 238, 0.8);
 }
 
 .ny-date-row__price {
@@ -1094,13 +1122,13 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
   display: block;
   font-size: 0.96875rem;
   font-weight: 600;
-  color: var(--brand-wood);
+  color: var(--ny-gold);
   margin-bottom: 2px;
 }
 
 .ny-date-row__price span {
   font-size: 0.8125rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(255, 245, 238, 0.8);
 }
 
 /* ==========================================================================
@@ -2864,6 +2892,7 @@ input[type="date"].booking-field__control::-webkit-calendar-picker-indicator {
     border-top: 2px solid #6b4420;
     border-bottom: 2px solid #6b4420;
     padding: 18px 0 20px;
+    scroll-margin-top: max(148px, 19svh);
   }
 
   .mobile-booking-section .booking-bar {

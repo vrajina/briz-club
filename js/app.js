@@ -381,6 +381,46 @@
   });
   handleScroll();
 
+  function getMobileBookingTargetOffset() {
+    var headerHeight = siteHeader ? siteHeader.offsetHeight : 72;
+    var headerBottom = siteHeader ? Math.max(siteHeader.getBoundingClientRect().bottom, headerHeight) : 74;
+    var vvTop = window.visualViewport && window.visualViewport.offsetTop ? window.visualViewport.offsetTop : 0;
+    var minClearance = Math.max(headerBottom, vvTop + headerHeight) + 14;
+    return Math.round(Math.max(minClearance, Math.min(window.innerHeight * 0.2, 168)));
+  }
+
+  if (mobileJumpBooking && mobileBookingSection) {
+    var jumpRefineTimer = null;
+    function cancelJumpRefine() {
+      if (jumpRefineTimer) {
+        clearTimeout(jumpRefineTimer);
+        jumpRefineTimer = null;
+      }
+    }
+
+    window.addEventListener("touchstart", cancelJumpRefine, { passive: true });
+    window.addEventListener("wheel", cancelJumpRefine, { passive: true });
+
+    mobileJumpBooking.addEventListener("click", function (e) {
+      e.preventDefault();
+      cancelJumpRefine();
+
+      var currentY = window.scrollY || window.pageYOffset;
+      var targetTop = Math.max(0, Math.round(currentY + mobileBookingSection.getBoundingClientRect().top - getMobileBookingTargetOffset()));
+      window.scrollTo({ top: targetTop, behavior: "smooth" });
+
+      // Повторная доводка после завершения скролла (во встроенных браузерах вроде Telegram iOS адресная панель сдвигает fixed-шапку вниз)
+      jumpRefineTimer = setTimeout(function () {
+        var safeOffset = getMobileBookingTargetOffset();
+        var rect = mobileBookingSection.getBoundingClientRect();
+        if (rect.top < safeOffset - 4 || rect.top > safeOffset + 56) {
+          var adjustedY = Math.max(0, Math.round((window.scrollY || window.pageYOffset) + rect.top - safeOffset));
+          window.scrollTo({ top: adjustedY, behavior: "smooth" });
+        }
+      }, 460);
+    });
+  }
+
   // Открытие нативного календаря при клике на любую область даты
   document.querySelectorAll('input[type="date"]').forEach(function (dateInput) {
     function openPicker() {
